@@ -3,11 +3,13 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Hero from '@/components/Hero.astro';
 import Marquee from '@/components/Marquee.astro';
 import IntroSection from '@/components/IntroSection.astro';
+import ClientsStrip from '@/components/ClientsStrip.astro';
 import HireCatalogue from '@/components/HireCatalogue.astro';
 import WorkSection from '@/components/WorkSection.astro';
 import GallerySocial from '@/components/GallerySocial.astro';
 import Manifesto from '@/components/Manifesto.astro';
 import Testimonials from '@/components/Testimonials.astro';
+import PressSection from '@/components/PressSection.astro';
 import CTABanner from '@/components/CTABanner.astro';
 
 const ticker = [
@@ -28,15 +30,17 @@ const ticker = [
 >
   <Hero />
 
-  <div class="border-y border-charcoal/10 bg-cream-50 py-5 text-charcoal">
+  <div class="border-y border-cream/10 bg-cream-50 py-5 text-cream">
     <Marquee items={ticker} variant="mono" duration={42} />
   </div>
 
   <IntroSection />
+  <ClientsStrip />
   <HireCatalogue />
   <WorkSection />
   <GallerySocial />
   <Manifesto />
   <Testimonials />
+  <PressSection />
   <CTABanner />
 </BaseLayout>

@@ -1,0 +1,89 @@
+---
+import SectionHeading from '@/components/SectionHeading.astro';
+
+const press = [
+  {
+    publication: 'Wedding Southern Africa',
+    year: '2026',
+    tag: 'Feature',
+    featured: true,
+    quote:
+      'Sulpice Designs Decor has quietly become the first call for weddings and corporate hire across Zimbabwe and South Africa — one quotation, one crew, one beautifully styled day.',
+  },
+  {
+    publication: 'Harare Insider',
+    year: '2025',
+    tag: 'End-of-year feature',
+    quote:
+      'From eleven marquee tents for a city product launch to candlelit tables for forty — one team, one date, zero drama.',
+  },
+  {
+    publication: 'The WeddingEdit',
+    year: '2025',
+    tag: 'Case study',
+    quote:
+      'A full-service hire model that keeps everything under one roof, so couples spend their day present, not pacing.',
+  },
+];
+---
+
+<section class="container-luxe section-pad" aria-labelledby="press-heading">
+  <SectionHeading
+    id="press-heading"
+    index="06"
+    eyebrow="In the press"
+    title="Stories people write about our events."
+    lead="Sample coverage while real articles are linked in — send us your features."
+    class="mb-14"
+  />
+
+  <div class="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
+    {
+      press.map((item, i) =>
+        item.featured ? (
+          <article
+            class="bg-teal-900 relative flex flex-col justify-between overflow-hidden rounded-2xl p-9 text-cream md:p-12"
+            data-reveal
+          >
+            <span
+              class="pointer-events-none absolute -right-6 -top-10 select-none font-display text-[11rem] leading-none text-cream/10"
+              aria-hidden="true"
+            >
+              ”
+            </span>
+            <div>
+              <p class="font-mono text-[0.68rem] uppercase tracking-[0.2em] text-gold-300">
+                {item.publication} · {item.year}
+              </p>
+              <p class="mt-8 max-w-prose text-balance font-display text-2xl leading-snug md:text-3xl">
+                “{item.quote}”
+              </p>
+            </div>
+            <div class="mt-10 flex items-center gap-3 border-t border-cream/15 pt-6">
+              <span class="bg-gold-gradient h-px w-10" aria-hidden="true" />
+              <span class="font-mono text-[0.68rem] uppercase tracking-[0.18em] text-cream/70">
+                {item.tag}
+              </span>
+            </div>
+          </article>
+        ) : (
+          <article
+            class="flex flex-col justify-between rounded-2xl bg-cream-50 p-9 ring-1 ring-cream/10 transition-all duration-500 hover:-translate-y-1 hover:shadow-card"
+            data-reveal
+            style={`--reveal-delay:${i * 90}ms`}
+          >
+            <p class="font-mono text-[0.68rem] uppercase tracking-[0.2em] text-gold-600">
+              {item.publication} · {item.year}
+            </p>
+            <p class="mt-6 font-display text-lg leading-relaxed text-cream">
+              “{item.quote}”
+            </p>
+            <p class="mt-8 font-mono text-[0.68rem] uppercase tracking-[0.18em] text-muted">
+              {item.tag}
+            </p>
+          </article>
+        ),
+      )
+    }
+  </div>
+</section>

@@ -18,7 +18,7 @@ const pillars = [
   <div class="grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
     <!-- Image collage -->
     <div class="relative" data-reveal>
-      <div class="overflow-hidden rounded-2xl bg-cream-100 ring-1 ring-charcoal/5">
+      <div class="overflow-hidden rounded-2xl bg-cream-100 ring-1 ring-cream/5">
         <Image
           src={aboutStudio}
           alt="Event décor range on display at Sulpice Designs Decor"
@@ -41,7 +41,7 @@ const pillars = [
         />
       </div>
       <div
-        class="absolute -left-3 -top-6 hidden items-center gap-3 rounded-full bg-cream/90 px-5 py-3 shadow-card ring-1 ring-charcoal/10 backdrop-blur-md md:flex"
+        class="absolute -left-3 -top-6 hidden items-center gap-3 rounded-full bg-cream/90 px-5 py-3 shadow-card ring-1 ring-cream/10 backdrop-blur-md md:flex"
       >
         <Icon name="lucide:sparkles" class="h-5 w-5 text-gold-600" />
         <span class="font-mono text-xs uppercase tracking-[0.16em]">Est. 2008</span>
@@ -50,14 +50,14 @@ const pillars = [
 
     <!-- Copy -->
     <div data-reveal style="--reveal-delay:120ms">
-      <span class="mono-label mb-5 flex items-center gap-3 text-teal-700">
+      <span class="mono-label mb-5 flex items-center gap-3 text-gold-300">
         <span class="index-num">00</span>
         <span class="h-px w-7 bg-gold-gradient" aria-hidden="true" />
         The company
       </span>
       <h2
         id="intro-heading"
-        class="text-balance text-3xl leading-[1.1] text-charcoal sm:text-4xl md:text-[2.85rem]"
+        class="text-balance text-3xl leading-[1.1] text-cream sm:text-4xl md:text-[2.85rem]"
       >
         Every event, <span class="text-gold-gradient italic">beautifully dressed.</span>
       </h2>
@@ -71,7 +71,7 @@ const pillars = [
       <ul class="mt-8 space-y-4">
         {
           pillars.map((pillar, i) => (
-            <li class="flex items-start gap-4 text-sm text-charcoal/90 md:text-base">
+            <li class="flex items-start gap-4 text-sm text-cream/90 md:text-base">
               <span class="index-num pt-0.5">{String(i + 1).padStart(2, '0')}</span>
               <span class="mt-[0.62em] h-px w-4 shrink-0 bg-gold-gradient/60" aria-hidden="true" />
               {pillar}
@@ -90,7 +90,7 @@ const pillars = [
   </div>
 
   <!-- Stats -->
-  <div class="mt-20 border-t border-charcoal/10 pt-12">
+  <div class="mt-20 border-t border-cream/10 pt-12">
     <StatsCounters client:visible items={[...SITE.stats]} />
   </div>
 </section>

@@ -73,14 +73,14 @@ const values = [
       {
         principles.map((p, i) => (
           <article
-            class="rounded-2xl border border-charcoal/10 bg-cream-50 p-8 transition-all duration-500 hover:-translate-y-1 hover:border-gold/40 hover:shadow-card"
+            class="rounded-2xl border border-cream/10 bg-cream-50 p-8 transition-all duration-500 hover:-translate-y-1 hover:border-gold/40 hover:shadow-card"
             data-reveal
             style={`--reveal-delay:${i * 100}ms`}
           >
             <span class="bg-gold-gradient inline-flex h-12 w-12 items-center justify-center rounded-full text-ink shadow-[0_10px_24px_-12px_rgba(184,134,11,0.8)]">
               <Icon name={p.icon} class="h-5 w-5" />
             </span>
-            <h3 class="mt-6 font-display text-2xl text-charcoal">{p.title}</h3>
+            <h3 class="mt-6 font-display text-2xl text-cream">{p.title}</h3>
             <p class="mt-3 text-sm leading-relaxed text-muted">{p.body}</p>
           </article>
         ))
@@ -92,7 +92,7 @@ const values = [
   <section class="bg-cream-100 py-24 md:py-32" aria-labelledby="founder-heading">
     <div class="container-luxe grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
       <div class="relative order-2 lg:order-1" data-reveal>
-        <div class="overflow-hidden rounded-2xl ring-1 ring-charcoal/5">
+        <div class="overflow-hidden rounded-2xl ring-1 ring-cream/5">
           <Image
             src={aboutFounder}
             alt="The Sulpice Designs team styling an event"
@@ -119,12 +119,12 @@ const values = [
           <span class="h-px w-8 bg-gold" aria-hidden="true" />
           Our story
         </span>
-        <h2 id="founder-heading" class="text-balance text-3xl leading-tight text-charcoal sm:text-4xl md:text-[2.75rem]">
+        <h2 id="founder-heading" class="text-balance text-3xl leading-tight text-cream sm:text-4xl md:text-[2.75rem]">
           “Every event, from first enquiry to the final dance.”
         </h2>
         <div class="mt-6 space-y-4 text-base leading-relaxed text-muted">
           <p>
-            Established in <strong class="font-medium text-charcoal">2008</strong>,
+            Established in <strong class="font-medium text-cream">2008</strong>,
             Sulpice Designs Decor is a premium events décor and hiring services
             company, specialising in a comprehensive, high-end solution for all
             types of events — with weddings at the top of our list. Corporate
@@ -160,7 +160,7 @@ const values = [
           <span class="h-px w-8 bg-gold" aria-hidden="true" />
           Vision &amp; mission
         </span>
-        <h2 id="mission-heading" class="text-balance text-3xl leading-tight text-charcoal sm:text-4xl md:text-[2.75rem]">
+        <h2 id="mission-heading" class="text-balance text-3xl leading-tight text-cream sm:text-4xl md:text-[2.75rem]">
           To be the leading and most reliable functions décor &amp; hiring services company.
         </h2>
         <p class="mt-6 text-base leading-relaxed text-muted md:text-lg">
@@ -170,7 +170,7 @@ const values = [
           memorable. Your dream is our passion, and your passion is our mission.
         </p>
 
-        <dl class="mt-10 grid grid-cols-2 gap-x-6 gap-y-8 border-t border-charcoal/10 pt-8 sm:grid-cols-4">
+        <dl class="mt-10 grid grid-cols-2 gap-x-6 gap-y-8 border-t border-cream/10 pt-8 sm:grid-cols-4">
           {
             values.map((v, i) => (
               <div data-reveal style={`--reveal-delay:${i * 80}ms`}>
@@ -186,9 +186,9 @@ const values = [
           }
         </dl>
 
-        <div class="mt-10 border-t border-charcoal/10 pt-8" data-reveal>
-          <p class="mono-label text-teal-700">The events we dress</p>
-          <ul class="mt-4 space-y-3 text-sm text-charcoal/90 md:text-[0.95rem]">
+        <div class="mt-10 border-t border-cream/10 pt-8" data-reveal>
+          <p class="mono-label text-gold-300">The events we dress</p>
+          <ul class="mt-4 space-y-3 text-sm text-cream/90 md:text-[0.95rem]">
             <li class="flex items-start gap-3">
               <span class="mt-[0.55em] h-1.5 w-1.5 shrink-0 rounded-full bg-gold-gradient" aria-hidden="true" />
               Weddings — ceremonies &amp; receptions
@@ -210,7 +210,7 @@ const values = [
       </div>
 
       <div class="relative" data-reveal style="--reveal-delay:120ms">
-        <div class="overflow-hidden rounded-2xl ring-1 ring-charcoal/5">
+        <div class="overflow-hidden rounded-2xl ring-1 ring-cream/5">
           <Image
             src={brandTile}
             alt="Sulpice Designs Decor event styling"

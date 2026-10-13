@@ -7,6 +7,7 @@ export interface Service {
   slug: string;
   title: string;
   tagline: string;
+  badge: string;
   description: string;
   image: ImageMetadata;
   icon: string;
@@ -20,6 +21,7 @@ export const SERVICES: Service[] = [
     slug: 'tents-pergolas',
     title: 'Tents & Pergolas',
     tagline: 'Shelter that sets the scene',
+    badge: 'Most popular',
     description:
       'A full range of tents and pergolas to frame your event — from intimate garden ceremonies to grand receptions, styled and installed by our own crew.',
     image: serviceCommercial,
@@ -37,6 +39,7 @@ export const SERVICES: Service[] = [
     slug: 'tables-chairs',
     title: 'Tables, Chairs & Glassware',
     tagline: 'Sit, set, celebrate',
+    badge: 'Full inventory',
     description:
       'Trendy tables, plush chairs, and complete glassware from bar sets to toasting flutes — everything your seating plan calls for, under one roof.',
     image: serviceResidential,
@@ -54,6 +57,7 @@ export const SERVICES: Service[] = [
     slug: 'crockery-linen',
     title: 'Crockery & Linen',
     tagline: 'Luxe foundations',
+    badge: 'Hot for weddings',
     description:
       'Luxurious linen and complete crockery collections that bring polish to every table — white-tie formal or relaxed and colourful.',
     image: serviceEvents,
@@ -71,6 +75,7 @@ export const SERVICES: Service[] = [
     slug: 'florals-accessories',
     title: 'Florals & Accessories',
     tagline: 'The finishing touches',
+    badge: 'Every style',
     description:
       'Flowers and fancy accessories that make all the difference — ceremony arches, centrepieces, and the details your guests will remember.',
     image: serviceConsultation,

@@ -16,7 +16,7 @@ import { SERVICES } from '@/data/services';
       />
       <a
         href="/services"
-        class="group hidden items-center gap-2 whitespace-nowrap text-sm font-medium text-charcoal transition-colors hover:text-gold-600 md:inline-flex"
+        class="group hidden items-center gap-2 whitespace-nowrap text-sm font-medium text-cream transition-colors hover:text-gold-600 md:inline-flex"
         data-reveal
       >
         All services
@@ -32,7 +32,7 @@ import { SERVICES } from '@/data/services';
         SERVICES.map((service, i) => (
           <a
             href={`/services#${service.slug}`}
-            class="group relative flex flex-col overflow-hidden rounded-3xl bg-cream shadow-card transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:shadow-soft"
+            class="group relative flex flex-col overflow-hidden rounded-3xl bg-cream-100 shadow-card transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:shadow-soft"
             data-reveal
             style={`--reveal-delay:${i * 90}ms`}
           >
@@ -52,10 +52,10 @@ import { SERVICES } from '@/data/services';
             </div>
 
             <div class="flex flex-1 flex-col p-7">
-              <p class="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-clay">
+              <p class="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-gold-300">
                 {service.tagline}
               </p>
-              <h3 class="mt-3 font-display text-2xl text-charcoal">{service.title}</h3>
+              <h3 class="mt-3 font-display text-2xl text-cream">{service.title}</h3>
               <p class="mt-3 text-sm leading-relaxed text-muted">{service.description}</p>
               <span class="mt-6 inline-flex items-center gap-2 text-sm font-medium text-gold-600">
                 Learn more

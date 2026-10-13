@@ -32,7 +32,7 @@ const budgets = [...BUDGET_RANGES];
           <span class="h-px w-8 bg-gold" aria-hidden="true" />
           Get a quotation
         </span>
-        <h2 id="contact-heading" class="text-balance font-display text-3xl text-charcoal sm:text-4xl">
+        <h2 id="contact-heading" class="text-balance font-display text-3xl text-cream sm:text-4xl">
           Tell us about your event
         </h2>
         <p class="mt-4 max-w-xl text-sm leading-relaxed text-muted">
@@ -47,8 +47,8 @@ const budgets = [...BUDGET_RANGES];
 
       <!-- Info sidebar -->
       <aside class="space-y-8" aria-label="Contact details" data-reveal style="--reveal-delay:120ms">
-        <div class="rounded-2xl border border-charcoal/10 bg-cream-50 p-7">
-          <h3 class="font-display text-xl text-charcoal">Contact details</h3>
+        <div class="rounded-2xl border border-cream/10 bg-cream-50 p-7">
+          <h3 class="font-display text-xl text-cream">Contact details</h3>
           <ul class="mt-5 space-y-5 text-sm">
             <li class="flex items-start gap-3">
               <span class="bg-gold-gradient mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-ink">
@@ -56,7 +56,7 @@ const budgets = [...BUDGET_RANGES];
               </span>
               <span>
                 <span class="block font-mono text-[0.68rem] uppercase tracking-[0.16em] text-muted">Showrooms</span>
-                <span class="mt-1 block text-charcoal">
+                <span class="mt-1 block text-cream">
                   {
                     SITE.showrooms.map((city) => (
                       <span class="block">{city}</span>
@@ -71,7 +71,7 @@ const budgets = [...BUDGET_RANGES];
               </span>
               <span>
                 <span class="block font-mono text-[0.68rem] uppercase tracking-[0.16em] text-muted">Phone</span>
-                <a href={`tel:${SITE.phoneHref}`} class="text-charcoal transition-colors hover:text-gold-600">
+                <a href={`tel:${SITE.phoneHref}`} class="text-cream transition-colors hover:text-gold-600">
                   {SITE.phone}
                 </a>
               </span>
@@ -82,7 +82,7 @@ const budgets = [...BUDGET_RANGES];
               </span>
               <span>
                 <span class="block font-mono text-[0.68rem] uppercase tracking-[0.16em] text-muted">Email</span>
-                <a href={`mailto:${SITE.email}`} class="text-charcoal transition-colors hover:text-gold-600">
+                <a href={`mailto:${SITE.email}`} class="text-cream transition-colors hover:text-gold-600">
                   {SITE.email}
                 </a>
               </span>
@@ -93,7 +93,7 @@ const budgets = [...BUDGET_RANGES];
               </span>
               <span>
                 <span class="block font-mono text-[0.68rem] uppercase tracking-[0.16em] text-muted">WhatsApp</span>
-                <a href="https://wa.me/263244334455" target="_blank" rel="noopener noreferrer" class="text-charcoal transition-colors hover:text-gold-600">
+                <a href="https://wa.me/263772335903" target="_blank" rel="noopener noreferrer" class="text-cream transition-colors hover:text-gold-600">
                   {SITE.whatsapp}
                 </a>
               </span>
@@ -101,21 +101,45 @@ const budgets = [...BUDGET_RANGES];
           </ul>
         </div>
 
-        <div class="rounded-2xl border border-charcoal/10 bg-cream-50 p-7">
-          <h3 class="font-display text-xl text-charcoal">Operating hours</h3>
+        <div class="rounded-2xl border border-cream/10 bg-cream-50 p-7">
+          <h3 class="font-display text-xl text-cream">Call a branch</h3>
+          <ul class="mt-5 space-y-4 text-sm">
+            {
+              SITE.branchContacts.map((branch) => (
+                <li class="flex items-center justify-between gap-4 border-b border-cream/5 pb-3 last:border-0 last:pb-0">
+                  <span class="flex items-center gap-3 text-muted">
+                    <span class="bg-gold-gradient inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-ink">
+                      <Icon name="lucide:phone" class="h-3.5 w-3.5" />
+                    </span>
+                    {branch.region}
+                  </span>
+                  <a
+                    href={`tel:${branch.phoneHref}`}
+                    class="whitespace-nowrap font-mono text-xs tracking-[0.06em] text-cream transition-colors hover:text-gold-600"
+                  >
+                    {branch.phone}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div class="rounded-2xl border border-cream/10 bg-cream-50 p-7">
+          <h3 class="font-display text-xl text-cream">Operating hours</h3>
           <dl class="mt-5 space-y-3 text-sm">
             {
               SITE.hours.map((entry) => (
-                <div class="flex items-center justify-between gap-4 border-b border-charcoal/5 pb-3 last:border-0 last:pb-0">
+                <div class="flex items-center justify-between gap-4 border-b border-cream/5 pb-3 last:border-0 last:pb-0">
                   <dt class="text-muted">{entry.day}</dt>
-                  <dd class="font-medium text-charcoal">{entry.time}</dd>
+                  <dd class="font-medium text-cream">{entry.time}</dd>
                 </div>
               ))
             }
           </dl>
         </div>
 
-        <div class="overflow-hidden rounded-2xl ring-1 ring-charcoal/5">
+        <div class="overflow-hidden rounded-2xl ring-1 ring-cream/5">
           <div class="relative aspect-[4/3]">
             <Image
               src={heroImage}
@@ -136,7 +160,7 @@ const budgets = [...BUDGET_RANGES];
         </div>
 
         <div>
-          <h3 class="mono-label text-teal-700">Follow along</h3>
+          <h3 class="mono-label text-gold-300">Follow along</h3>
           <ul class="mt-4 flex items-center gap-3">
             {
               SITE.socials.map((social) => (
@@ -146,7 +170,7 @@ const budgets = [...BUDGET_RANGES];
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`${SITE.shortName} on ${social.name}`}
-                    class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-charcoal/15 text-charcoal/70 transition-colors duration-300 hover:border-gold-600 hover:text-gold-600"
+                    class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-cream/15 text-cream/70 transition-colors duration-300 hover:border-gold-600 hover:text-gold-600"
                   >
                     <Icon name={social.icon} class="h-4 w-4" />
                   </a>

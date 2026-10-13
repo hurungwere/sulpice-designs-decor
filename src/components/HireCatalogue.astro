@@ -51,14 +51,14 @@ const products = [
 <section class="container-luxe section-pad" aria-labelledby="hire-heading">
   <div class="mb-14 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
     <div>
-      <span class="mono-label mb-5 flex items-center gap-3 text-teal-700">
+      <span class="mono-label mb-5 flex items-center gap-3 text-gold-300">
         <span class="index-num">01</span>
         <span class="h-px w-7 bg-gold-gradient" aria-hidden="true" />
         What we hire
       </span>
       <h2
         id="hire-heading"
-        class="text-balance text-3xl leading-[1.1] text-charcoal sm:text-4xl md:text-[2.85rem]"
+        class="text-balance text-3xl leading-[1.1] text-cream sm:text-4xl md:text-[2.85rem]"
       >
         One roof. <span class="text-gold-gradient italic">Everything your event needs.</span>
       </h2>
@@ -73,7 +73,7 @@ const products = [
     {
       products.map((product, i) => (
         <article
-          class="group overflow-hidden rounded-2xl bg-cream-50 ring-1 ring-charcoal/10 transition-all duration-500 hover:-translate-y-1 hover:shadow-card hover:ring-gold/60"
+          class="group overflow-hidden rounded-2xl bg-cream-50 ring-1 ring-cream/10 transition-all duration-500 hover:-translate-y-1 hover:shadow-card hover:ring-gold/60"
           data-reveal
           style={`--reveal-delay:${i * 70}ms`}
         >
@@ -100,11 +100,11 @@ const products = [
             </span>
           </div>
           <div class="p-6">
-            <h3 class="font-display text-2xl text-charcoal">{product.name}</h3>
+            <h3 class="font-display text-2xl text-cream">{product.name}</h3>
             <ul class="mt-4">
               {
                 product.specs.map((spec) => (
-                  <li class="flex items-center justify-between gap-4 border-t border-charcoal/10 py-2.5 font-mono text-xs uppercase tracking-[0.14em] text-muted transition-colors duration-300 group-hover:text-charcoal/80">
+                  <li class="flex items-center justify-between gap-4 border-t border-cream/10 py-2.5 font-mono text-xs uppercase tracking-[0.14em] text-muted transition-colors duration-300 group-hover:text-cream/80">
                     {spec}
                     <Icon name="lucide:plus" class="h-3.5 w-3.5 shrink-0 text-gold-600" />
                   </li>
@@ -114,7 +114,7 @@ const products = [
             <div class="mt-5">
               <a
                 href={product.href}
-                class="inline-flex items-center gap-2 text-sm font-medium text-teal-700 transition-colors hover:text-gold-600"
+                class="inline-flex items-center gap-2 text-sm font-medium text-gold-300 transition-colors hover:text-gold-600"
               >
                 Enquire
                 <Icon
@@ -129,7 +129,7 @@ const products = [
     }
   </div>
 
-  <div class="mt-14 grid gap-6 border-t border-charcoal/10 pt-10 sm:grid-cols-2 lg:grid-cols-4">
+  <div class="mt-14 grid gap-6 border-t border-cream/10 pt-10 sm:grid-cols-2 lg:grid-cols-4">
     {
       [
         {
@@ -158,7 +158,7 @@ const products = [
             <Icon name={g.icon} class="h-4 w-4" />
           </span>
           <div>
-            <h3 class="font-display text-lg text-charcoal">{g.title}</h3>
+            <h3 class="font-display text-lg text-cream">{g.title}</h3>
             <p class="mt-1 text-sm leading-relaxed text-muted">{g.body}</p>
           </div>
         </div>

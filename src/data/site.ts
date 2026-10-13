@@ -8,18 +8,23 @@ export const SITE = {
   locale: 'en_US',
   ogImage: '/og-default.jpg',
   email: 'hello@sulpicedesigns.com',
-  phone: '+263 244 334 455',
-  phoneHref: '+263244334455',
-  whatsapp: '+263 244 334 455',
+  phone: '+263 772 335 903',
+  phoneHref: '+263772335903',
+  whatsapp: '+263 772 335 903',
+  branchContacts: [
+    { region: 'Harare, Zimbabwe', phone: '0772 335 903', phoneHref: '+263772335903' },
+    { region: 'Bulawayo, Zimbabwe', phone: '0712 042 832', phoneHref: '+263712042832' },
+    { region: 'South Africa', phone: '+27 61 830 6514', phoneHref: '+27618306514' },
+  ],
   address: {
-    street: '24 Atelier Row, Showroom 3',
+    street: '28 Midlothian Ave, Eastlea',
     city: 'Harare',
     region: 'Zimbabwe',
     postal: '',
     country: 'Zimbabwe',
   },
   showrooms: [
-    'Harare, Zimbabwe',
+    '28 Midlothian Ave, Eastlea, Harare, Zimbabwe',
     'Bulawayo, Zimbabwe',
     'Fourways, Johannesburg, South Africa',
   ],
@@ -31,7 +36,7 @@ export const SITE = {
   socials: [
     { name: 'Instagram', href: 'https://instagram.com', icon: 'lucide:instagram' },
     { name: 'Facebook', href: 'https://facebook.com', icon: 'lucide:facebook' },
-    { name: 'WhatsApp', href: 'https://wa.me/263244334455', icon: 'lucide:message-circle' },
+    { name: 'WhatsApp', href: 'https://wa.me/263772335903', icon: 'lucide:message-circle' },
     { name: 'LinkedIn', href: 'https://linkedin.com', icon: 'lucide:linkedin' },
   ],
   nav: [

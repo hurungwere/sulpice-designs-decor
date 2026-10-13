@@ -50,7 +50,7 @@ export default function PortfolioGallery({
                 onClick={() => setActive(filter)}
                 className={[
                   'relative rounded-full px-5 py-2.5 text-sm font-medium transition-colors duration-300',
-                  isActive ? 'text-ink' : 'text-charcoal/75 hover:text-gold-600',
+                  isActive ? 'text-ink' : 'text-cream/75 hover:text-gold-600',
                 ].join(' ')}
               >
                 {isActive && (
@@ -77,7 +77,7 @@ export default function PortfolioGallery({
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.96 }}
               transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="group relative overflow-hidden rounded-2xl bg-cream-100 ring-1 ring-charcoal/5"
+              className="group relative overflow-hidden rounded-2xl bg-cream-100 ring-1 ring-cream/5"
             >
               <button
                 type="button"
@@ -143,7 +143,7 @@ export default function PortfolioGallery({
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 24, scale: 0.97 }}
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-              className="relative w-full max-w-3xl overflow-hidden rounded-2xl bg-cream shadow-2xl"
+              className="relative w-full max-w-3xl overflow-hidden rounded-2xl bg-ink shadow-2xl"
             >
               <img
                 src={selected.src}
@@ -163,7 +163,7 @@ export default function PortfolioGallery({
                 <X className="h-5 w-5" aria-hidden="true" />
               </button>
               <div className="p-6 md:p-8">
-                <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-medium uppercase tracking-[0.16em] text-clay">
+                <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-medium uppercase tracking-[0.16em] text-cream/60">
                   <span>{CATEGORY_LABELS[selected.category] ?? selected.category}</span>
                   <span className="flex items-center gap-1.5">
                     <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
@@ -174,13 +174,13 @@ export default function PortfolioGallery({
                     {selected.year}
                   </span>
                 </div>
-                <h3 className="mt-3 font-display text-3xl text-charcoal">{selected.title}</h3>
+                <h3 className="mt-3 font-display text-3xl text-cream">{selected.title}</h3>
                 {selected.scope.length > 0 && (
                   <ul className="mt-5 flex flex-wrap gap-2">
                     {selected.scope.map((tag) => (
                       <li
                         key={tag}
-                        className="rounded-full border border-charcoal/15 px-3 py-1 text-xs text-muted"
+                        className="rounded-full border border-cream/15 px-3 py-1 text-xs text-muted"
                       >
                         {tag}
                       </li>

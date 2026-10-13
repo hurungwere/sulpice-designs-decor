@@ -1,0 +1,60 @@
+---
+import SectionHeading from '@/components/SectionHeading.astro';
+
+const groups = [
+  'Wedding venues & planners',
+  'Hotels & lodges',
+  'Corporate — launches & awards',
+  'End-of-year functions',
+  'Product launches',
+  'Churches & community halls',
+  'Caterers & MCs',
+  'Film & production sets',
+];
+---
+
+<section class="border-y border-cream/5 bg-cream-100/70 py-20 md:py-24" aria-label="Clients and partners">
+  <div class="container-luxe">
+    <SectionHeading
+      index="02"
+      eyebrow="Trusted by"
+      title="Styling celebrations across Zimbabwe & South Africa."
+      lead="Weddings, corporates, launches, and milestone events — with the inventory to back every single one."
+      class="mb-12"
+    />
+  </div>
+
+  <div class="overflow-hidden" aria-hidden="true">
+    <div class="client-marquee flex w-max items-center gap-4 pr-4">
+      {[...groups, ...groups].map((group) => (
+        <span class="bg-cream-50 inline-flex items-center gap-2.5 whitespace-nowrap rounded-full border border-cream/10 px-6 py-3 font-mono text-[0.72rem] uppercase tracking-[0.16em] text-gold-300">
+          <span class="bg-gold-gradient h-1.5 w-1.5 rounded-full" />
+          {group}
+        </span>
+      ))}
+    </div>
+  </div>
+
+  <p class="container-luxe mt-10 text-center text-sm text-muted">
+    Send us your real client or partner logos and we'll swap these placeholders for a logo wall.
+  </p>
+</section>
+
+<style>
+  .client-marquee {
+    animation: client-scroll 38s linear infinite;
+  }
+  .client-marquee:hover {
+    animation-play-state: paused;
+  }
+  @keyframes client-scroll {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .client-marquee {
+      animation: none;
+    }
+  }
+</style>

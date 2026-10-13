@@ -59,14 +59,14 @@ const socials = [
   <div class="container-luxe">
     <div class="mb-14 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
       <div>
-        <span class="mono-label mb-5 flex items-center gap-3 text-teal-700">
-          <span class="index-num">03</span>
+        <span class="mono-label mb-5 flex items-center gap-3 text-gold-300">
+          <span class="index-num">04</span>
           <span class="h-px w-7 bg-gold-gradient" aria-hidden="true" />
           Gallery &amp; social
         </span>
         <h2
           id="gallery-heading"
-          class="text-balance text-3xl leading-[1.1] text-charcoal sm:text-4xl md:text-[2.85rem]"
+          class="text-balance text-3xl leading-[1.1] text-cream sm:text-4xl md:text-[2.85rem]"
         >
           Fresh from the <span class="text-gold-gradient italic">event floor.</span>
         </h2>
@@ -75,7 +75,7 @@ const socials = [
         href={instagram}
         target="_blank"
         rel="noopener noreferrer"
-        class="group inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-charcoal/20 px-5 py-2.5 font-mono text-xs uppercase tracking-[0.16em] text-charcoal transition-colors hover:border-gold-600 hover:text-gold-600"
+        class="group inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-cream/20 px-5 py-2.5 font-mono text-xs uppercase tracking-[0.16em] text-cream transition-colors hover:border-gold-600 hover:text-gold-600"
       >
         <Icon name="lucide:instagram" class="h-4 w-4" />
         Follow @sulpicedesigns
@@ -91,7 +91,7 @@ const socials = [
             href={img.link ? instagram : '/portfolio'}
             target={img.link ? '_blank' : undefined}
             rel={img.link ? 'noopener noreferrer' : undefined}
-            class:list={['group relative overflow-hidden rounded-2xl bg-cream-100 ring-1 ring-charcoal/5', img.span]}
+            class:list={['group relative overflow-hidden rounded-2xl bg-cream-100 ring-1 ring-cream/5', img.span]}
             data-reveal
             style={`--reveal-delay:${i * 60}ms`}
             aria-label={`${img.alt} — view the gallery on Instagram`}
@@ -128,7 +128,7 @@ const socials = [
             href={social.href}
             target="_blank"
             rel="noopener noreferrer"
-            class="group flex items-center gap-4 rounded-2xl bg-cream-50 p-5 ring-1 ring-charcoal/10 transition-all duration-500 hover:-translate-y-1 hover:shadow-card hover:ring-gold/50"
+            class="group flex items-center gap-4 rounded-2xl bg-cream-50 p-5 ring-1 ring-cream/10 transition-all duration-500 hover:-translate-y-1 hover:shadow-card hover:ring-gold/50"
             data-reveal
             style={`--reveal-delay:${i * 80}ms`}
             aria-label={`${social.name}: ${social.tagline}`}
@@ -137,7 +137,7 @@ const socials = [
               <Icon name={social.icon} class="h-5 w-5" />
             </span>
             <span class="min-w-0">
-              <span class="font-mono text-xs font-medium uppercase tracking-[0.16em] text-charcoal">
+              <span class="font-mono text-xs font-medium uppercase tracking-[0.16em] text-cream">
                 {social.name}
               </span>
               <span class="mt-0.5 block truncate text-sm text-muted">{social.handle}</span>

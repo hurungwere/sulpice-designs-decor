@@ -75,7 +75,7 @@ export default function TestimonialsSlider({ items, autoplayMs = 7000 }: Props) 
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
               aria-live="polite"
             >
-              <div className="rounded-3xl bg-cream-50 p-7 shadow-card ring-1 ring-charcoal/5 md:p-10">
+              <div className="rounded-3xl bg-cream-50 p-7 shadow-card ring-1 ring-cream/5 md:p-10">
                 <div className="flex items-start justify-between gap-4">
                   <span
                     aria-hidden="true"
@@ -97,7 +97,7 @@ export default function TestimonialsSlider({ items, autoplayMs = 7000 }: Props) 
                   </span>
                 </div>
 
-                <p className="mt-7 max-w-4xl text-balance font-display text-2xl leading-[1.35] text-charcoal md:text-[2rem] md:leading-[1.3]">
+                <p className="mt-7 max-w-4xl text-balance font-display text-2xl leading-[1.35] text-cream md:text-[2rem] md:leading-[1.3]">
                   {active.quote}
                 </p>
 
@@ -106,7 +106,7 @@ export default function TestimonialsSlider({ items, autoplayMs = 7000 }: Props) 
                     {active.initials}
                   </span>
                   <span>
-                    <span className="block font-mono text-xs uppercase tracking-[0.16em] text-charcoal">
+                    <span className="block font-mono text-xs uppercase tracking-[0.16em] text-cream">
                       {active.name}
                     </span>
                     <span className="mt-1 block font-mono text-[0.68rem] uppercase tracking-[0.14em] text-muted-400">
@@ -125,7 +125,7 @@ export default function TestimonialsSlider({ items, autoplayMs = 7000 }: Props) 
               type="button"
               onClick={() => paginate(-1)}
               aria-label="Previous testimonial"
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-charcoal/20 text-charcoal transition-colors hover:border-gold-600 hover:text-gold-600"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-cream/20 text-cream transition-colors hover:border-gold-600 hover:text-gold-600"
             >
               <ArrowLeft className="h-4 w-4" aria-hidden="true" />
             </button>
@@ -133,17 +133,17 @@ export default function TestimonialsSlider({ items, autoplayMs = 7000 }: Props) 
               type="button"
               onClick={() => paginate(1)}
               aria-label="Next testimonial"
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-charcoal/20 text-charcoal transition-colors hover:border-gold-600 hover:text-gold-600"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-cream/20 text-cream transition-colors hover:border-gold-600 hover:text-gold-600"
             >
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </button>
           </div>
 
           <div className="flex items-center gap-4">
-            <span className="font-mono text-xs uppercase tracking-[0.16em] text-charcoal">
+            <span className="font-mono text-xs uppercase tracking-[0.16em] text-cream">
               {String(index + 1).padStart(2, '0')}
             </span>
-            <span className="relative h-px w-28 bg-charcoal/15">
+            <span className="relative h-px w-28 bg-cream/15">
               <span
                 className="absolute inset-y-0 left-0 bg-gold-gradient transition-[width] duration-500"
                 style={{ width: `${pct}%` }}

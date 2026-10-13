@@ -3,7 +3,7 @@ title: An Ivory Wedding
 category: Events
 location: Franschhoek, South Africa
 year: 2025
-cover: ../../assets/project-10.jpg
+cover: ../../assets/project-14.jpg
 summary: A 120-guest celebration styled in ivory, sage, and endless candlelight.
 scope:
   - Concept direction

@@ -15,8 +15,8 @@ interface Errors {
 }
 
 const field =
-  'w-full rounded-2xl border border-charcoal/15 bg-cream-50 px-4 py-3 text-sm text-charcoal placeholder:text-muted-400 transition-[border-color,background-color] hover:border-charcoal/30 focus:border-gold focus:bg-cream focus:outline-none';
-const labelCls = 'mb-2 block text-xs font-semibold uppercase tracking-[0.16em] text-clay';
+  'w-full rounded-2xl border border-cream/15 bg-cream-50 px-4 py-3 text-sm text-cream placeholder:text-muted-400 transition-[border-color,background-color] hover:border-cream/30 focus:border-gold focus:bg-cream-100 focus:outline-none';
+const labelCls = 'mb-2 block text-xs font-semibold uppercase tracking-[0.16em] text-gold-300';
 
 export default function ContactForm({ projectTypes, budgets }: Props) {
   const [status, setStatus] = useState<Status>('idle');
@@ -174,6 +174,67 @@ export default function ContactForm({ projectTypes, budgets }: Props) {
         </div>
       </div>
 
+      <div className="grid gap-6 sm:grid-cols-2">
+        <div>
+          <label htmlFor="eventDate" className={labelCls}>
+            Event date
+          </label>
+          <input
+            id="eventDate"
+            name="eventDate"
+            type="date"
+            min={new Date().toISOString().split('T')[0]}
+            className={field}
+          />
+        </div>
+
+        <div>
+          <label htmlFor="guests" className={labelCls}>
+            Number of guests
+          </label>
+          <input
+            id="guests"
+            name="guests"
+            type="number"
+            min={1}
+            step={1}
+            inputMode="numeric"
+            className={field}
+            placeholder="Approximate guest count"
+          />
+        </div>
+      </div>
+
+      <div className="grid gap-6 sm:grid-cols-2">
+        <div>
+          <label htmlFor="city" className={labelCls}>
+            City / location
+          </label>
+          <input
+            id="city"
+            name="city"
+            type="text"
+            autoComplete="address-level2"
+            className={field}
+            placeholder="Harare, Bulawayo, Johannesburg..."
+          />
+        </div>
+
+        <div>
+          <label htmlFor="venueNeed" className={labelCls}>
+            Do you need a venue?
+          </label>
+          <select id="venueNeed" name="venueNeed" className={field} defaultValue="">
+            <option value="" disabled>
+              Select an option
+            </option>
+            <option>Yes — please suggest venues</option>
+            <option>No — I have a venue</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+      </div>
+
       <div>
         <label htmlFor="budget" className={labelCls}>
           Budget range
@@ -257,8 +318,9 @@ export default function ContactForm({ projectTypes, budgets }: Props) {
       </div>
 
       <p className="text-xs text-muted-400">
-        By submitting, you agree to be contacted about your enquiry. We never share
-        your details.
+        Quotations and bookings are confirmed in writing, and we reply within one
+        business day. By submitting, you agree to be contacted about your enquiry —
+        we never share your details.
       </p>
     </form>
   );

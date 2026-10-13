@@ -13,13 +13,13 @@
     Consolas, monospace;
 
   /* Warm creams & sands */
-  --color-cream: #fbf7f0;
-  --color-cream-50: #fdfbf7;
-  --color-cream-100: #f8f2e9;
-  --color-cream-200: #f1e8db;
-  --color-sand: #e9dfcf;
-  --color-sand-300: #e0d2bd;
-  --color-linen: #d8c7af;
+  --color-cream: #f4eee2;
+  --color-cream-50: #0a424c;
+  --color-cream-100: #0e4c57;
+  --color-cream-200: #145863;
+  --color-sand: #185d68;
+  --color-sand-300: #1f6874;
+  --color-linen: #256d78;
 
   /* Muted taupe / clay */
   --color-taupe: #b49b7c;
@@ -43,12 +43,12 @@
   --color-teal-800: #084c56;
   --color-teal-900: #063a42;
 
-  /* Text — crisp charcoal on light sections */
+  /* Text — warm ivory on the deep teal surface */
   --color-charcoal: #1a1a1a;
   --color-charcoal-800: #141414;
-  --color-ink: #111111;
-  --color-muted: #5f5850;
-  --color-muted-400: #8a8179;
+  --color-ink: #063a42;
+  --color-muted: #cdc4b6;
+  --color-muted-400: #a79d8f;
 
   --shadow-soft: 0 24px 60px -32px rgb(42 36 32 / 0.45);
   --shadow-card: 0 18px 40px -28px rgb(42 36 32 / 0.4);
@@ -61,7 +61,7 @@
 /* ------------------------------------------------------------------ */
 @layer base {
   :root {
-    color-scheme: light;
+    color-scheme: dark;
     scroll-behavior: smooth;
   }
 
@@ -70,8 +70,8 @@
   }
 
   body {
-    background-color: var(--color-cream);
-    color: var(--color-charcoal);
+    background-color: var(--color-ink);
+    color: var(--color-cream);
     font-family: var(--font-sans);
     font-synthesis-weight: none;
     text-rendering: optimizeLegibility;
@@ -93,7 +93,7 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-teal-600);
+    outline: 2px solid var(--color-gold-300);
     outline-offset: 3px;
     border-radius: 2px;
   }
@@ -131,7 +131,7 @@
   font-weight: 500;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--color-teal-700);
+  color: var(--color-gold-300);
 }
 
 /* Metallic gold gradient text — for headings, logo, accents */
@@ -211,9 +211,9 @@
   color: var(--color-gold-300);
 }
 
-/* Brand wordmark: charcoal on white, gold gradient over the dark hero */
+/* Brand wordmark: ivory on dark, gold gradient over the dark hero */
 .brand-name {
-  color: var(--color-charcoal);
+  color: var(--color-cream);
 }
 #site-header[data-transparent='true']:not([data-scrolled='true']) .brand-name {
   color: transparent;

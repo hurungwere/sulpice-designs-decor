@@ -22,9 +22,9 @@ const {
 } = Astro.props;
 
 const alignment = align === 'center' ? 'items-center text-center mx-auto' : 'items-start';
-const titleColor = tone === 'light' ? 'text-cream' : 'text-charcoal';
+const titleColor = tone === 'light' ? 'text-cream' : 'text-cream';
 const leadColor = tone === 'light' ? 'text-cream/70' : 'text-muted';
-const eyebrowColor = tone === 'light' ? 'text-gold-300' : 'text-teal-700';
+const eyebrowColor = tone === 'light' ? 'text-gold-300' : 'text-gold-300';
 ---
 
 <div class:list={['flex max-w-2xl flex-col', alignment, className]} data-reveal>

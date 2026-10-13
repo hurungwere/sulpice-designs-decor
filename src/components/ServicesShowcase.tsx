@@ -37,7 +37,7 @@ export default function ServicesShowcase({ items }: Props) {
                 href={`/services#${item.slug}`}
                 onMouseEnter={() => setActive(i)}
                 onFocus={() => setActive(i)}
-                className="group flex items-baseline gap-5 border-b border-charcoal/12 py-6"
+                className="group flex items-baseline gap-5 border-b border-cream/12 py-6"
                 aria-current={isActive ? 'true' : undefined}
               >
                 <span className="index-num pt-1">{String(i + 1).padStart(2, '0')}</span>
@@ -45,7 +45,7 @@ export default function ServicesShowcase({ items }: Props) {
                   <span
                     className={[
                       'block font-display text-2xl leading-tight transition-colors duration-400 md:text-3xl',
-                      isActive ? 'text-gold-600' : 'text-charcoal group-hover:text-gold-600',
+                      isActive ? 'text-gold-600' : 'text-cream group-hover:text-gold-600',
                     ].join(' ')}
                   >
                     {item.title}
@@ -69,7 +69,7 @@ export default function ServicesShowcase({ items }: Props) {
 
       <div className="order-1 lg:order-2">
         <div className="lg:sticky lg:top-28">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-cream-100 ring-1 ring-charcoal/5">
+          <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-cream-100 ring-1 ring-cream/5">
             <AnimatePresence mode="wait">
               <motion.img
                 key={current.slug}
