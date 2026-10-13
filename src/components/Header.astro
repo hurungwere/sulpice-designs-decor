@@ -1,0 +1,98 @@
+---
+import Button from '@/components/Button.astro';
+import MobileMenu from '@/components/MobileMenu.tsx';
+import { Icon } from 'astro-icon/components';
+import { SITE } from '@/data/site';
+
+interface Props {
+  transparent?: boolean;
+}
+const { transparent = false } = Astro.props;
+
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === '/' ? path === '/' : path.startsWith(href);
+---
+
+<header
+  id="site-header"
+  data-transparent={transparent ? 'true' : 'false'}
+  class:list={[
+    'fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,backdrop-filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]',
+    transparent
+      ? 'bg-transparent data-[scrolled=true]:bg-cream/85 data-[scrolled=true]:shadow-[0_1px_0_rgba(42,36,32,0.08),0_16px_32px_-24px_rgba(42,36,32,0.4)] data-[scrolled=true]:backdrop-blur-xl'
+      : 'bg-cream/85 shadow-[0_1px_0_rgba(42,36,32,0.08),0_16px_32px_-24px_rgba(42,36,32,0.4)] backdrop-blur-xl',
+  ]}
+>
+  <div
+    class="container-luxe flex items-center justify-between py-4 md:py-5"
+    id="header-inner"
+  >
+    <!-- Brand -->
+    <a
+      href="/"
+      class="group flex items-center gap-3"
+      aria-label={`${SITE.name} — home`}
+    >
+      <span
+        class="flex h-10 w-10 items-center justify-center rounded-full bg-gold-gradient font-display text-lg leading-none text-ink shadow-[0_8px_20px_-10px_rgba(184,134,11,0.9)] transition-transform duration-300 group-hover:scale-105"
+        id="brand-mark"
+      >
+        S
+      </span>
+      <span class="flex flex-col leading-none" id="brand-text">
+        <span class="brand-name font-display text-lg tracking-tight">Sulpice</span>
+        <span class="text-[0.6rem] font-medium uppercase tracking-[0.28em] text-gold-600">
+          Designs &amp; Decor
+        </span>
+      </span>
+    </a>
+
+    <!-- Desktop nav -->
+    <nav aria-label="Primary" class="hidden items-center gap-7 lg:flex">
+      {
+        SITE.nav.map((item) => {
+          const active = isActive(item.href);
+          return (
+            <a
+              href={item.href}
+              aria-current={active ? 'page' : undefined}
+              class:list={[
+                'nav-link group relative py-1 font-mono text-xs font-medium uppercase tracking-[0.18em] transition-colors duration-300',
+                active ? 'text-gold-600' : 'hover:text-gold-600',
+              ]}
+            >
+              {item.label}
+              <span
+                aria-hidden="true"
+                class:list={[
+                  'absolute -bottom-0.5 left-0 h-px w-full origin-left bg-gold-gradient transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]',
+                  active ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100',
+                ]}
+              />
+            </a>
+          );
+        })
+      }
+    </nav>
+
+    <!-- Actions -->
+    <div class="flex items-center gap-2">
+      <a
+        href={`tel:${SITE.phoneHref}`}
+        class="nav-link hidden items-center gap-2 rounded-full border border-current/20 px-4 py-2 font-mono text-xs font-medium tracking-[0.12em] transition-colors hover:border-gold-600 hover:text-gold-600 xl:inline-flex"
+      >
+        <Icon name="lucide:phone" class="h-3.5 w-3.5" />
+        <span>{SITE.phone}</span>
+      </a>
+      <Button href="/contact" size="sm" class="hidden sm:inline-flex">
+        Get a quotation
+        <Icon
+          name="lucide:arrow-right"
+          class="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-0.5"
+        />
+      </Button>
+      <MobileMenu client:load nav={[...SITE.nav]} phone={SITE.phone} phoneHref={SITE.phoneHref} />
+    </div>
+  </div>
+</header>

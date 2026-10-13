@@ -1,0 +1,37 @@
+---
+import { getCollection } from 'astro:content';
+import SectionHeading from '@/components/SectionHeading.astro';
+import PortfolioGallery from '@/components/PortfolioGallery.tsx';
+import Button from '@/components/Button.astro';
+import { Icon } from 'astro-icon/components';
+import { toGalleryItems } from '@/utils/portfolio';
+
+const featured = (await getCollection('projects'))
+  .filter((entry) => entry.data.featured)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 6);
+
+const items = await toGalleryItems(featured);
+---
+
+<section class="py-24 md:py-32" aria-labelledby="portfolio-heading">
+  <div class="container-luxe">
+    <SectionHeading
+      id="portfolio-heading"
+      eyebrow="Selected work"
+      title="Recent projects we're proud of"
+      lead="A glimpse into the homes, brands, and celebrations we've had the privilege to shape."
+      align="center"
+      class="mb-14"
+    />
+
+    <PortfolioGallery client:visible items={items} showFilter={false} idPrefix="home-gallery" />
+
+    <div class="mt-14 flex justify-center" data-reveal>
+      <Button href="/portfolio" variant="outline" size="lg">
+        Explore the full portfolio
+        <Icon name="lucide:arrow-right" class="h-4 w-4" />
+      </Button>
+    </div>
+  </div>
+</section>

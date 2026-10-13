@@ -1,0 +1,51 @@
+---
+interface Props {
+  eyebrow?: string;
+  index?: string;
+  title: string;
+  lead?: string;
+  align?: 'left' | 'center';
+  tone?: 'dark' | 'light';
+  class?: string;
+  id?: string;
+}
+
+const {
+  eyebrow,
+  index,
+  title,
+  lead,
+  align = 'left',
+  tone = 'dark',
+  class: className = '',
+  id,
+} = Astro.props;
+
+const alignment = align === 'center' ? 'items-center text-center mx-auto' : 'items-start';
+const titleColor = tone === 'light' ? 'text-cream' : 'text-charcoal';
+const leadColor = tone === 'light' ? 'text-cream/70' : 'text-muted';
+const eyebrowColor = tone === 'light' ? 'text-gold-300' : 'text-teal-700';
+---
+
+<div class:list={['flex max-w-2xl flex-col', alignment, className]} data-reveal>
+  {
+    eyebrow && (
+      <span class:list={['mono-label mb-5 flex items-center gap-3', eyebrowColor]}>
+        {index && <span class:list={['index-num', tone === 'light' && 'text-cream/50']}>{index}</span>}
+        <span class="h-px w-7 bg-gold-gradient" aria-hidden="true" />
+        {eyebrow}
+      </span>
+    )
+  }
+  <h2
+    id={id}
+    class:list={['text-balance text-3xl leading-[1.08] sm:text-4xl md:text-[2.85rem]', titleColor]}
+  >
+    {title}
+  </h2>
+  {
+    lead && (
+      <p class:list={['mt-5 text-base leading-relaxed md:text-lg', leadColor]}>{lead}</p>
+    )
+  }
+</div>

@@ -1,0 +1,222 @@
+---
+import { Image } from 'astro:assets';
+import Button from '@/components/Button.astro';
+import { Icon } from 'astro-icon/components';
+import hero1 from '@/assets/hero-1.jpg';
+import hero2 from '@/assets/hero-2.jpg';
+import hero3 from '@/assets/hero-3.jpg';
+
+const slides = [
+  { src: hero1, alt: 'Warm minimalist living room with cream sofas and oak detailing' },
+  { src: hero2, alt: 'Serene neutral interior with soft daylight and sculptural furniture' },
+  { src: hero3, alt: 'Elegant bedroom styled in muted beige and natural textiles' },
+];
+---
+
+<section
+  class="relative isolate flex min-h-[100svh] items-end overflow-hidden bg-teal-900 text-cream"
+  aria-label="Introduction"
+>
+  <!-- Crossfading backdrop -->
+  <div class="absolute inset-0 -z-10">
+    {
+      slides.map((slide, i) => (
+        <div class:list={['hero-slide absolute inset-0', `hero-slide-${i}`]}>
+          <Image
+            src={slide.src}
+            alt={slide.alt}
+            widths={[768, 1280, 1920]}
+            sizes="100vw"
+            loading={i === 0 ? 'eager' : 'lazy'}
+            fetchpriority={i === 0 ? 'high' : 'auto'}
+            class="h-full w-full scale-105 object-cover"
+          />
+        </div>
+      ))
+    }
+    <div
+      class="absolute inset-0 bg-gradient-to-t from-teal-900/88 via-teal-900/50 to-teal-900/32"
+      aria-hidden="true"
+    />
+    <div
+      class="absolute inset-0 bg-gradient-to-r from-teal-900/65 via-transparent to-transparent"
+      aria-hidden="true"
+    />
+  </div>
+
+  <div class="container-luxe w-full pb-16 pt-32 md:pb-24">
+    <div class="max-w-3xl">
+      <p class="hero-anim mono-label text-gold-300" style="--d:0ms">
+        <span class="h-px w-8 bg-gold-gradient" aria-hidden="true" />
+        Events décor &amp; hiring services
+      </p>
+
+      <h1
+        class="hero-anim mt-6 text-balance font-display text-[2.6rem] leading-[1.04] text-white sm:text-6xl lg:text-[4.5rem]"
+        style="--d:120ms"
+      >
+        Your dream day,
+        <span class="text-gold-gradient italic">styled to the last detail.</span>
+      </h1>
+
+      <p
+        class="hero-anim mt-7 max-w-xl text-base leading-relaxed text-cream/80 md:text-lg"
+        style="--d:240ms"
+      >
+        Sulpice Designs Decor is a premium events décor and hiring company — tents,
+        tables, linen, and flowers for weddings, corporate events, and every
+        celebration in between.
+      </p>
+
+      <div class="hero-anim mt-9 flex flex-wrap items-center gap-3" style="--d:360ms">
+        <Button href="/contact" size="lg">
+          Get a quotation
+          <Icon
+            name="lucide:arrow-right"
+            class="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-0.5"
+          />
+        </Button>
+        <Button href="/portfolio" variant="light" size="lg">
+          See our latest events
+        </Button>
+      </div>
+
+      <div class="hero-anim mt-7 flex flex-wrap items-center gap-x-3 gap-y-3" style="--d:420ms">
+        <span class="font-mono text-[0.68rem] uppercase tracking-[0.16em] text-cream/60">
+          Popular hire:
+        </span>
+        <a
+          href="/services#tents-pergolas"
+          class="inline-flex items-center gap-1.5 rounded-full border border-cream/25 bg-cream/5 px-4 py-2 font-mono text-[0.68rem] uppercase tracking-[0.14em] text-cream/80 backdrop-blur-sm transition-colors duration-300 hover:border-gold-300 hover:text-gold-300"
+        >
+          Tents
+        </a>
+        <a
+          href="/services#tables-chairs"
+          class="inline-flex items-center gap-1.5 rounded-full border border-cream/25 bg-cream/5 px-4 py-2 font-mono text-[0.68rem] uppercase tracking-[0.14em] text-cream/80 backdrop-blur-sm transition-colors duration-300 hover:border-gold-300 hover:text-gold-300"
+        >
+          Tables &amp; chairs
+        </a>
+        <a
+          href="/services#crockery-linen"
+          class="inline-flex items-center gap-1.5 rounded-full border border-cream/25 bg-cream/5 px-4 py-2 font-mono text-[0.68rem] uppercase tracking-[0.14em] text-cream/80 backdrop-blur-sm transition-colors duration-300 hover:border-gold-300 hover:text-gold-300"
+        >
+          Crockery &amp; linen
+        </a>
+        <a
+          href="/services#florals-accessories"
+          class="inline-flex items-center gap-1.5 rounded-full border border-cream/25 bg-cream/5 px-4 py-2 font-mono text-[0.68rem] uppercase tracking-[0.14em] text-cream/80 backdrop-blur-sm transition-colors duration-300 hover:border-gold-300 hover:text-gold-300"
+        >
+          Florals
+        </a>
+      </div>
+
+      <div
+        class="hero-anim mt-12 flex flex-wrap items-center gap-x-6 gap-y-3 font-mono text-[0.68rem] uppercase tracking-[0.16em] text-cream/70"
+        style="--d:480ms"
+      >
+        <span>Est. 2008</span>
+        <span class="h-3 w-px bg-cream/25" aria-hidden="true" />
+        <span>3 showrooms — ZW &amp; ZA</span>
+        <span class="h-3 w-px bg-cream/25" aria-hidden="true" />
+        <span>Zimbabwe · South Africa &amp; beyond</span>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="absolute bottom-8 right-8 hidden flex-col items-center gap-3 md:flex"
+    aria-hidden="true"
+  >
+    <span class="font-mono text-[0.6rem] uppercase tracking-[0.22em] text-cream/60">
+      Scroll
+    </span>
+    <span class="relative h-12 w-px overflow-hidden bg-cream/20">
+      <span class="scroll-hint-anim bg-gold-gradient absolute inset-x-0 top-0 h-full" />
+    </span>
+  </div>
+</section>
+
+<style>
+  .hero-slide {
+    opacity: 0;
+    animation: hero-fade 21s linear infinite;
+  }
+  .hero-slide-0 {
+    animation-delay: 0s;
+  }
+  .hero-slide-1 {
+    animation-delay: 7s;
+  }
+  .hero-slide-2 {
+    animation-delay: 14s;
+  }
+  .hero-slide :global(img) {
+    animation: hero-zoom 21s ease-in-out infinite;
+  }
+
+  @keyframes hero-fade {
+    0% {
+      opacity: 0;
+    }
+    4% {
+      opacity: 1;
+    }
+    33% {
+      opacity: 1;
+    }
+    38% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes hero-zoom {
+    0% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1.16);
+    }
+  }
+
+  .hero-anim {
+    animation: hero-rise 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--d, 0ms);
+  }
+  @keyframes hero-rise {
+    from {
+      opacity: 0;
+      transform: translateY(28px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes scroll-hint {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(100%);
+    }
+  }
+  .scroll-hint-anim {
+    animation: scroll-hint 2.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-slide,
+    .hero-slide :global(img),
+    .hero-anim,
+    .scroll-hint-anim {
+      animation: none !important;
+    }
+    .hero-slide-0 {
+      opacity: 1;
+    }
+  }
+</style>

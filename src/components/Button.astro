@@ -1,0 +1,53 @@
+---
+interface Props {
+  href?: string;
+  type?: 'button' | 'submit';
+  variant?: 'primary' | 'gold' | 'outline' | 'ghost' | 'light';
+  size?: 'sm' | 'md' | 'lg';
+  class?: string;
+  [key: string]: unknown;
+}
+
+const {
+  href,
+  type = 'button',
+  variant = 'primary',
+  size = 'md',
+  class: className = '',
+  ...rest
+} = Astro.props;
+
+const base =
+  'group/btn inline-flex items-center justify-center gap-2 rounded-full font-sans font-medium tracking-wide transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60';
+
+const variants: Record<string, string> = {
+  primary:
+    'bg-charcoal text-cream hover:bg-ink shadow-[0_12px_28px_-18px_rgba(26,26,26,0.85)]',
+  gold: 'bg-gold-gradient text-ink shadow-[0_14px_32px_-20px_rgba(184,134,11,0.85)] hover:shadow-[0_18px_40px_-20px_rgba(184,134,11,0.95)] hover:brightness-[1.06]',
+  outline:
+    'border border-charcoal/30 text-charcoal hover:border-gold-600 hover:text-gold-600',
+  light:
+    'border border-cream/45 text-cream hover:bg-cream hover:text-charcoal backdrop-blur-sm',
+  ghost: 'text-charcoal hover:text-gold-600',
+};
+
+const sizes: Record<string, string> = {
+  sm: 'px-4 py-2 text-xs',
+  md: 'px-6 py-3 text-sm',
+  lg: 'px-8 py-4 text-sm md:text-base',
+};
+
+const cls = `${base} ${variants[variant]} ${sizes[size]} ${className}`;
+---
+
+{
+  href ? (
+    <a href={href} class={cls} {...rest}>
+      <slot />
+    </a>
+  ) : (
+    <button type={type} class={cls} {...rest}>
+      <slot />
+    </button>
+  )
+}

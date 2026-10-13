@@ -1,0 +1,306 @@
+@import 'tailwindcss';
+
+/* ------------------------------------------------------------------ */
+/*  Design tokens (Tailwind v4)                                        */
+/*  Warm neutral, elegant, luxury palette + editorial type pairing.    */
+/* ------------------------------------------------------------------ */
+@theme {
+  --font-sans: 'Quicksand Variable', ui-sans-serif, system-ui, -apple-system,
+    'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Playfair Display Variable', ui-serif, Georgia, 'Times New Roman',
+    serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo,
+    Consolas, monospace;
+
+  /* Warm creams & sands */
+  --color-cream: #fbf7f0;
+  --color-cream-50: #fdfbf7;
+  --color-cream-100: #f8f2e9;
+  --color-cream-200: #f1e8db;
+  --color-sand: #e9dfcf;
+  --color-sand-300: #e0d2bd;
+  --color-linen: #d8c7af;
+
+  /* Muted taupe / clay */
+  --color-taupe: #b49b7c;
+  --color-clay: #97815f;
+  --color-clay-700: #7c684c;
+
+  /* Brand — rich metallic gold */
+  --color-gold-300: #e5c558;
+  --color-gold: #d4af37;
+  --color-gold-600: #b8860b;
+  --gradient-gold: linear-gradient(135deg, #e5c558 0%, #b8860b 100%);
+
+  /* Brand — deep teal */
+  --color-teal-50: #e6f4f5;
+  --color-teal-100: #c3e5e8;
+  --color-teal-200: #93ced4;
+  --color-teal-300: #57afb9;
+  --color-teal: #0e8391;
+  --color-teal-600: #0c7481;
+  --color-teal-700: #0a5f6b;
+  --color-teal-800: #084c56;
+  --color-teal-900: #063a42;
+
+  /* Text — crisp charcoal on light sections */
+  --color-charcoal: #1a1a1a;
+  --color-charcoal-800: #141414;
+  --color-ink: #111111;
+  --color-muted: #5f5850;
+  --color-muted-400: #8a8179;
+
+  --shadow-soft: 0 24px 60px -32px rgb(42 36 32 / 0.45);
+  --shadow-card: 0 18px 40px -28px rgb(42 36 32 / 0.4);
+
+  --ease-luxe: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Base                                                               */
+/* ------------------------------------------------------------------ */
+@layer base {
+  :root {
+    color-scheme: light;
+    scroll-behavior: smooth;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-charcoal);
+    font-family: var(--font-sans);
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  .font-display {
+    font-family: var(--font-display);
+    letter-spacing: -0.015em;
+  }
+
+  ::selection {
+    background-color: var(--color-gold-300);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-teal-600);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :root {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Small reusable utilities                                           */
+/* ------------------------------------------------------------------ */
+@utility container-luxe {
+  width: 100%;
+  margin-inline: auto;
+  max-width: 80rem;
+  padding-inline: 1.25rem;
+  @media (min-width: 768px) {
+    padding-inline: 2rem;
+  }
+  @media (min-width: 1280px) {
+    padding-inline: 2.5rem;
+  }
+}
+
+/* Eyebrow / kicker label */
+@utility eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-teal-700);
+}
+
+/* Metallic gold gradient text — for headings, logo, accents */
+@utility text-gold-gradient {
+  background-image: var(--gradient-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Metallic gold gradient fill — for icon chips, buttons, rules */
+@utility bg-gold-gradient {
+  background-image: var(--gradient-gold);
+}
+
+/* Scroll reveal (progressive enhancement via IntersectionObserver).
+   Hidden ONLY when JS is running — content is visible by default (no-JS safe). */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.9s var(--ease-luxe),
+    transform 0.9s var(--ease-luxe);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* Clip/mask reveal variant — for headlines and image frames */
+.js [data-reveal-clip] {
+  opacity: 0;
+  clip-path: inset(0 0 100% 0);
+  transition:
+    opacity 1s var(--ease-luxe),
+    clip-path 1.15s var(--ease-luxe);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, clip-path;
+}
+
+.js [data-reveal-clip].is-visible {
+  opacity: 1;
+  clip-path: inset(0 0 0 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal-clip] {
+    opacity: 1 !important;
+    clip-path: none !important;
+    transition: none !important;
+  }
+}
+
+/* Transparent header over a hero: light links until scrolled */
+#site-header[data-transparent='true']:not([data-scrolled='true']) {
+  color: var(--color-cream);
+}
+#site-header[data-transparent='true']:not([data-scrolled='true']) .nav-link {
+  color: rgb(251 247 240 / 0.82);
+}
+#site-header[data-transparent='true']:not([data-scrolled='true']) .nav-link:hover {
+  color: #fff;
+}
+#site-header[data-transparent='true']:not([data-scrolled='true'])
+  .nav-link[aria-current='page'] {
+  color: var(--color-gold-300);
+}
+
+/* Brand wordmark: charcoal on white, gold gradient over the dark hero */
+.brand-name {
+  color: var(--color-charcoal);
+}
+#site-header[data-transparent='true']:not([data-scrolled='true']) .brand-name {
+  color: transparent;
+  background-image: var(--gradient-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* Thin decorative rule */
+@utility rule-gold {
+  display: block;
+  height: 1px;
+  width: 3.5rem;
+  background-image: var(--gradient-gold);
+}
+
+/* Animated underline link */
+@utility link-underline {
+  position: relative;
+}
+
+/* ------------------------------------------------------------------ */
+/*  System layer — editorial / studio system                           */
+/* ------------------------------------------------------------------ */
+
+/* Monospace micro-label — metadata, nav, indices */
+@utility mono-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* Numeric index (01, 02 …) */
+@utility index-num {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-muted-400);
+}
+
+/* Consistent section rhythm */
+@utility section-pad {
+  padding-block: 5.5rem;
+  @media (min-width: 768px) {
+    padding-block: 8rem;
+  }
+}
+
+/* Horizontal marquee */
+@keyframes luxe-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@utility animate-marquee {
+  animation: luxe-marquee var(--marquee-duration, 38s) linear infinite;
+}
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+
+/* Film-grain overlay for depth */
+@utility grain {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none !important;
+  }
+}

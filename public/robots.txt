@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.sulpicedesigns.com/sitemap-index.xml

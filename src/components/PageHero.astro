@@ -1,0 +1,70 @@
+---
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  lead?: string;
+  image: ImageMetadata;
+  alt: string;
+  crumb?: string;
+}
+
+const { eyebrow, title, lead, image, alt, crumb } = Astro.props;
+---
+
+<section class="relative isolate overflow-hidden bg-teal-900 text-cream" aria-labelledby="page-title">
+  <div class="absolute inset-0 -z-10">
+    <Image
+      src={image}
+      alt={alt}
+      widths={[768, 1280, 1920]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+      class="h-full w-full object-cover"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-teal-900/92 via-teal-900/68 to-teal-800/48" aria-hidden="true" />
+    <div
+      class="absolute inset-0 bg-[radial-gradient(60%_55%_at_18%_0%,rgba(229,197,88,0.16),transparent_60%)]"
+      aria-hidden="true"
+    />
+    <div
+      class="absolute inset-0 bg-[radial-gradient(45%_45%_at_95%_100%,rgba(14,131,145,0.45),transparent_65%)]"
+      aria-hidden="true"
+    />
+  </div>
+  <span
+    class="absolute inset-x-0 bottom-0 z-10 h-px bg-gold-gradient/40"
+    aria-hidden="true"
+  />
+
+  <div class="container-luxe pb-16 pt-36 md:pb-24 md:pt-44">
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex items-center gap-2 text-xs text-cream/60">
+        <li><a href="/" class="transition-colors hover:text-gold-300">Home</a></li>
+        <li aria-hidden="true"><Icon name="lucide:chevron-right" class="h-3.5 w-3.5" /></li>
+        <li class="text-cream/90">{crumb ?? title}</li>
+      </ol>
+    </nav>
+
+    <div class="max-w-3xl">
+      {
+        eyebrow && (
+          <p class="eyebrow text-gold-300">
+            <span class="h-px w-8 bg-gold-300" aria-hidden="true" />
+            {eyebrow}
+          </p>
+        )
+      }
+      <h1
+        id="page-title"
+        class="mt-5 text-balance font-display text-4xl leading-[1.05] text-white sm:text-5xl md:text-6xl"
+      >
+        {title}
+      </h1>
+      {lead && <p class="mt-6 max-w-xl text-base leading-relaxed text-cream/75 md:text-lg">{lead}</p>}
+    </div>
+  </div>
+</section>

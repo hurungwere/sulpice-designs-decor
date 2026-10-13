@@ -1,0 +1,49 @@
+---
+import Marquee from '@/components/Marquee.astro';
+
+interface Props {
+  label?: string;
+  word?: string;
+  sentence?: string;
+  marquee?: string[];
+}
+
+const {
+  label = 'The Sulpice promise',
+  word = 'passion',
+  sentence = 'your dream is our passion, and your passion is our mission — we make your event memorable, delivered hassle- and stress-free.',
+  marquee = ['Weddings', 'Corporates', 'Birthdays', 'Tents', 'Tables', 'Linen', 'Florals'],
+} = Astro.props;
+
+const parts = sentence.split(word);
+const lead = parts[0];
+const tail = parts.slice(1).join(word);
+---
+
+<section
+  class="relative overflow-hidden bg-teal-900 text-cream section-pad"
+  aria-label="The Sulpice promise"
+>
+  <div
+    class="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-teal-600/40 blur-3xl"
+    aria-hidden="true"
+  />
+  <div class="container-luxe relative">
+    <p class="mono-label text-gold-300">{label}</p>
+    <p
+      class="mt-8 max-w-4xl text-balance font-display text-3xl leading-[1.14] sm:text-4xl md:text-5xl"
+      data-reveal
+    >
+      {lead}<span class="text-gold-gradient italic">{word}</span>{tail}
+    </p>
+  </div>
+
+  <div class="relative mt-16 md:mt-20">
+    <Marquee
+      items={marquee}
+      variant="mono"
+      duration={44}
+      class="border-y border-cream/15 py-6 text-cream/70"
+    />
+  </div>
+</section>

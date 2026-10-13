@@ -1,0 +1,38 @@
+{
+  "name": "sulpice-designs-decor",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Website for Sulpice Designs Decor — an interior design and decor agency.",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/react": "^4.2.0",
+    "@astrojs/sitemap": "^3.2.1",
+    "@fontsource-variable/jetbrains-mono": "^5.3.0",
+    "@fontsource-variable/playfair-display": "^5.1.1",
+    "@fontsource-variable/quicksand": "^5.3.0",
+    "@iconify-json/lucide": "^1.2.20",
+    "@tailwindcss/vite": "^4.0.6",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "astro": "^5.2.5",
+    "astro-icon": "^1.1.5",
+    "lucide-react": "^0.475.0",
+    "motion": "^12.4.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "sharp": "^0.33.5",
+    "tailwindcss": "^4.0.6"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "typescript": "^5.9.3"
+  }
+}

@@ -1,0 +1,171 @@
+---
+import '@fontsource-variable/quicksand';
+import '@fontsource-variable/playfair-display';
+import '@fontsource-variable/jetbrains-mono';
+import '@/styles/global.css';
+
+import { ClientRouter } from 'astro:transitions';
+import SEO from '@/components/SEO.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import { SITE } from '@/data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  noindex?: boolean;
+  transparentHeader?: boolean;
+}
+
+const { title, description, image, noindex, transparentHeader = false } = Astro.props;
+
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HomeAndConstructionBusiness',
+  name: SITE.name,
+  description: SITE.description,
+  url: SITE.url,
+  image: new URL(SITE.ogImage, SITE.url).href,
+  email: SITE.email,
+  telephone: SITE.phone,
+  priceRange: '$$$',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: SITE.address.street,
+    addressLocality: SITE.address.city,
+    addressRegion: SITE.address.region,
+    postalCode: SITE.address.postal,
+    addressCountry: SITE.address.country,
+  },
+  sameAs: SITE.socials.map((s) => s.href),
+};
+---
+
+<!doctype html>
+<html lang="en" class="scroll-pt-24">
+  <head>
+    <meta charset="UTF-8" />
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="generator" content={Astro.generator} />
+    <SEO title={title} description={description} image={image} noindex={noindex} />
+    <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+    <ClientRouter />
+  </head>
+  <body class="min-h-screen bg-cream font-sans text-charcoal antialiased">
+    <div
+      id="scroll-progress"
+      class="fixed inset-x-0 top-0 z-[55] h-0.5 origin-left scale-x-0 bg-gold-gradient"
+      aria-hidden="true"
+    ></div>
+
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-charcoal focus:px-5 focus:py-2.5 focus:text-sm focus:font-medium focus:text-cream"
+    >
+      Skip to content
+    </a>
+
+    <Header transparent={transparentHeader} />
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <Footer />
+
+    <div class="grain" aria-hidden="true"></div>
+
+    <script is:inline>
+      // Motion layer — runs on first load and after every client-router navigation.
+      (() => {
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        let revealObserver;
+
+        function initReveal() {
+          const items = document.querySelectorAll('[data-reveal], [data-reveal-clip]');
+          if (reduce || !('IntersectionObserver' in window)) {
+            items.forEach((el) => el.classList.add('is-visible'));
+            return;
+          }
+          if (revealObserver) revealObserver.disconnect();
+          revealObserver = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add('is-visible');
+                  revealObserver.unobserve(entry.target);
+                }
+              });
+            },
+            { rootMargin: '0px 0px -10% 0px', threshold: 0.12 }
+          );
+          items.forEach((el) => {
+            if (!el.classList.contains('is-visible')) revealObserver.observe(el);
+          });
+        }
+
+        function initHeader() {
+          const header = document.getElementById('site-header');
+          const inner = document.getElementById('header-inner');
+          if (!header) return;
+          const onScroll = () => {
+            if (header.dataset.transparent !== 'true') {
+              header.dataset.scrolled = 'false';
+              return;
+            }
+            const scrolled = window.scrollY > 24;
+            header.dataset.scrolled = scrolled ? 'true' : 'false';
+            if (inner) {
+              inner.classList.toggle('py-4', !scrolled);
+              inner.classList.toggle('py-3', scrolled);
+            }
+          };
+          if (window.__sulpiceHeaderScroll) {
+            window.removeEventListener('scroll', window.__sulpiceHeaderScroll);
+          }
+          window.__sulpiceHeaderScroll = onScroll;
+          window.addEventListener('scroll', onScroll, { passive: true });
+          onScroll();
+        }
+
+        function initProgress() {
+          const bar = document.getElementById('scroll-progress');
+          if (!bar) return;
+          const update = () => {
+            const max = document.documentElement.scrollHeight - window.innerHeight;
+            const p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+            bar.style.transform = `scaleX(${p})`;
+          };
+          if (window.__sulpiceProgress) {
+            window.removeEventListener('scroll', window.__sulpiceProgress);
+            window.removeEventListener('resize', window.__sulpiceProgress);
+          }
+          window.__sulpiceProgress = update;
+          window.addEventListener('scroll', update, { passive: true });
+          window.addEventListener('resize', update, { passive: true });
+          update();
+        }
+
+        let booted = false;
+        function boot() {
+          booted = true;
+          initReveal();
+          initHeader();
+          initProgress();
+        }
+
+        document.addEventListener('astro:page-load', boot);
+        window.addEventListener('load', () => {
+          if (!booted) boot();
+        });
+      })();
+    </script>
+  </body>
+</html>

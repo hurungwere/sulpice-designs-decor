@@ -1,0 +1,11 @@
+services:
+  - type: static
+    name: sulpice-designs-decor
+    runtime: static
+    buildCommand: npm ci && npm run build
+    staticPublishPath: ./dist
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: PUBLIC_WEB3FORMS_KEY
+        sync: false

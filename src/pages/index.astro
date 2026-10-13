@@ -1,0 +1,42 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/Hero.astro';
+import Marquee from '@/components/Marquee.astro';
+import IntroSection from '@/components/IntroSection.astro';
+import HireCatalogue from '@/components/HireCatalogue.astro';
+import WorkSection from '@/components/WorkSection.astro';
+import GallerySocial from '@/components/GallerySocial.astro';
+import Manifesto from '@/components/Manifesto.astro';
+import Testimonials from '@/components/Testimonials.astro';
+import CTABanner from '@/components/CTABanner.astro';
+
+const ticker = [
+  'Weddings',
+  'Corporate Events',
+  'Birthday Bashes',
+  'Tents & Pergolas',
+  'Tables & Chairs',
+  'Crockery & Linen',
+  'Florals & Accessories',
+];
+---
+
+<BaseLayout
+  title="Events Décor & Hiring Services"
+  description="Sulpice Designs Decor is a premium events décor and hiring company across Zimbabwe and South Africa — weddings, corporate events, and celebrations of every kind, delivered and styled by our own crew."
+  transparentHeader
+>
+  <Hero />
+
+  <div class="border-y border-charcoal/10 bg-cream-50 py-5 text-charcoal">
+    <Marquee items={ticker} variant="mono" duration={42} />
+  </div>
+
+  <IntroSection />
+  <HireCatalogue />
+  <WorkSection />
+  <GallerySocial />
+  <Manifesto />
+  <Testimonials />
+  <CTABanner />
+</BaseLayout>

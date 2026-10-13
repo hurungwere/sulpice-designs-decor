@@ -1,0 +1,161 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import ContactForm from '@/components/ContactForm.tsx';
+import { Icon } from 'astro-icon/components';
+import { SITE, PROJECT_TYPES, BUDGET_RANGES } from '@/data/site';
+import heroImage from '@/assets/about-studio.jpg';
+
+const projectTypes = [...PROJECT_TYPES];
+const budgets = [...BUDGET_RANGES];
+---
+
+<BaseLayout
+  title="Contact & Get a Quotation"
+  description="Get a quotation from Sulpice Designs Decor. Reach us by phone, email, or the enquiry form — we reply within one business day."
+>
+  <PageHero
+    eyebrow="Contact"
+    title="Let's plan your event."
+    lead="Send us your event date, venue, and guest list and we'll prepare a detailed, no-obligation quotation — we reply to every enquiry within one business day."
+    image={heroImage}
+    alt="Elegant event styled by Sulpice Designs Decor"
+    crumb="Contact"
+  />
+
+  <section class="container-luxe py-24 md:py-28" aria-labelledby="contact-heading">
+    <div class="grid gap-14 lg:grid-cols-[1.15fr_0.85fr] lg:gap-20">
+      <!-- Form -->
+      <div data-reveal>
+        <span class="eyebrow mb-4">
+          <span class="h-px w-8 bg-gold" aria-hidden="true" />
+          Get a quotation
+        </span>
+        <h2 id="contact-heading" class="text-balance font-display text-3xl text-charcoal sm:text-4xl">
+          Tell us about your event
+        </h2>
+        <p class="mt-4 max-w-xl text-sm leading-relaxed text-muted">
+          The more you share, the better we can prepare. Your date, venue, guest
+          count, and the look you love — photos and references are always welcome.
+        </p>
+
+        <div class="mt-10">
+          <ContactForm client:load projectTypes={projectTypes} budgets={budgets} />
+        </div>
+      </div>
+
+      <!-- Info sidebar -->
+      <aside class="space-y-8" aria-label="Contact details" data-reveal style="--reveal-delay:120ms">
+        <div class="rounded-2xl border border-charcoal/10 bg-cream-50 p-7">
+          <h3 class="font-display text-xl text-charcoal">Contact details</h3>
+          <ul class="mt-5 space-y-5 text-sm">
+            <li class="flex items-start gap-3">
+              <span class="bg-gold-gradient mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-ink">
+                <Icon name="lucide:store" class="h-4 w-4" />
+              </span>
+              <span>
+                <span class="block font-mono text-[0.68rem] uppercase tracking-[0.16em] text-muted">Showrooms</span>
+                <span class="mt-1 block text-charcoal">
+                  {
+                    SITE.showrooms.map((city) => (
+                      <span class="block">{city}</span>
+                    ))
+                  }
+                </span>
+              </span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="bg-gold-gradient mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-ink">
+                <Icon name="lucide:phone" class="h-4 w-4" />
+              </span>
+              <span>
+                <span class="block font-mono text-[0.68rem] uppercase tracking-[0.16em] text-muted">Phone</span>
+                <a href={`tel:${SITE.phoneHref}`} class="text-charcoal transition-colors hover:text-gold-600">
+                  {SITE.phone}
+                </a>
+              </span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="bg-gold-gradient mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-ink">
+                <Icon name="lucide:mail" class="h-4 w-4" />
+              </span>
+              <span>
+                <span class="block font-mono text-[0.68rem] uppercase tracking-[0.16em] text-muted">Email</span>
+                <a href={`mailto:${SITE.email}`} class="text-charcoal transition-colors hover:text-gold-600">
+                  {SITE.email}
+                </a>
+              </span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="bg-gold-gradient mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-ink">
+                <Icon name="lucide:message-circle" class="h-4 w-4" />
+              </span>
+              <span>
+                <span class="block font-mono text-[0.68rem] uppercase tracking-[0.16em] text-muted">WhatsApp</span>
+                <a href="https://wa.me/263244334455" target="_blank" rel="noopener noreferrer" class="text-charcoal transition-colors hover:text-gold-600">
+                  {SITE.whatsapp}
+                </a>
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="rounded-2xl border border-charcoal/10 bg-cream-50 p-7">
+          <h3 class="font-display text-xl text-charcoal">Operating hours</h3>
+          <dl class="mt-5 space-y-3 text-sm">
+            {
+              SITE.hours.map((entry) => (
+                <div class="flex items-center justify-between gap-4 border-b border-charcoal/5 pb-3 last:border-0 last:pb-0">
+                  <dt class="text-muted">{entry.day}</dt>
+                  <dd class="font-medium text-charcoal">{entry.time}</dd>
+                </div>
+              ))
+            }
+          </dl>
+        </div>
+
+        <div class="overflow-hidden rounded-2xl ring-1 ring-charcoal/5">
+          <div class="relative aspect-[4/3]">
+            <Image
+              src={heroImage}
+              alt="The Sulpice Designs Decor showroom"
+              widths={[400, 640]}
+              sizes="(min-width: 1024px) 32vw, 90vw"
+              loading="lazy"
+              class="h-full w-full object-cover"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-ink/70 to-transparent" aria-hidden="true"></div>
+            <div class="absolute inset-x-0 bottom-0 p-6 text-cream">
+              <p class="font-mono text-[0.68rem] uppercase tracking-[0.18em] text-gold-300">Visit our showroom</p>
+              <p class="mt-1 text-sm text-cream/85">
+                {SITE.showrooms.join(' · ')}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="mono-label text-teal-700">Follow along</h3>
+          <ul class="mt-4 flex items-center gap-3">
+            {
+              SITE.socials.map((social) => (
+                <li>
+                  <a
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${SITE.shortName} on ${social.name}`}
+                    class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-charcoal/15 text-charcoal/70 transition-colors duration-300 hover:border-gold-600 hover:text-gold-600"
+                  >
+                    <Icon name={social.icon} class="h-4 w-4" />
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>

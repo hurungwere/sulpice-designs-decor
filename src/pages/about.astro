@@ -1,0 +1,248 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
+import Button from '@/components/Button.astro';
+import CTABanner from '@/components/CTABanner.astro';
+import { Icon } from 'astro-icon/components';
+import { SITE } from '@/data/site';
+
+import aboutStudio from '@/assets/about-studio.jpg';
+import aboutFounder from '@/assets/about-founder.jpg';
+import aboutDetail from '@/assets/about-detail.jpg';
+import wordmarkLight from '@/assets/brand/wordmark-light.png';
+import brandTile from '@/assets/brand/brand-tile.jpg';
+
+const principles = [
+  {
+    icon: 'lucide:flame',
+    title: 'Passionate about events',
+    body: 'We love what we do and we will go all out to ensure every event is a success.',
+  },
+  {
+    icon: 'lucide:boxes',
+    title: 'Everything under one roof',
+    body: 'All types of equipment, in one place — a wide choice to choose from, and one point of contact.',
+  },
+  {
+    icon: 'lucide:truck',
+    title: 'Smooth delivery',
+    body: 'With our own trucks, delivery is smooth — on time, right the first time, every time.',
+  },
+  {
+    icon: 'lucide:users',
+    title: 'Experienced staff',
+    body: 'A highly experienced team guarantees exceptional service, from your first enquiry to breakdown.',
+  },
+];
+
+const values = [
+  { value: '2008', label: 'Company established' },
+  { value: '18+', label: 'Years styling events' },
+  { value: '3', label: 'Showrooms — ZW & ZA' },
+  { value: '100%', label: 'Delivered by our own fleet' },
+];
+---
+
+<BaseLayout
+  title="About Us"
+  description="Sulpice Designs Decor is a premium events décor and hiring services company, established in 2008 with showrooms in Harare, Bulawayo, and Fourways — styling weddings, corporate events, and every celebration in between."
+>
+  <PageHero
+    eyebrow="About us"
+    title="The people behind your perfect day."
+    lead="From our showrooms in Harare, Bulawayo, and Fourways, we dress weddings, corporate events, and celebrations of every kind with care, detail, and a genuine love for what we do."
+    image={aboutStudio}
+    alt="Events décor and hiring by Sulpice Designs Decor"
+    crumb="About"
+  />
+
+  <!-- Why choose us -->
+  <section class="container-luxe py-24 md:py-32" aria-labelledby="philosophy-heading">
+    <SectionHeading
+      id="philosophy-heading"
+      eyebrow="Why choose us"
+      title="Four promises on every hire"
+      lead="We are passionate about events. Here is what you can count on from the moment you call."
+      align="center"
+      class="mb-16"
+    />
+
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        principles.map((p, i) => (
+          <article
+            class="rounded-2xl border border-charcoal/10 bg-cream-50 p-8 transition-all duration-500 hover:-translate-y-1 hover:border-gold/40 hover:shadow-card"
+            data-reveal
+            style={`--reveal-delay:${i * 100}ms`}
+          >
+            <span class="bg-gold-gradient inline-flex h-12 w-12 items-center justify-center rounded-full text-ink shadow-[0_10px_24px_-12px_rgba(184,134,11,0.8)]">
+              <Icon name={p.icon} class="h-5 w-5" />
+            </span>
+            <h3 class="mt-6 font-display text-2xl text-charcoal">{p.title}</h3>
+            <p class="mt-3 text-sm leading-relaxed text-muted">{p.body}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Our story -->
+  <section class="bg-cream-100 py-24 md:py-32" aria-labelledby="founder-heading">
+    <div class="container-luxe grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
+      <div class="relative order-2 lg:order-1" data-reveal>
+        <div class="overflow-hidden rounded-2xl ring-1 ring-charcoal/5">
+          <Image
+            src={aboutFounder}
+            alt="The Sulpice Designs team styling an event"
+            widths={[480, 720, 960]}
+            sizes="(min-width: 1024px) 45vw, 90vw"
+            loading="lazy"
+            class="h-full w-full object-cover"
+          />
+        </div>
+        <div class="absolute -bottom-6 -right-2 hidden w-40 overflow-hidden rounded-2xl border-8 border-cream-100 shadow-card sm:block md:w-52">
+          <Image
+            src={aboutDetail}
+            alt="Elegantly dressed event table"
+            widths={[220, 340, 440]}
+            sizes="13rem"
+            loading="lazy"
+            class="h-full w-full object-cover"
+          />
+        </div>
+      </div>
+
+      <div class="order-1 lg:order-2" data-reveal style="--reveal-delay:120ms">
+        <span class="eyebrow mb-4">
+          <span class="h-px w-8 bg-gold" aria-hidden="true" />
+          Our story
+        </span>
+        <h2 id="founder-heading" class="text-balance text-3xl leading-tight text-charcoal sm:text-4xl md:text-[2.75rem]">
+          “Every event, from first enquiry to the final dance.”
+        </h2>
+        <div class="mt-6 space-y-4 text-base leading-relaxed text-muted">
+          <p>
+            Established in <strong class="font-medium text-charcoal">2008</strong>,
+            Sulpice Designs Decor is a premium events décor and hiring services
+            company, specialising in a comprehensive, high-end solution for all
+            types of events — with weddings at the top of our list. Corporate
+            events, birthday bashes, and any celebration or gathering, formal or
+            casual: we have the products to suit them all.
+          </p>
+          <p>
+            From trendy tables and plush chairs to crockery, luxurious linen, all
+            kinds of tents and pergolas, fresh flowers and fancy accessories —
+            the wide range and little details that make all the difference to
+            your event. From a single tent to a full ceremony-and-reception
+            package, we design, deliver, and style — then we pack it all away,
+            so your only job is to enjoy the day.
+          </p>
+        </div>
+        <p class="text-gold-gradient mt-8 font-display text-2xl italic">Est. 2008 — Harare · Bulawayo · Fourways</p>
+        <p class="text-xs font-medium uppercase tracking-[0.2em] text-muted">Events décor &amp; hiring services</p>
+        <div class="mt-8">
+          <Button href="/contact" variant="outline">
+            Plan your event
+            <Icon name="lucide:arrow-right" class="h-4 w-4" />
+          </Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vision & mission -->
+  <section class="container-luxe py-24 md:py-32" aria-labelledby="mission-heading">
+    <div class="grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
+      <div data-reveal>
+        <span class="eyebrow mb-4">
+          <span class="h-px w-8 bg-gold" aria-hidden="true" />
+          Vision &amp; mission
+        </span>
+        <h2 id="mission-heading" class="text-balance text-3xl leading-tight text-charcoal sm:text-4xl md:text-[2.75rem]">
+          To be the leading and most reliable functions décor &amp; hiring services company.
+        </h2>
+        <p class="mt-6 text-base leading-relaxed text-muted md:text-lg">
+          We value your time and clear communication, and we strive to make sure
+          you have your dream day with a smile on your face — a hassle- and
+          stress-free day, that's what we are here for. We make your day
+          memorable. Your dream is our passion, and your passion is our mission.
+        </p>
+
+        <dl class="mt-10 grid grid-cols-2 gap-x-6 gap-y-8 border-t border-charcoal/10 pt-8 sm:grid-cols-4">
+          {
+            values.map((v, i) => (
+              <div data-reveal style={`--reveal-delay:${i * 80}ms`}>
+                <dt class="sr-only">{v.label}</dt>
+                <dd>
+                  <span class="text-gold-gradient block font-display text-3xl">{v.value}</span>
+                  <span class="mt-1 block text-xs font-medium uppercase tracking-[0.16em] text-muted">
+                    {v.label}
+                  </span>
+                </dd>
+              </div>
+            ))
+          }
+        </dl>
+
+        <div class="mt-10 border-t border-charcoal/10 pt-8" data-reveal>
+          <p class="mono-label text-teal-700">The events we dress</p>
+          <ul class="mt-4 space-y-3 text-sm text-charcoal/90 md:text-[0.95rem]">
+            <li class="flex items-start gap-3">
+              <span class="mt-[0.55em] h-1.5 w-1.5 shrink-0 rounded-full bg-gold-gradient" aria-hidden="true" />
+              Weddings — ceremonies &amp; receptions
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-[0.55em] h-1.5 w-1.5 shrink-0 rounded-full bg-gold-gradient" aria-hidden="true" />
+              Birthday bashes — big or intimate
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-[0.55em] h-1.5 w-1.5 shrink-0 rounded-full bg-gold-gradient" aria-hidden="true" />
+              Corporate events — end-of-year parties, product launches &amp; award ceremonies
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-[0.55em] h-1.5 w-1.5 shrink-0 rounded-full bg-gold-gradient" aria-hidden="true" />
+              Formal or casual — we customise solutions for any event, big or small
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="relative" data-reveal style="--reveal-delay:120ms">
+        <div class="overflow-hidden rounded-2xl ring-1 ring-charcoal/5">
+          <Image
+            src={brandTile}
+            alt="Sulpice Designs Decor event styling"
+            widths={[400, 700, 1000]}
+            sizes="(min-width: 1024px) 45vw, 90vw"
+            loading="lazy"
+            class="h-full w-full object-cover"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wordmark band -->
+  <section class="bg-teal-900 py-20" aria-label="Sulpice Designs Decor">
+    <div class="container-luxe flex flex-col items-center text-center" data-reveal>
+      <Image
+        src={wordmarkLight}
+        alt="Sulpice Designs Decor"
+        widths={[420, 700]}
+        sizes="26rem"
+        loading="lazy"
+        class="h-auto w-full max-w-sm"
+      />
+      <p class="mt-6 text-sm uppercase tracking-[0.3em] text-cream/60">
+        {SITE.tagline} · Est. 2008
+      </p>
+    </div>
+  </section>
+
+  <CTABanner
+    title="Planning an event?"
+    lead="Visit our showroom in Harare, Bulawayo, or Fourways — or send us your date and guest list for a no-obligation quotation."
+  />
+</BaseLayout>
