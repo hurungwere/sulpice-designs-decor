@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
-import { X, ArrowUpRight, MapPin, Calendar } from 'lucide-react';
+import { X } from 'lucide-react';
 import type { GalleryItem } from '@/utils/portfolio';
 
 const CATEGORY_LABELS: Record<string, string> = {
@@ -36,11 +36,14 @@ export default function PortfolioGallery({
       {showFilter && (
         <div
           role="tablist"
-          aria-label="Filter projects by category"
-          className="mb-10 flex flex-wrap items-center gap-2"
+          aria-label="Filter events by category"
+          className="mb-16 flex flex-wrap items-center gap-x-10 gap-y-4 border-b border-cream/10"
         >
           {filters.map((filter) => {
             const isActive = active === filter;
+            const count =
+              filter === 'All' ? items.length : items.filter((i) => i.category === filter).length;
+            if (filter !== 'All' && count === 0) return null;
             return (
               <button
                 key={filter}
@@ -49,72 +52,74 @@ export default function PortfolioGallery({
                 aria-selected={isActive}
                 onClick={() => setActive(filter)}
                 className={[
-                  'relative rounded-full px-5 py-2.5 text-sm font-medium transition-colors duration-300',
-                  isActive ? 'text-ink' : 'text-cream/75 hover:text-gold-600',
+                  'relative -mb-px pb-5 text-[0.66rem] font-[450] uppercase tracking-[0.3em] transition-colors duration-500',
+                  isActive ? 'text-cream' : 'text-cream/50 hover:text-cream',
                 ].join(' ')}
               >
+                {CATEGORY_LABELS[filter] ?? filter}
+                <sup className="ml-1.5 font-display text-xs normal-case italic tracking-normal text-gold-300">
+                  {count}
+                </sup>
                 {isActive && (
                   <motion.span
-                    layoutId={`${idPrefix}-pill`}
-                    className="bg-gold-gradient absolute inset-0 -z-10 rounded-full shadow-[0_10px_24px_-14px_rgba(184,134,11,0.9)]"
-                    transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                    layoutId={`${idPrefix}-underline`}
+                    className="absolute inset-x-0 bottom-0 h-px bg-gold"
+                    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                   />
                 )}
-                {CATEGORY_LABELS[filter] ?? filter}
               </button>
             );
           })}
         </div>
       )}
 
-      <motion.div layout className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <motion.div
+        layout
+        className="grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-10"
+      >
         <AnimatePresence mode="popLayout">
-          {visible.map((item) => (
+          {visible.map((item, i) => (
             <motion.figure
               layout
               key={item.id}
               initial={false}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.96 }}
-              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="group relative overflow-hidden rounded-2xl bg-cream-100 ring-1 ring-cream/5"
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className="group"
             >
               <button
                 type="button"
                 onClick={() => setSelected(item)}
                 aria-label={`View ${item.title}`}
-                className="block w-full text-left"
+                className="block w-full cursor-zoom-in text-left"
               >
-                <div className="relative aspect-[4/5] overflow-hidden">
+                <div className="relative aspect-[4/5] overflow-hidden bg-cream-50">
                   <img
                     src={item.src}
                     srcSet={item.srcSet}
-                    sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw"
+                    sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 92vw"
                     width={item.width}
                     height={item.height}
-                    alt={`${item.title} — ${item.category} project in ${item.location}`}
+                    alt={`${item.title} — ${item.category} event in ${item.location}`}
                     loading="lazy"
                     decoding="async"
-                    className="h-full w-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
+                    className="h-full w-full object-cover transition-transform duration-[1600ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.05]"
                   />
-                  <div
-                    className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-95"
-                    aria-hidden="true"
-                  />
-                  <span className="absolute left-4 top-4 rounded-full bg-cream/90 px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-clay backdrop-blur-sm">
-{CATEGORY_LABELS[item.category] ?? item.category}
-                  </span>
-                  <span className="bg-gold-gradient absolute right-4 top-4 flex h-9 w-9 translate-y-1 items-center justify-center rounded-full text-ink opacity-0 shadow-[0_10px_24px_-12px_rgba(184,134,11,0.9)] transition-all duration-400 group-hover:translate-y-0 group-hover:opacity-100">
-                    <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-                  </span>
-                  <figcaption className="absolute inset-x-0 bottom-0 p-5 text-cream">
-                    <h3 className="font-display text-xl leading-snug">{item.title}</h3>
-                    <p className="mt-1 flex items-center gap-2 text-xs text-cream/75">
-                      <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
-                      {item.location}
-                    </p>
-                  </figcaption>
                 </div>
+                <figcaption className="mt-6 flex items-baseline gap-5 border-b border-cream/15 pb-5">
+                  <span className="font-display text-lg italic text-gold-300">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <span className="flex-1">
+                    <span className="block font-display text-[1.75rem] leading-tight text-cream transition-colors duration-500 group-hover:text-gold-300">
+                      {item.title}
+                    </span>
+                    <span className="mt-2 block text-[0.6rem] uppercase tracking-[0.3em] text-muted-400">
+                      {CATEGORY_LABELS[item.category] ?? item.category} · {item.location}
+                    </span>
+                  </span>
+                </figcaption>
               </button>
             </motion.figure>
           ))}
@@ -124,70 +129,73 @@ export default function PortfolioGallery({
       <AnimatePresence>
         {selected && (
           <motion.div
-            className="fixed inset-0 z-[80] flex items-center justify-center p-4"
+            className="fixed inset-0 z-[80] flex items-center justify-center p-4 md:p-10"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
             role="dialog"
             aria-modal="true"
             aria-label={selected.title}
           >
             <button
               type="button"
-              aria-label="Close project"
+              aria-label="Close"
               onClick={() => setSelected(null)}
-              className="absolute inset-0 h-full w-full cursor-zoom-out bg-ink/70 backdrop-blur-sm"
+              className="absolute inset-0 h-full w-full cursor-zoom-out bg-teal-900/90 backdrop-blur-md"
             />
             <motion.div
-              initial={{ opacity: 0, y: 24, scale: 0.97 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 24, scale: 0.97 }}
-              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-              className="relative w-full max-w-3xl overflow-hidden rounded-2xl bg-ink shadow-2xl"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="relative grid w-full max-w-6xl overflow-hidden bg-ink md:grid-cols-[1.5fr_1fr]"
             >
               <img
                 src={selected.src}
                 srcSet={selected.srcSet}
-                sizes="(min-width: 768px) 720px, 92vw"
+                sizes="(min-width: 768px) 60vw, 92vw"
                 width={selected.width}
                 height={selected.height}
-                alt={`${selected.title} — ${selected.category} project`}
-                className="max-h-[52vh] w-full object-cover"
+                alt={`${selected.title} — ${selected.category} event`}
+                className="max-h-[50vh] w-full object-cover md:h-full md:max-h-[80vh]"
               />
-              <button
-                type="button"
-                onClick={() => setSelected(null)}
-                aria-label="Close project"
-                className="bg-gold-gradient absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full text-ink shadow-[0_10px_24px_-12px_rgba(184,134,11,0.9)] transition-transform hover:scale-105"
-              >
-                <X className="h-5 w-5" aria-hidden="true" />
-              </button>
-              <div className="p-6 md:p-8">
-                <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-medium uppercase tracking-[0.16em] text-cream/60">
-                  <span>{CATEGORY_LABELS[selected.category] ?? selected.category}</span>
-                  <span className="flex items-center gap-1.5">
-                    <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
-                    {selected.location}
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <Calendar className="h-3.5 w-3.5" aria-hidden="true" />
-                    {selected.year}
-                  </span>
-                </div>
-                <h3 className="mt-3 font-display text-3xl text-cream">{selected.title}</h3>
+              <div className="flex flex-col p-8 md:p-12">
+                <p className="text-[0.6rem] uppercase tracking-[0.32em] text-gold-300">
+                  {CATEGORY_LABELS[selected.category] ?? selected.category} · {selected.year}
+                </p>
+                <h3 className="mt-5 font-display text-4xl leading-tight text-cream md:text-5xl">
+                  {selected.title}
+                </h3>
+                <p className="mt-3 text-sm text-muted">{selected.location}</p>
                 {selected.scope.length > 0 && (
-                  <ul className="mt-5 flex flex-wrap gap-2">
+                  <ul className="mt-10 border-t border-cream/10">
                     {selected.scope.map((tag) => (
                       <li
                         key={tag}
-                        className="rounded-full border border-cream/15 px-3 py-1 text-xs text-muted"
+                        className="flex items-center gap-4 border-b border-cream/10 py-3 text-sm text-cream/80"
                       >
+                        <span className="diamond" aria-hidden="true" />
                         {tag}
                       </li>
                     ))}
                   </ul>
                 )}
+                <a
+                  href="/contact"
+                  className="link-hairline mt-auto self-start pt-10 text-cream hover:text-gold-300"
+                >
+                  Enquire about a similar event
+                </a>
               </div>
+              <button
+                type="button"
+                onClick={() => setSelected(null)}
+                aria-label="Close"
+                className="absolute right-3 top-3 inline-flex h-11 w-11 items-center justify-center bg-ink/70 text-cream backdrop-blur-sm transition-colors hover:text-gold-300"
+              >
+                <X className="h-5 w-5" strokeWidth={1.25} aria-hidden="true" />
+              </button>
             </motion.div>
           </motion.div>
         )}

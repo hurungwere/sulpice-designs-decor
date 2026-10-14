@@ -26,7 +26,7 @@ export async function toGalleryItems(
       const cover = entry.data.cover;
       const img = await getImage({
         src: cover,
-        widths: [400, 600, 900],
+        widths: [480, 800, 1200, 1600],
         format: 'webp',
         quality: 82,
       });

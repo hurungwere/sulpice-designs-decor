@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
-import { Menu, X, Phone, ArrowRight } from 'lucide-react';
+import { X } from 'lucide-react';
 
 interface NavItem {
   label: string;
@@ -11,9 +11,12 @@ interface Props {
   nav: NavItem[];
   phone: string;
   phoneHref: string;
+  logoSrc?: string;
 }
 
-export default function MobileMenu({ nav, phone, phoneHref }: Props) {
+const ease = [0.22, 1, 0.36, 1] as const;
+
+export default function MobileMenu({ nav, phone, phoneHref, logoSrc }: Props) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -34,105 +37,91 @@ export default function MobileMenu({ nav, phone, phoneHref }: Props) {
         aria-label="Open menu"
         aria-expanded={open}
         aria-controls="mobile-drawer"
-        className="nav-link inline-flex h-10 w-10 items-center justify-center rounded-full border border-current/25 transition-colors hover:border-gold hover:text-gold-600 lg:hidden"
+        className="nav-link group flex h-10 w-10 flex-col items-end justify-center gap-[7px] lg:hidden"
       >
-        <Menu className="h-5 w-5" aria-hidden="true" />
+        <span className="h-px w-7 bg-current transition-all duration-500 group-hover:w-5" />
+        <span className="h-px w-5 bg-current transition-all duration-500 group-hover:w-7" />
       </button>
 
       <AnimatePresence>
         {open && (
           <motion.div
-            className="fixed inset-0 z-[60] lg:hidden"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            id="mobile-drawer"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Site menu"
+            className="fixed inset-0 z-[60] flex flex-col bg-teal-900 px-6 pb-10 pt-5 text-cream lg:hidden"
+            initial={{ clipPath: 'inset(0 0 100% 0)' }}
+            animate={{ clipPath: 'inset(0 0 0% 0)' }}
+            exit={{ clipPath: 'inset(0 0 100% 0)' }}
+            transition={{ duration: 0.7, ease }}
           >
-            <button
-              type="button"
-              aria-label="Close menu"
-              onClick={() => setOpen(false)}
-              className="absolute inset-0 h-full w-full cursor-default bg-ink/50 backdrop-blur-sm"
-            />
+            <div className="flex items-center justify-between">
+              <a href="/" onClick={() => setOpen(false)} className="flex items-center gap-3">
+                {logoSrc && <img src={logoSrc} alt="" className="h-10 w-auto" />}
+                <span className="flex flex-col leading-none">
+                  <span className="font-display text-xl font-medium uppercase tracking-[0.2em]">
+                    Sulpice
+                  </span>
+                  <span className="mt-1 text-[0.5rem] uppercase tracking-[0.42em] text-gold-300">
+                    Designs &amp; Decor
+                  </span>
+                </span>
+              </a>
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                aria-label="Close menu"
+                className="inline-flex h-10 w-10 items-center justify-center text-cream/80 transition-colors hover:text-gold-300"
+              >
+                <X className="h-6 w-6" strokeWidth={1} aria-hidden="true" />
+              </button>
+            </div>
 
-            <motion.aside
-              id="mobile-drawer"
-              role="dialog"
-              aria-modal="true"
-              aria-label="Site menu"
-              className="absolute right-0 top-0 flex h-full w-[86%] max-w-sm flex-col bg-ink px-7 pb-8 pt-6 shadow-2xl"
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', stiffness: 320, damping: 34 }}
+            <nav className="mt-16 flex flex-col" aria-label="Mobile primary">
+              {nav.map((item, i) => (
+                <motion.a
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setOpen(false)}
+                  initial={{ opacity: 0, y: 28 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.25 + i * 0.07, duration: 0.8, ease }}
+                  className="group flex items-baseline gap-5 border-b border-cream/10 py-5"
+                >
+                  <span className="font-display text-sm italic text-gold-300">
+                    {['I', 'II', 'III', 'IV', 'V', 'VI'][i] ?? i + 1}
+                  </span>
+                  <span className="font-display text-[2.6rem] leading-none text-cream transition-colors duration-500 group-hover:text-gold-300">
+                    {item.label}
+                  </span>
+                </motion.a>
+              ))}
+            </nav>
+
+            <motion.div
+              className="mt-auto space-y-6 pt-10"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.7, duration: 0.8 }}
             >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gold-gradient font-display text-base text-ink">
-                    S
-                  </span>
-                  <span className="flex flex-col leading-none">
-                    <span className="font-display text-base tracking-tight text-cream">
-                      Sulpice
-                    </span>
-                    <span className="mt-0.5 text-[0.55rem] font-medium uppercase tracking-[0.24em] text-gold-600">
-                      Designs &amp; Decor
-                    </span>
-                  </span>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setOpen(false)}
-                  aria-label="Close menu"
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-cream/20 transition-colors hover:border-gold hover:text-gold-600"
-                >
-                  <X className="h-5 w-5" aria-hidden="true" />
-                </button>
-              </div>
-
-              <nav className="mt-12 flex flex-col" aria-label="Mobile primary">
-                {nav.map((item, i) => (
-                  <motion.a
-                    key={item.href}
-                    href={item.href}
-                    onClick={() => setOpen(false)}
-                    initial={{ opacity: 0, x: 24 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.12 + i * 0.06, duration: 0.4 }}
-                    className="group flex items-center gap-5 border-b border-cream/10 py-4"
-                  >
-                    <span className="font-mono text-[0.62rem] uppercase tracking-[0.14em] text-gold-600">
-                      {String(i + 1).padStart(2, '0')}
-                    </span>
-                    <span className="font-display text-2xl text-cream transition-colors group-hover:text-gold-600">
-                      {item.label}
-                    </span>
-                    <ArrowRight className="ml-auto h-5 w-5 -translate-x-1 text-cream/40 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100" />
-                  </motion.a>
-                ))}
-              </nav>
-
-              <div className="mt-auto space-y-5 pt-8">
-                <p className="font-mono text-[0.62rem] uppercase tracking-[0.16em] text-muted-400">
-                  Showrooms — Harare · Bulawayo · Fourways
-                </p>
-                <a
-                  href={`tel:${phoneHref}`}
-                  className="flex items-center gap-3 text-sm text-muted transition-colors hover:text-gold-600"
-                >
-                  <Phone className="h-4 w-4" aria-hidden="true" />
-                  {phone}
-                </a>
-                <a
-                  href="/contact"
-                  onClick={() => setOpen(false)}
-                  className="bg-gold-gradient flex w-full items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-medium text-ink shadow-[0_14px_32px_-20px_rgba(184,134,11,0.9)]"
-                >
-                  Get a quotation
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                </a>
-              </div>
-            </motion.aside>
+              <p className="text-[0.62rem] uppercase tracking-[0.32em] text-cream/50">
+                Harare · Bulawayo · Fourways
+              </p>
+              <a
+                href={`tel:${phoneHref}`}
+                className="block font-display text-2xl text-cream transition-colors hover:text-gold-300"
+              >
+                {phone}
+              </a>
+              <a
+                href="/contact"
+                onClick={() => setOpen(false)}
+                className="flex h-14 w-full items-center justify-center bg-gold text-[0.68rem] uppercase tracking-[0.28em] text-ink"
+              >
+                Request a quote
+              </a>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

@@ -1,8 +1,8 @@
 ---
-import Button from '@/components/Button.astro';
+import { Image, getImage } from 'astro:assets';
 import MobileMenu from '@/components/MobileMenu.tsx';
-import { Icon } from 'astro-icon/components';
 import { SITE } from '@/data/site';
+import monogram from '@/assets/brand/monogram.png';
 
 interface Props {
   transparent?: boolean;
@@ -12,44 +12,50 @@ const { transparent = false } = Astro.props;
 const path = Astro.url.pathname;
 const isActive = (href: string) =>
   href === '/' ? path === '/' : path.startsWith(href);
+
+const mobileLogo = await getImage({ src: monogram, width: 96, format: 'webp' });
 ---
 
 <header
   id="site-header"
   data-transparent={transparent ? 'true' : 'false'}
   class:list={[
-    'fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,backdrop-filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]',
+    'fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,backdrop-filter] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]',
     transparent
-      ? 'bg-transparent data-[scrolled=true]:bg-ink/80 data-[scrolled=true]:shadow-[0_1px_0_rgba(42,36,32,0.08),0_16px_32px_-24px_rgba(42,36,32,0.4)] data-[scrolled=true]:backdrop-blur-xl'
-      : 'bg-ink/80 shadow-[0_1px_0_rgba(42,36,32,0.08),0_16px_32px_-24px_rgba(42,36,32,0.4)] backdrop-blur-xl',
+      ? 'border-transparent bg-transparent data-[scrolled=true]:border-cream/10 data-[scrolled=true]:bg-ink/85 data-[scrolled=true]:backdrop-blur-xl'
+      : 'border-cream/10 bg-ink/85 backdrop-blur-xl',
   ]}
 >
   <div
-    class="container-luxe flex items-center justify-between py-4 md:py-5"
+    class="container-luxe grid grid-cols-[1fr_auto] items-center py-5 transition-[padding] duration-700 lg:grid-cols-[1fr_auto_1fr] lg:py-6"
     id="header-inner"
   >
     <!-- Brand -->
     <a
       href="/"
-      class="group flex items-center gap-3"
+      class="group flex items-center gap-3.5 justify-self-start"
       aria-label={`${SITE.name} — home`}
     >
-      <span
-        class="flex h-10 w-10 items-center justify-center rounded-full bg-gold-gradient font-display text-lg leading-none text-ink shadow-[0_8px_20px_-10px_rgba(184,134,11,0.9)] transition-transform duration-300 group-hover:scale-105"
-        id="brand-mark"
-      >
-        S
-      </span>
-      <span class="flex flex-col leading-none" id="brand-text">
-        <span class="brand-name font-display text-lg tracking-tight">Sulpice</span>
-        <span class="text-[0.6rem] font-medium uppercase tracking-[0.28em] text-gold-600">
+      <Image
+        src={monogram}
+        alt=""
+        width={96}
+        height={97}
+        loading="eager"
+        class="h-10 w-auto transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04] md:h-11"
+      />
+      <span class="flex flex-col leading-none">
+        <span class="brand-name font-display text-[1.35rem] font-medium uppercase tracking-[0.2em]">
+          Sulpice
+        </span>
+        <span class="mt-1 text-[0.52rem] font-[450] uppercase tracking-[0.42em] text-gold-300">
           Designs &amp; Decor
         </span>
       </span>
     </a>
 
     <!-- Desktop nav -->
-    <nav aria-label="Primary" class="hidden items-center gap-7 lg:flex">
+    <nav aria-label="Primary" class="hidden items-center gap-10 lg:flex">
       {
         SITE.nav.map((item) => {
           const active = isActive(item.href);
@@ -58,15 +64,15 @@ const isActive = (href: string) =>
               href={item.href}
               aria-current={active ? 'page' : undefined}
               class:list={[
-                'nav-link group relative py-1 font-mono text-xs font-medium uppercase tracking-[0.18em] transition-colors duration-300',
-                active ? 'text-gold-600' : 'hover:text-gold-600',
+                'nav-link group relative py-1.5 text-[0.66rem] font-[450] uppercase tracking-[0.3em] transition-colors duration-500',
+                active ? 'text-gold-300' : 'text-cream/75 hover:text-cream',
               ]}
             >
               {item.label}
               <span
                 aria-hidden="true"
                 class:list={[
-                  'absolute -bottom-0.5 left-0 h-px w-full origin-left bg-gold-gradient transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]',
+                  'absolute -bottom-0.5 left-0 h-px w-full origin-left bg-gold transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]',
                   active ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100',
                 ]}
               />
@@ -77,22 +83,26 @@ const isActive = (href: string) =>
     </nav>
 
     <!-- Actions -->
-    <div class="flex items-center gap-2">
+    <div class="flex items-center justify-self-end gap-6">
       <a
         href={`tel:${SITE.phoneHref}`}
-        class="nav-link hidden items-center gap-2 rounded-full border border-current/20 px-4 py-2 font-mono text-xs font-medium tracking-[0.12em] transition-colors hover:border-gold-600 hover:text-gold-600 xl:inline-flex"
+        class="nav-link hidden text-[0.66rem] font-[450] uppercase tracking-[0.24em] text-cream/75 transition-colors duration-500 hover:text-cream xl:inline"
       >
-        <Icon name="lucide:phone" class="h-3.5 w-3.5" />
-        <span>{SITE.phone}</span>
+        {SITE.phone}
       </a>
-      <Button href="/contact" size="sm" class="hidden sm:inline-flex">
-        Get a quotation
-        <Icon
-          name="lucide:arrow-right"
-          class="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-0.5"
-        />
-      </Button>
-      <MobileMenu client:load nav={[...SITE.nav]} phone={SITE.phone} phoneHref={SITE.phoneHref} />
+      <a
+        href="/contact"
+        class="hidden h-10 items-center border border-gold/60 px-5 text-[0.62rem] font-[450] uppercase tracking-[0.28em] text-gold-300 transition-colors duration-500 hover:border-gold hover:bg-gold hover:text-ink sm:inline-flex"
+      >
+        Request a quote
+      </a>
+      <MobileMenu
+        client:load
+        nav={[...SITE.nav]}
+        phone={SITE.phone}
+        phoneHref={SITE.phoneHref}
+        logoSrc={mobileLogo.src}
+      />
     </div>
   </div>
 </header>

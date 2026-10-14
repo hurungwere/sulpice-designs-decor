@@ -1,16 +1,9 @@
 ---
-import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
 import { SITE } from '@/data/site';
+import monogram from '@/assets/brand/monogram.png';
 
 const year = new Date().getFullYear();
-
-const quickLinks = [
-  { label: 'Home', href: '/' },
-  { label: 'About', href: '/about' },
-  { label: 'Services', href: '/services' },
-  { label: 'Portfolio', href: '/portfolio' },
-  { label: 'Contact', href: '/contact' },
-];
 
 const serviceLinks = [
   { label: 'Tents & Pergolas', href: '/services#tents-pergolas' },
@@ -18,153 +11,145 @@ const serviceLinks = [
   { label: 'Crockery & Linen', href: '/services#crockery-linen' },
   { label: 'Florals & Accessories', href: '/services#florals-accessories' },
 ];
+
+const heading = 'mono-label text-[0.62rem] text-gold-300';
+const link = 'text-[0.95rem] text-cream/70 transition-colors duration-500 hover:text-cream';
 ---
 
-<footer class="relative mt-24 overflow-hidden border-t border-gold/30 bg-teal-900 text-cream">
-  <span
-    class="pointer-events-none absolute -left-16 -top-10 select-none font-display text-[18rem] leading-none text-cream/[0.03]"
-    aria-hidden="true"
-  >
-    S
-  </span>
-  <div class="container-luxe relative py-16 md:py-20">
-    <div class="grid gap-12 lg:grid-cols-12">
-      <!-- Brand + newsletter -->
-      <div class="lg:col-span-5">
-        <a href="/" class="flex items-center gap-3" aria-label={`${SITE.name} — home`}>
-          <span
-            class="flex h-11 w-11 items-center justify-center rounded-full bg-gold-gradient font-display text-xl leading-none text-ink shadow-[0_8px_20px_-10px_rgba(0,0,0,0.6)]"
-            aria-hidden="true"
-          >
-            S
-          </span>
-          <span class="flex flex-col leading-none">
-            <span class="text-gold-gradient font-display text-lg tracking-tight">Sulpice</span>
-            <span class="text-[0.6rem] font-medium uppercase tracking-[0.28em] text-gold-300"
-              >Designs &amp; Decor</span
-            >
-          </span>
-        </a>
-<p class="mt-6 max-w-sm text-sm leading-relaxed text-cream/70">
-  Premium events décor and hiring services from Zimbabwe and South Africa — styling
-  weddings, corporate events, and every celebration in between.
-</p>
-
-        <form
-          name="newsletter"
-          method="POST"
-          data-netlify="true"
-          netlify-honeypot="bot-field"
-          class="mt-8 max-w-sm"
-          aria-label="Newsletter signup"
-        >
-          <input type="hidden" name="form-name" value="newsletter" />
-          <p class="hidden">
-            <label>Don't fill this out: <input name="bot-field" /></label>
-          </p>
-          <label for="newsletter-email" class="font-mono text-[0.68rem] font-medium uppercase tracking-[0.16em] text-gold-300">
-            Join our mailing list
-          </label>
-          <div class="mt-3 flex items-center gap-2 rounded-full border border-cream/25 bg-teal-800/50 p-1.5 pl-4 transition-colors focus-within:border-gold-300">
-            <Icon name="lucide:mail" class="h-4 w-4 shrink-0 text-cream/60" />
-            <input
-              id="newsletter-email"
-              type="email"
-              name="email"
-              required
-              autocomplete="email"
-              placeholder="Your email address"
-              class="w-full bg-transparent py-2 text-sm text-cream placeholder:text-cream/45 focus:outline-none"
-            />
-            <button
-              type="submit"
-              aria-label="Subscribe to newsletter"
-              class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gold-gradient text-ink transition-transform hover:scale-105"
-            >
-              <Icon name="lucide:arrow-right" class="h-4 w-4" />
-            </button>
-          </div>
-        </form>
+<footer class="relative overflow-hidden border-t border-cream/10 bg-teal-900 text-cream">
+  <div class="container-luxe relative pb-10 pt-24 md:pt-32">
+    <!-- Statement + newsletter -->
+    <div class="grid gap-14 border-b border-cream/10 pb-20 lg:grid-cols-12 lg:items-end">
+      <div class="lg:col-span-7">
+        <p class="display-md max-w-2xl text-balance">
+          Your occasion, <em class="text-gold-300">our craft.</em>
+        </p>
+        <a href="/contact" class="link-hairline mt-10 text-cream hover:text-gold-300">Request a quote</a>
       </div>
 
-      <!-- Link columns -->
-      <nav class="lg:col-span-3" aria-label="Quick links">
-        <h3 class="font-mono text-[0.68rem] font-medium uppercase tracking-[0.16em] text-gold-300">Explore</h3>
-        <ul class="mt-5 space-y-3">
-          {
-            quickLinks.map((link) => (
-              <li>
-                <a
-                  href={link.href}
-                  class="text-sm text-cream/70 transition-colors hover:text-gold-300"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </nav>
-
-      <nav class="lg:col-span-4" aria-label="Services">
-        <h3 class="font-mono text-[0.68rem] font-medium uppercase tracking-[0.16em] text-gold-300">Services</h3>
-        <ul class="mt-5 space-y-3">
-          {
-            serviceLinks.map((link) => (
-              <li>
-                <a
-                  href={link.href}
-                  class="text-sm text-cream/70 transition-colors hover:text-gold-300"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-
-        <div class="mt-8 space-y-3 text-sm text-cream/70">
-          <a
-            href={`tel:${SITE.phoneHref}`}
-            class="flex items-center gap-3 transition-colors hover:text-gold-300"
+      <form
+        name="newsletter"
+        method="POST"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        class="lg:col-span-4 lg:col-start-9"
+        aria-label="Newsletter signup"
+      >
+        <input type="hidden" name="form-name" value="newsletter" />
+        <p class="hidden">
+          <label>Don't fill this out: <input name="bot-field" /></label>
+        </p>
+        <label for="newsletter-email" class={heading}>The Sulpice letter</label>
+        <p class="mt-3 text-sm leading-relaxed text-cream/60">
+          New collections and seasonal inspiration, a few times a year.
+        </p>
+        <div
+          class="mt-6 flex items-center border-b border-cream/30 transition-colors duration-500 focus-within:border-gold"
+        >
+          <input
+            id="newsletter-email"
+            type="email"
+            name="email"
+            required
+            autocomplete="email"
+            placeholder="Your email address"
+            class="w-full bg-transparent py-3 text-[0.95rem] text-cream placeholder:text-cream/40 focus:outline-none"
+          />
+          <button
+            type="submit"
+            class="shrink-0 py-3 pl-4 text-[0.62rem] uppercase tracking-[0.3em] text-gold-300 transition-colors hover:text-cream"
           >
-            <Icon name="lucide:phone" class="h-4 w-4 shrink-0 text-gold-300" />
-            {SITE.phone}
-          </a>
-          <a
-            href={`mailto:${SITE.email}`}
-            class="flex items-center gap-3 transition-colors hover:text-gold-300"
-          >
-            <Icon name="lucide:mail" class="h-4 w-4 shrink-0 text-gold-300" />
-            {SITE.email}
-          </a>
-
-          <div class="pt-2">
-            <p class="font-mono text-[0.68rem] font-medium uppercase tracking-[0.16em] text-gold-300">
-              Visit our showrooms
-            </p>
-            <ul class="mt-3 space-y-2.5">
-              {
-                SITE.showrooms.map((showroom) => (
-                  <li class="flex items-center gap-3">
-                    <Icon name="lucide:store" class="h-4 w-4 shrink-0 text-gold-300" />
-                    <span>{showroom}</span>
-                  </li>
-                ))
-              }
-            </ul>
-          </div>
+            Subscribe
+          </button>
         </div>
-      </nav>
+      </form>
     </div>
 
+    <!-- Columns -->
+    <div class="grid gap-12 py-20 sm:grid-cols-2 lg:grid-cols-12">
+      <nav class="lg:col-span-2" aria-label="Footer">
+        <h3 class={heading}>Explore</h3>
+        <ul class="mt-6 space-y-3">
+          {
+            SITE.nav.map((item) => (
+              <li>
+                <a href={item.href} class={link}>
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <nav class="lg:col-span-3" aria-label="Collection">
+        <h3 class={heading}>The collection</h3>
+        <ul class="mt-6 space-y-3">
+          {
+            serviceLinks.map((item) => (
+              <li>
+                <a href={item.href} class={link}>
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <div class="lg:col-span-4">
+        <h3 class={heading}>Showrooms</h3>
+        <ul class="mt-6 space-y-5">
+          {
+            SITE.branchContacts.map((branch, i) => (
+              <li>
+                <p class="font-display text-xl text-cream">{branch.region}</p>
+                <p class="mt-1 text-sm text-cream/60">
+                  {SITE.showrooms[i]}
+                  <span class="mx-2 hidden text-cream/25 sm:inline">·</span>
+                  <a href={`tel:${branch.phoneHref}`} class="block whitespace-nowrap transition-colors hover:text-cream sm:inline">
+                    {branch.phone}
+                  </a>
+                </p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="lg:col-span-3">
+        <h3 class={heading}>Enquiries</h3>
+        <ul class="mt-6 space-y-3">
+          <li>
+            <a href={`mailto:${SITE.email}`} class={link}>{SITE.email}</a>
+          </li>
+          <li>
+            <a href={`tel:${SITE.phoneHref}`} class={link}>{SITE.phone}</a>
+          </li>
+        </ul>
+        <dl class="mt-8 space-y-2 text-sm text-cream/60">
+          {
+            SITE.hours.map((h) => (
+              <div class="flex justify-between gap-6 border-b border-cream/10 pb-2">
+                <dt>{h.day}</dt>
+                <dd class="text-cream/80">{h.time}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </div>
+
+    <!-- Base -->
     <div
-      class="mt-14 flex flex-col items-center justify-between gap-6 border-t border-cream/15 pt-8 sm:flex-row"
+      class="flex flex-col items-center gap-8 border-t border-cream/10 pt-10 md:flex-row md:justify-between"
     >
-      <p class="text-xs text-cream/50">
-        &copy; {year} {SITE.name}. All rights reserved.
-      </p>
-      <ul class="flex items-center gap-3">
+      <a href="/" class="flex items-center gap-3" aria-label={`${SITE.name} — home`}>
+        <Image src={monogram} alt="" width={80} height={81} loading="lazy" class="h-9 w-auto" />
+        <span class="font-display text-lg font-medium uppercase tracking-[0.2em]">Sulpice</span>
+      </a>
+
+      <ul class="flex flex-wrap items-center justify-center gap-x-7 gap-y-3">
         {
           SITE.socials.map((social) => (
             <li>
@@ -172,17 +157,17 @@ const serviceLinks = [
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`${SITE.shortName} on ${social.name}`}
-                class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-cream/20 text-cream/70 transition-all duration-300 hover:-translate-y-0.5 hover:border-gold-300 hover:text-gold-300"
+                class="text-[0.62rem] uppercase tracking-[0.3em] text-cream/60 transition-colors duration-500 hover:text-gold-300"
               >
-                <Icon name={social.icon} class="h-4 w-4" />
+                {social.name}
               </a>
             </li>
           ))
         }
       </ul>
-      <p class="text-xs text-cream/50">
-Styled across Zimbabwe, South Africa &amp; beyond
+
+      <p class="text-[0.62rem] uppercase tracking-[0.24em] text-cream/40">
+        &copy; {year} {SITE.legalName}
       </p>
     </div>
   </div>

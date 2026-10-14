@@ -1,6 +1,6 @@
 ---
+import { Image } from 'astro:assets';
 import Button from '@/components/Button.astro';
-import { Icon } from 'astro-icon/components';
 import p1 from '@/assets/service-residential.jpg';
 import p2 from '@/assets/service-events.jpg';
 import p3 from '@/assets/service-consultation.jpg';
@@ -46,130 +46,89 @@ const products = [
     href: '/services',
   },
 ];
+
+const standards = [
+  { title: 'Our own trucks', body: 'Delivery handled in-house — punctual, and careful with every piece.' },
+  { title: 'Our own crew', body: 'Experienced stylists set, dress and clear away, start to finish.' },
+  { title: 'One quotation', body: 'The full range under one roof, with a single point of contact.' },
+  { title: 'Since 2008', body: 'Trusted for weddings and occasions across Zimbabwe and South Africa.' },
+];
 ---
 
-<section class="container-luxe section-pad" aria-labelledby="hire-heading">
-  <div class="mb-14 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-    <div>
-      <span class="mono-label mb-5 flex items-center gap-3 text-gold-300">
-        <span class="index-num">01</span>
-        <span class="h-px w-7 bg-gold-gradient" aria-hidden="true" />
-        What we hire
-      </span>
-      <h2
-        id="hire-heading"
-        class="text-balance text-3xl leading-[1.1] text-cream sm:text-4xl md:text-[2.85rem]"
+<section class="section-pad" aria-labelledby="hire-heading">
+  <div class="container-luxe">
+    <div class="grid gap-10 lg:grid-cols-12 lg:items-end">
+      <div class="lg:col-span-7" data-reveal>
+        <span class="mono-label flex items-center gap-4 text-gold-300">
+          <span class="h-px w-10 bg-gold/70" aria-hidden="true"></span>
+          The collection
+        </span>
+        <h2 id="hire-heading" class="display-lg mt-8 text-balance text-cream">
+          One house. <em class="text-gold-300">Everything your event needs.</em>
+        </h2>
+      </div>
+      <p
+        class="max-w-sm text-[0.98rem] leading-[1.85] text-muted lg:col-span-4 lg:col-start-9"
+        data-reveal
+        style="--reveal-delay:120ms"
       >
-        One roof. <span class="text-gold-gradient italic">Everything your event needs.</span>
-      </h2>
+        A complete hire range for weddings, corporate occasions and private celebrations —
+        quoted together, delivered by our own trucks, styled by our own hands.
+      </p>
     </div>
-    <p class="max-w-md text-sm leading-relaxed text-muted lg:self-start lg:pt-2">
-      A full hire range for weddings, corporate events, and celebrations of every
-      kind — quoted together, delivered by our own trucks, styled by our crew.
-    </p>
-  </div>
 
-  <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-    {
-      products.map((product, i) => (
-        <article
-          class="group overflow-hidden rounded-2xl bg-cream-50 ring-1 ring-cream/10 transition-all duration-500 hover:-translate-y-1 hover:shadow-card hover:ring-gold/60"
-          data-reveal
-          style={`--reveal-delay:${i * 70}ms`}
-        >
-          <div class="relative aspect-[4/3] overflow-hidden bg-cream-100">
-            <img
-              src={product.image.src}
-              alt={`${product.name} hire by Sulpice Designs Decor`}
-              loading="lazy"
-              decoding="async"
-              class="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
-            />
-            <span
-              class="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-charcoal/25 to-transparent"
-              aria-hidden="true"
-            />
-            <span class="absolute left-4 top-4 rounded-full bg-cream/90 px-3 py-1 font-mono text-[0.62rem] uppercase tracking-[0.18em] text-teal-700 backdrop-blur-sm">
-              {String(i + 1).padStart(2, '0')} / Hire
-            </span>
-            <span
-              class="bg-gold-gradient absolute bottom-4 right-4 inline-flex h-9 w-9 translate-y-2 items-center justify-center rounded-full text-ink opacity-0 shadow-[0_10px_24px_-12px_rgba(184,134,11,0.9)] transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100"
-              aria-hidden="true"
-            >
-              <Icon name="lucide:arrow-up-right" class="h-4 w-4" />
-            </span>
-          </div>
-          <div class="p-6">
-            <h3 class="font-display text-2xl text-cream">{product.name}</h3>
-            <ul class="mt-4">
-              {
-                product.specs.map((spec) => (
-                  <li class="flex items-center justify-between gap-4 border-t border-cream/10 py-2.5 font-mono text-xs uppercase tracking-[0.14em] text-muted transition-colors duration-300 group-hover:text-cream/80">
-                    {spec}
-                    <Icon name="lucide:plus" class="h-3.5 w-3.5 shrink-0 text-gold-600" />
-                  </li>
-                ))
-              }
-            </ul>
-            <div class="mt-5">
-              <a
-                href={product.href}
-                class="inline-flex items-center gap-2 text-sm font-medium text-gold-300 transition-colors hover:text-gold-600"
-              >
-                Enquire
-                <Icon
-                  name="lucide:arrow-right"
-                  class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5"
-                />
-              </a>
+    <div class="mt-20 grid gap-x-8 gap-y-16 pb-0 sm:grid-cols-2 lg:mt-28 lg:grid-cols-3 lg:gap-x-10 lg:pb-24">
+      {
+        products.map((product, i) => (
+          <a
+            href={product.href}
+            class:list={['group block', i % 3 === 1 && 'lg:translate-y-24']}
+            data-reveal
+            style={`--reveal-delay:${(i % 3) * 110}ms`}
+          >
+            <div class="relative overflow-hidden bg-cream-50">
+              <Image
+                src={product.image}
+                alt={`${product.name} hire by Sulpice Designs Decor`}
+                widths={[480, 720, 960]}
+                sizes="(min-width: 1024px) 30vw, (min-width: 640px) 46vw, 92vw"
+                loading="lazy"
+                class="aspect-[4/5] w-full object-cover transition-transform duration-[1600ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.05]"
+              />
+              <span
+                class="pointer-events-none absolute inset-0 bg-teal-900/0 transition-colors duration-700 group-hover:bg-teal-900/15"
+                aria-hidden="true"
+              />
             </div>
-          </div>
-        </article>
-      ))
-    }
-  </div>
+            <div class="mt-7 flex items-baseline gap-5">
+              <span class="index-num text-lg text-gold-300">{String(i + 1).padStart(2, '0')}</span>
+              <div class="flex-1 border-b border-cream/15 pb-5">
+                <h3 class="font-display text-[1.9rem] leading-tight text-cream transition-colors duration-500 group-hover:text-gold-300">
+                  {product.name}
+                </h3>
+                <p class="mt-2 text-sm leading-relaxed text-muted">{product.specs.join(' · ')}</p>
+              </div>
+            </div>
+          </a>
+        ))
+      }
+    </div>
 
-  <div class="mt-14 grid gap-6 border-t border-cream/10 pt-10 sm:grid-cols-2 lg:grid-cols-4">
-    {
-      [
-        {
-          icon: 'lucide:truck',
-          title: 'Our trucks',
-          body: 'Delivery handled in-house, smooth and on time.',
-        },
-        {
-          icon: 'lucide:users',
-          title: 'Our crew',
-          body: 'Experienced staff style and clear away, start to finish.',
-        },
-        {
-          icon: 'lucide:boxes',
-          title: 'One roof',
-          body: 'Full hire range, one quotation, one point of contact.',
-        },
-        {
-          icon: 'lucide:badge-check',
-          title: 'Since 2008',
-          body: 'Trusted for weddings & events across Zimbabwe and South Africa.',
-        },
-      ].map((g, i) => (
-        <div class="flex items-start gap-4" data-reveal style={`--reveal-delay:${i * 80}ms`}>
-          <span class="bg-gold-gradient inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-ink">
-            <Icon name={g.icon} class="h-4 w-4" />
-          </span>
-          <div>
-            <h3 class="font-display text-lg text-cream">{g.title}</h3>
-            <p class="mt-1 text-sm leading-relaxed text-muted">{g.body}</p>
+    <!-- The Sulpice standard -->
+    <div class="mt-32 grid gap-12 border-t border-cream/15 pt-14 sm:grid-cols-2 lg:mt-40 lg:grid-cols-4 lg:gap-10">
+      {
+        standards.map((g, i) => (
+          <div data-reveal style={`--reveal-delay:${i * 90}ms`}>
+            <span class="diamond" aria-hidden="true" />
+            <h3 class="mt-6 font-display text-2xl text-cream">{g.title}</h3>
+            <p class="mt-3 max-w-xs text-sm leading-[1.8] text-muted">{g.body}</p>
           </div>
-        </div>
-      ))
-    }
-  </div>
+        ))
+      }
+    </div>
 
-  <div class="mt-10 text-center">
-    <Button href="/services" variant="outline" size="lg">
-      See the full range &amp; hire process
-      <Icon name="lucide:arrow-right" class="h-4 w-4" />
-    </Button>
+    <div class="mt-20 flex justify-center">
+      <Button href="/services" variant="outline" size="lg">Explore the full collection</Button>
+    </div>
   </div>
 </section>

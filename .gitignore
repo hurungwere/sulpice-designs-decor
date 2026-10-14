@@ -30,3 +30,9 @@ Thumbs.db
 # derived / local
 preview/
 .backup/
+
+# client originals (company profile contains confidential banking details — keep out of this public repo)
+/assets/
+
+# internal notes about the client — keep local only
+/CLIENT-NOTES.md

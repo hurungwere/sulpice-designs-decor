@@ -1,6 +1,6 @@
 import { useState, type SyntheticEvent } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { CheckCircle2, AlertCircle, Loader2, Send } from 'lucide-react';
+import { CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
 
 interface Props {
   projectTypes: readonly string[];
@@ -15,8 +15,8 @@ interface Errors {
 }
 
 const field =
-  'w-full rounded-2xl border border-cream/15 bg-cream-50 px-4 py-3 text-sm text-cream placeholder:text-muted-400 transition-[border-color,background-color] hover:border-cream/30 focus:border-gold focus:bg-cream-100 focus:outline-none';
-const labelCls = 'mb-2 block text-xs font-semibold uppercase tracking-[0.16em] text-gold-300';
+  'w-full rounded-none border-0 border-b border-cream/25 bg-transparent px-0 py-3 text-[0.98rem] text-cream placeholder:text-muted-400 transition-colors duration-500 hover:border-cream/50 focus:border-gold focus:outline-none [&>option]:bg-ink';
+const labelCls = 'block text-[0.62rem] font-[450] uppercase tracking-[0.3em] text-gold-300';
 
 export default function ContactForm({ projectTypes, budgets }: Props) {
   const [status, setStatus] = useState<Status>('idle');
@@ -85,7 +85,7 @@ export default function ContactForm({ projectTypes, budgets }: Props) {
       method="POST"
       action="/contact?success=true"
       onSubmit={handleSubmit}
-      className="space-y-6"
+      className="space-y-10"
       aria-label="Event enquiry form"
       {...{ 'data-netlify': 'true', 'netlify-honeypot': 'bot-field' }}
     >
@@ -96,7 +96,7 @@ export default function ContactForm({ projectTypes, budgets }: Props) {
         </label>
       </p>
 
-      <div className="grid gap-6 sm:grid-cols-2">
+      <div className="grid gap-10 sm:grid-cols-2 sm:gap-8">
         <div>
           <label htmlFor="name" className={labelCls}>
             Name *
@@ -113,7 +113,7 @@ export default function ContactForm({ projectTypes, budgets }: Props) {
             placeholder="Your full name"
           />
           {errors.name && (
-            <p id="name-error" className="mt-2 text-xs text-red-600">
+            <p id="name-error" className="mt-2 text-xs text-red-300">
               {errors.name}
             </p>
           )}
@@ -135,14 +135,14 @@ export default function ContactForm({ projectTypes, budgets }: Props) {
             placeholder="you@example.com"
           />
           {errors.email && (
-            <p id="email-error" className="mt-2 text-xs text-red-600">
+            <p id="email-error" className="mt-2 text-xs text-red-300">
               {errors.email}
             </p>
           )}
         </div>
       </div>
 
-      <div className="grid gap-6 sm:grid-cols-2">
+      <div className="grid gap-10 sm:grid-cols-2 sm:gap-8">
         <div>
           <label htmlFor="phone" className={labelCls}>
             Phone
@@ -174,7 +174,7 @@ export default function ContactForm({ projectTypes, budgets }: Props) {
         </div>
       </div>
 
-      <div className="grid gap-6 sm:grid-cols-2">
+      <div className="grid gap-10 sm:grid-cols-2 sm:gap-8">
         <div>
           <label htmlFor="eventDate" className={labelCls}>
             Event date
@@ -205,7 +205,7 @@ export default function ContactForm({ projectTypes, budgets }: Props) {
         </div>
       </div>
 
-      <div className="grid gap-6 sm:grid-cols-2">
+      <div className="grid gap-10 sm:grid-cols-2 sm:gap-8">
         <div>
           <label htmlFor="city" className={labelCls}>
             City / location
@@ -266,16 +266,26 @@ export default function ContactForm({ projectTypes, budgets }: Props) {
           placeholder="Your date, venue, guest count, and the look you love..."
         />
         {errors.message && (
-          <p id="message-error" className="mt-2 text-xs text-red-600">
+          <p id="message-error" className="mt-2 text-xs text-red-300">
             {errors.message}
           </p>
         )}
       </div>
 
+      <label className="flex cursor-pointer items-start gap-4 text-sm leading-relaxed text-muted">
+        <input
+          type="checkbox"
+          name="marketingOptIn"
+          value="yes"
+          className="mt-1 h-4 w-4 shrink-0 cursor-pointer appearance-none border border-cream/40 bg-transparent transition-colors checked:border-gold checked:bg-gold"
+        />
+        <span>Keep me informed about new collections and SEWA masterclass intakes. Optional — unsubscribe any time.</span>
+      </label>
+
       <button
         type="submit"
         disabled={status === 'submitting'}
-        className="bg-gold-gradient group inline-flex w-full items-center justify-center gap-2 rounded-full px-8 py-4 text-sm font-medium text-ink shadow-[0_14px_32px_-20px_rgba(184,134,11,0.9)] transition-all duration-300 hover:brightness-[1.06] disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
+        className="group inline-flex h-14 w-full items-center justify-center gap-3 bg-gold px-12 text-[0.68rem] font-[450] uppercase tracking-[0.28em] text-ink transition-colors duration-500 hover:bg-gold-300 disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
       >
         {status === 'submitting' ? (
           <>
@@ -285,7 +295,6 @@ export default function ContactForm({ projectTypes, budgets }: Props) {
         ) : (
           <>
             Send enquiry
-            <Send className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true" />
           </>
         )}
       </button>
@@ -297,9 +306,9 @@ export default function ContactForm({ projectTypes, budgets }: Props) {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
-              className="flex items-center gap-2 rounded-2xl bg-green-50 px-4 py-3 text-sm text-green-800"
+              className="flex items-center gap-3 border-l border-gold py-2 pl-4 text-sm text-cream"
             >
-              <CheckCircle2 className="h-5 w-5 shrink-0" aria-hidden="true" />
+              <CheckCircle2 className="h-5 w-5 shrink-0 text-gold-300" strokeWidth={1.25} aria-hidden="true" />
               Thank you — your enquiry is on its way. We'll reply within one business day.
             </motion.p>
           )}
@@ -308,7 +317,7 @@ export default function ContactForm({ projectTypes, budgets }: Props) {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
-              className="flex items-center gap-2 rounded-2xl bg-red-50 px-4 py-3 text-sm text-red-700"
+              className="flex items-center gap-3 border-l border-red-400 py-2 pl-4 text-sm text-red-300"
             >
               <AlertCircle className="h-5 w-5 shrink-0" aria-hidden="true" />
               Something went wrong. Please email us directly at hello@sulpicedesigns.com.
@@ -317,10 +326,10 @@ export default function ContactForm({ projectTypes, budgets }: Props) {
         </AnimatePresence>
       </div>
 
-      <p className="text-xs text-muted-400">
-        Quotations and bookings are confirmed in writing, and we reply within one
-        business day. By submitting, you agree to be contacted about your enquiry —
-        we never share your details.
+      <p className="max-w-xl text-xs leading-relaxed text-muted-400">
+        Quotations and bookings are confirmed in writing. Your details are used only to respond
+        to this enquiry and are processed in line with South Africa&rsquo;s POPI Act and
+        Zimbabwe&rsquo;s Cyber and Data Protection Act — we never sell or share them.
       </p>
     </form>
   );

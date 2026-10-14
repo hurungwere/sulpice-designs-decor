@@ -1,0 +1,77 @@
+---
+import { Image } from 'astro:assets';
+import monogram from '@/assets/brand/monogram.png';
+
+const word = 'SULPICE';
+const letters = Array.from(word);
+---
+
+<div
+  id="preloader"
+  class="preloader"
+  role="status"
+  aria-live="polite"
+  aria-label="Loading Sulpice Designs Decor"
+>
+  <div class="preloader__inner">
+    <Image src={monogram} alt="" width={160} height={162} loading="eager" class="preloader__mark" />
+    <span class="preloader__word" aria-hidden="true">
+      <span class="preloader__letters">
+        {
+          letters.map((letter, i) => (
+            <span class="preloader__letter">
+              <span class="preloader__letter-inner" style={`--i:${i}`}>
+                {letter}
+              </span>
+            </span>
+          ))
+        }
+      </span>
+      <span class="preloader__shimmer">
+        {
+          letters.map((letter) => (
+            <span class="preloader__letter">
+              <span class="preloader__letter-inner">{letter}</span>
+            </span>
+          ))
+        }
+      </span>
+    </span>
+    <span class="preloader__sub" aria-hidden="true">Designs &amp; Decor</span>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var el = document.getElementById('preloader');
+    if (!el) return;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var minVisible = reduce ? 0 : 1900;
+    var start = performance.now();
+    var done = false;
+
+    function hide() {
+      if (done) return;
+      done = true;
+      var wait = Math.max(0, minVisible - (performance.now() - start));
+      setTimeout(function () {
+        el.classList.add('is-hidden');
+        var finish = function () {
+          el.remove();
+          document.documentElement.classList.remove('preloading');
+        };
+        el.addEventListener('transitionend', finish, { once: true });
+        setTimeout(finish, reduce ? 60 : 900);
+      }, wait);
+    }
+
+    function ready() {
+      hide();
+    }
+
+    if (document.readyState === 'complete') ready();
+    else window.addEventListener('load', ready, { once: true });
+
+    setTimeout(hide, 5000);
+  })();
+</script>

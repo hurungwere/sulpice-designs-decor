@@ -1,6 +1,5 @@
 ---
 import { Image } from 'astro:assets';
-import { Icon } from 'astro-icon/components';
 import { SITE } from '@/data/site';
 import serviceResidential from '@/assets/service-residential.jpg';
 import serviceEvents from '@/assets/service-events.jpg';
@@ -8,150 +7,97 @@ import serviceCommercial from '@/assets/service-commercial.jpg';
 import project7 from '@/assets/project-7.jpg';
 import project1 from '@/assets/project-1.jpg';
 import project9 from '@/assets/project-9.jpg';
-import project12 from '@/assets/project-12.jpg';
 import hero2 from '@/assets/hero-2.jpg';
 
 const imgs = [
-  { src: serviceResidential, alt: 'Elegant event décor by Sulpice Designs Decor', span: 'md:col-span-2 md:row-span-2', link: true },
+  { src: serviceResidential, alt: 'Elegant event décor by Sulpice Designs Decor', span: 'col-span-2 row-span-2 md:col-span-2 md:row-span-2', link: true },
   { src: project7, alt: 'Styled wedding table by Sulpice Designs Decor', span: 'md:col-span-1 md:row-span-2', link: true },
   { src: project1, alt: 'Ballroom styling by Sulpice Designs Decor', span: 'md:col-span-1 md:row-span-1', link: true },
   { src: serviceEvents, alt: 'Corporate event setup by Sulpice Designs Decor', span: 'md:col-span-1 md:row-span-1', link: true },
   { src: project9, alt: 'Fresh florals and place settings by Sulpice Designs Decor', span: 'md:col-span-1 md:row-span-2', link: true },
-  { src: hero2, alt: 'Canopy and lighting hire by Sulpice Designs Decor', span: 'md:col-span-2 md:row-span-1', link: true },
+  { src: hero2, alt: 'Canopy and lighting hire by Sulpice Designs Decor', span: 'md:col-span-2 md:row-span-2', link: true },
   { src: serviceCommercial, alt: 'Reception styling by Sulpice Designs Decor', span: 'md:col-span-1 md:row-span-2', link: true },
-  { src: project12, alt: 'Celebration décor by Sulpice Designs Decor', span: 'md:col-span-2 md:row-span-1', link: true },
 ];
 
 const instagram = SITE.socials.find((s) => s.name === 'Instagram')?.href ?? '#';
-const socials = [
-  {
-    icon: 'lucide:instagram',
-    name: 'Instagram',
-    handle: '@sulpicedesigns',
-    tagline: 'Behind-the-scenes styling & daily inspiration',
-    href: SITE.socials.find((s) => s.name === 'Instagram')?.href ?? '#',
-  },
-  {
-    icon: 'lucide:facebook',
-    name: 'Facebook',
-    handle: '/SulpiceDesignsDecor',
-    tagline: 'New arrivals, offers & client stories',
-    href: SITE.socials.find((s) => s.name === 'Facebook')?.href ?? '#',
-  },
-  {
-    icon: 'lucide:message-circle',
-    name: 'WhatsApp',
-    handle: SITE.whatsapp,
-    tagline: 'Chat with us about your event',
-    href: SITE.socials.find((s) => s.name === 'WhatsApp')?.href ?? 'https://wa.me/263244334455',
-  },
-  {
-    icon: 'lucide:linkedin',
-    name: 'LinkedIn',
-    handle: 'Sulpice Designs Decor',
-    tagline: 'Company news & career updates',
-    href: SITE.socials.find((s) => s.name === 'LinkedIn')?.href ?? '#',
-  },
-];
 ---
 
-<section class="bg-cream-50 section-pad" aria-labelledby="gallery-heading">
+<section class="section-pad" aria-labelledby="gallery-heading">
   <div class="container-luxe">
-    <div class="mb-14 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-      <div>
-        <span class="mono-label mb-5 flex items-center gap-3 text-gold-300">
-          <span class="index-num">04</span>
-          <span class="h-px w-7 bg-gold-gradient" aria-hidden="true" />
-          Gallery &amp; social
+    <div class="grid gap-10 lg:grid-cols-12 lg:items-end">
+      <div class="lg:col-span-8" data-reveal>
+        <span class="mono-label flex items-center gap-4 text-gold-300">
+          <span class="h-px w-10 bg-gold/70" aria-hidden="true"></span>
+          @sulpicedesigns
         </span>
-        <h2
-          id="gallery-heading"
-          class="text-balance text-3xl leading-[1.1] text-cream sm:text-4xl md:text-[2.85rem]"
-        >
-          Fresh from the <span class="text-gold-gradient italic">event floor.</span>
+        <h2 id="gallery-heading" class="display-lg mt-8 text-balance text-cream">
+          Fresh from the <em class="text-gold-300">event floor.</em>
         </h2>
       </div>
-      <a
-        href={instagram}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="group inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-cream/20 px-5 py-2.5 font-mono text-xs uppercase tracking-[0.16em] text-cream transition-colors hover:border-gold-600 hover:text-gold-600"
-      >
-        <Icon name="lucide:instagram" class="h-4 w-4" />
-        Follow @sulpicedesigns
-        <Icon name="lucide:arrow-right" class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-      </a>
+      <div class="lg:col-span-3 lg:col-start-10 lg:justify-self-end" data-reveal>
+        <a
+          href={instagram}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="link-hairline text-cream hover:text-gold-300"
+        >
+          Follow on Instagram
+        </a>
+      </div>
     </div>
 
     <!-- Mosaic -->
-    <div class="grid grid-flow-dense grid-cols-2 gap-3 auto-rows-[7rem] sm:auto-rows-[8.5rem] md:grid-cols-4 md:gap-4 md:auto-rows-[9.5rem]">
+    <div
+      class="mt-20 grid grid-flow-dense auto-rows-[8rem] grid-cols-2 gap-2 sm:auto-rows-[10rem] md:grid-cols-4 md:gap-3 md:auto-rows-[11rem] lg:auto-rows-[12.5rem]"
+    >
       {
         imgs.map((img, i) => (
           <a
             href={img.link ? instagram : '/portfolio'}
             target={img.link ? '_blank' : undefined}
             rel={img.link ? 'noopener noreferrer' : undefined}
-            class:list={['group relative overflow-hidden rounded-2xl bg-cream-100 ring-1 ring-cream/5', img.span]}
+            class:list={['group relative overflow-hidden bg-cream-50', img.span]}
             data-reveal
             style={`--reveal-delay:${i * 60}ms`}
-            aria-label={`${img.alt} — view the gallery on Instagram`}
+            aria-label={`${img.alt} — view on Instagram`}
           >
             <Image
               src={img.src}
               alt={img.alt}
-              widths={[400, 640, 900]}
+              widths={[400, 640, 900, 1200]}
               sizes="(min-width: 1024px) 25vw, (min-width: 640px) 45vw, 90vw"
               loading="lazy"
               decoding="async"
-              class="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
+              class="h-full w-full object-cover transition-transform duration-[1600ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.05]"
             />
             <span
-              class="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+              class="pointer-events-none absolute inset-0 bg-teal-900/0 transition-colors duration-700 group-hover:bg-teal-900/25"
               aria-hidden="true"
             />
-            <span class="bg-gold-gradient absolute bottom-3 right-3 inline-flex h-9 w-9 -translate-y-1 items-center justify-center rounded-full text-ink opacity-0 shadow-[0_10px_24px_-12px_rgba(184,134,11,0.9)] transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
-              <Icon name="lucide:arrow-up-right" class="h-4 w-4" />
-            </span>
           </a>
         ))
       }
     </div>
 
-    <!-- Social platforms -->
-    <div
-      class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
-      aria-label="Follow Sulpice Designs Decor on social media"
+    <ul
+      class="mt-14 flex flex-wrap items-center justify-center gap-x-6 gap-y-4"
+      aria-label="Sulpice Designs Decor on social media"
     >
       {
-        socials.map((social, i) => (
-          <a
-            href={social.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="group flex items-center gap-4 rounded-2xl bg-cream-50 p-5 ring-1 ring-cream/10 transition-all duration-500 hover:-translate-y-1 hover:shadow-card hover:ring-gold/50"
-            data-reveal
-            style={`--reveal-delay:${i * 80}ms`}
-            aria-label={`${social.name}: ${social.tagline}`}
-          >
-            <span class="bg-gold-gradient inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-ink shadow-[0_10px_24px_-12px_rgba(184,134,11,0.8)]">
-              <Icon name={social.icon} class="h-5 w-5" />
-            </span>
-            <span class="min-w-0">
-              <span class="font-mono text-xs font-medium uppercase tracking-[0.16em] text-cream">
-                {social.name}
-              </span>
-              <span class="mt-0.5 block truncate text-sm text-muted">{social.handle}</span>
-            </span>
-            <Icon
-              name="lucide:arrow-up-right"
-              class="ml-auto h-4 w-4 shrink-0 text-gold-600 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100"
-            />
-          </a>
+        SITE.socials.map((social, i) => (
+          <li class="flex items-center gap-6">
+            {i > 0 && <span class="diamond opacity-60" aria-hidden="true" />}
+            <a
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="mono-label text-cream/70 transition-colors duration-500 hover:text-gold-300"
+            >
+              {social.name}
+            </a>
+          </li>
         ))
       }
-    </div>
-    <p class="mt-6 text-center font-mono text-[0.68rem] uppercase tracking-[0.18em] text-muted-400">
-      Tag <span class="text-gold-600">@sulpicedesigns</span> — we repost our favourites
-    </p>
+    </ul>
   </div>
 </section>

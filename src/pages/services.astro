@@ -5,14 +5,16 @@ import PageHero from '@/components/PageHero.astro';
 import SectionHeading from '@/components/SectionHeading.astro';
 import Button from '@/components/Button.astro';
 import CTABanner from '@/components/CTABanner.astro';
+import BeyondHire from '@/components/BeyondHire.astro';
 import { Icon } from 'astro-icon/components';
 import { SERVICES, PROCESS } from '@/data/services';
+import { INVENTORY } from '@/data/site';
 import heroImage from '@/assets/service-residential.jpg';
 
 const faqs = [
   {
     q: 'Where do you work?',
-    a: 'Our showrooms are in Harare and Bulawayo, Zimbabwe, and Fourways, Johannesburg, South Africa — and we deliver events across the wider southern African region for private clients.',
+    a: 'Our headquarters is in Eastlea, Harare, with an operations branch in Bulawayo and our creative design hub in Broadacres, Fourways, Johannesburg — and we deliver events across the wider Southern African region.',
   },
   {
     q: 'What if we already have some furniture or décor?',
@@ -30,6 +32,7 @@ const faqs = [
 ---
 
 <BaseLayout
+  transparentHeader
   title="Design Services"
   description="Tents, tables, chairs, crockery, linen, and florals for hire from Sulpice Designs Decor across Zimbabwe and South Africa — weddings, corporate events, and every celebration."
 >
@@ -43,73 +46,69 @@ const faqs = [
   />
 
   <!-- Service detail -->
-  <section class="container-luxe space-y-24 py-24 md:space-y-32 md:py-32" aria-label="Service details">
+  <section class="container-luxe section-pad space-y-32 md:space-y-48" aria-label="The collection">
     {
       SERVICES.map((service, i) => {
         const reversed = i % 2 === 1;
         return (
           <article id={service.slug} class="scroll-mt-28">
-            <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-              <div class:list={['relative', reversed && 'lg:order-2']} data-reveal>
-                <div class="overflow-hidden rounded-2xl ring-1 ring-cream/5">
+            <div class="grid items-center gap-14 lg:grid-cols-12 lg:gap-12">
+              <figure
+                class:list={['lg:col-span-6', reversed ? 'lg:order-2 lg:col-start-7' : '']}
+              >
+                <div class="overflow-hidden bg-cream-50" data-reveal-clip>
                   <Image
                     src={service.image}
                     alt={`${service.title} by Sulpice Designs Decor`}
-                    widths={[480, 720, 960]}
-                    sizes="(min-width: 1024px) 45vw, 90vw"
+                    widths={[600, 900, 1200]}
+                    sizes="(min-width: 1024px) 45vw, 92vw"
                     loading="lazy"
-                    class="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.03]"
+                    class="aspect-[4/5] w-full object-cover transition-transform duration-[1600ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.04]"
                   />
                 </div>
-                <span class="absolute left-5 top-5 inline-flex items-center gap-2 rounded-full bg-cream/90 px-4 py-2 font-mono text-[0.68rem] font-medium uppercase tracking-[0.16em] text-teal-700 backdrop-blur-sm">
-                  <Icon name={service.icon} class="h-4 w-4 text-gold-600" />
+                <figcaption class="mono-label mt-5 text-[0.58rem] text-muted-400">
                   {service.tagline}
-                </span>
-                <span class="bg-gold-gradient absolute right-5 top-5 inline-flex items-center gap-1.5 rounded-full px-4 py-2 font-mono text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-ink shadow-lg shadow-gold-600/25">
-                  <Icon name="lucide:star" class="h-3.5 w-3.5" />
-                  {service.badge}
-                </span>
-              </div>
+                </figcaption>
+              </figure>
 
-              <div class:list={[reversed && 'lg:order-1']} data-reveal style="--reveal-delay:120ms">
-                <p class="mono-label text-gold-300">
-                  0{i + 1} — {service.title}
+              <div
+                class:list={[
+                  'lg:col-span-5',
+                  reversed ? 'lg:order-1 lg:col-start-1' : 'lg:col-start-8',
+                ]}
+                data-reveal
+                style="--reveal-delay:120ms"
+              >
+                <p class="flex items-center gap-4 text-gold-300">
+                  <span class="index-num text-lg text-gold-300">{String(i + 1).padStart(2, '0')}</span>
+                  <span class="h-px w-10 bg-gold/70" aria-hidden="true" />
                 </p>
-                <h2 class="mt-4 text-balance text-3xl leading-tight text-cream sm:text-4xl">
-                  {service.title}
-                </h2>
-                <p class="mt-4 text-base leading-relaxed text-muted md:text-lg">
-                  {service.description}
-                </p>
+                <h2 class="display-md mt-6 text-balance text-cream">{service.title}</h2>
+                <p class="mt-7 text-[1.02rem] leading-[1.85] text-muted">{service.description}</p>
 
-                <ul class="mt-7 grid gap-3 sm:grid-cols-2">
+                <ul class="mt-10 border-t border-cream/10">
                   {service.features.map((feature) => (
-                    <li class="flex items-start gap-2.5 text-sm text-cream/90">
-                      <Icon name="lucide:check" class="mt-0.5 h-4 w-4 shrink-0 text-gold-600" />
+                    <li class="flex items-center gap-4 border-b border-cream/10 py-3.5 text-[0.95rem] text-cream/85">
+                      <span class="diamond" aria-hidden="true" />
                       {feature}
                     </li>
                   ))}
                 </ul>
 
-                <dl class="mt-8 flex flex-wrap gap-x-10 gap-y-4 border-t border-cream/10 pt-6">
+                <dl class="mt-10 grid grid-cols-2 gap-6">
                   <div>
-                    <dt class="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-muted">
-                      Investment
-                    </dt>
-                    <dd class="mt-1 font-display text-xl text-cream">{service.price}</dd>
+                    <dt class="mono-label text-[0.58rem] text-muted-400">Pricing</dt>
+                    <dd class="mt-2 font-display text-2xl text-cream">{service.price}</dd>
                   </div>
                   <div>
-                    <dt class="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-muted">
-                      Typical timeline
-                    </dt>
-                    <dd class="mt-1 font-display text-xl text-cream">{service.duration}</dd>
+                    <dt class="mono-label text-[0.58rem] text-muted-400">Timeline</dt>
+                    <dd class="mt-2 font-display text-2xl text-cream">{service.duration}</dd>
                   </div>
                 </dl>
 
-                <div class="mt-8">
-                  <Button href="/contact">
-                    Enquire about {service.title.toLowerCase()}
-                    <Icon name="lucide:arrow-right" class="h-4 w-4" />
+                <div class="mt-12">
+                  <Button href="/contact" variant="outline" aria-label={`Enquire about ${service.title}`}>
+                    Enquire
                   </Button>
                 </div>
               </div>
@@ -120,37 +119,64 @@ const faqs = [
     }
   </section>
 
+  <!-- Inventory -->
+  <section class="container-luxe pb-32 md:pb-44" aria-labelledby="inventory-heading">
+    <div class="grid gap-14 lg:grid-cols-12">
+      <div class="lg:col-span-4">
+        <SectionHeading
+          id="inventory-heading"
+          eyebrow="The inventory"
+          title="What is in the warehouse."
+          lead="A high-specification range, kept current with the latest trends — all owned, maintained and delivered by us."
+        />
+      </div>
+      <dl class="border-t border-cream/15 lg:col-span-7 lg:col-start-6">
+        {
+          INVENTORY.map((row, i) => (
+            <div
+              class="grid gap-2 border-b border-cream/15 py-6 sm:grid-cols-[14rem_1fr] sm:gap-8"
+              data-reveal
+              style={`--reveal-delay:${i * 60}ms`}
+            >
+              <dt class="font-display text-2xl text-cream">{row.category}</dt>
+              <dd class="text-[0.95rem] leading-[1.8] text-muted sm:pt-1.5">{row.items}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
   <!-- Types of events -->
-  <section class="container-luxe pb-24 md:pb-32" aria-labelledby="events-heading">
-    <SectionHeading
-      id="events-heading"
-      index="02"
-      eyebrow="Types of events"
-      title="Every celebration, styled with care."
-      lead="From white-tie weddings to casual garden bashes — formal or casual, we customise a complete solution for any event, big or small."
-      class="mb-14"
-    />
-    <div class="grid gap-px overflow-hidden rounded-2xl border border-cream/10 bg-cream/10 sm:grid-cols-2 lg:grid-cols-4">
-      {
-        [
-          { icon: 'lucide:heart', title: 'Weddings', body: 'Ceremonies & receptions' },
-          { icon: 'lucide:star', title: 'Birthday bashes', body: 'Big or intimate' },
-          { icon: 'lucide:building-2', title: 'Corporate events', body: 'End-of-year parties, launches & awards' },
-          { icon: 'lucide:sparkles', title: 'Any celebration', body: 'Formal or casual — customised to you' },
-        ].map((type, i) => (
-          <div
-            class="bg-cream-50 p-8 transition-colors duration-500 hover:bg-cream-100"
-            data-reveal
-            style={`--reveal-delay:${i * 90}ms`}
-          >
-            <span class="bg-gold-gradient inline-flex h-12 w-12 items-center justify-center rounded-full text-ink">
-              <Icon name={type.icon} class="h-5 w-5" />
-            </span>
-            <h3 class="mt-6 font-display text-xl text-cream">{type.title}</h3>
-            <p class="mt-2 text-sm leading-relaxed text-muted">{type.body}</p>
-          </div>
-        ))
-      }
+  <section class="surface-ivory section-pad" aria-labelledby="events-heading">
+    <div class="container-luxe">
+      <SectionHeading
+        id="events-heading"
+        eyebrow="Occasions"
+        title="Every celebration, styled with care."
+        lead="From white-tie weddings to relaxed garden gatherings — formal or casual, we tailor a complete solution to any event, large or intimate."
+        class="mb-20"
+      />
+      <div class="grid border-t border-cream/15 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          [
+            { title: 'Weddings', body: 'Ceremonies & receptions' },
+            { title: 'Birthdays', body: 'Milestones, large or intimate' },
+            { title: 'Corporate', body: 'Year-end functions, launches & awards' },
+            { title: 'Any celebration', body: 'Formal or casual — tailored to you' },
+          ].map((type, i) => (
+            <div
+              class="border-b border-cream/15 py-10 sm:pr-8 lg:border-b-0 lg:border-l lg:px-8 lg:first:border-l-0 lg:first:pl-0"
+              data-reveal
+              style={`--reveal-delay:${i * 90}ms`}
+            >
+              <span class="index-num text-lg text-gold-300">{['i', 'ii', 'iii', 'iv'][i]}.</span>
+              <h3 class="mt-8 font-display text-3xl text-cream">{type.title}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-muted">{type.body}</p>
+            </div>
+          ))
+        }
+      </div>
     </div>
   </section>
 
@@ -159,27 +185,22 @@ const faqs = [
     <div class="container-luxe">
       <SectionHeading
         id="process-heading"
-        index="03"
         eyebrow="How we work"
         title="Hired, delivered, styled — in four steps."
-        lead="We value time and clear communication. One clear rhythm from first enquiry to the day of your event."
+        lead="We value your time and clear communication: one calm rhythm from first enquiry to the day itself."
         tone="light"
-        class="mb-16"
+        class="mb-20"
       />
 
-      <ol class="grid gap-px overflow-hidden rounded-2xl border border-cream/15 bg-cream/15 md:grid-cols-2 lg:grid-cols-4">
+      <ol class="grid gap-y-14 md:grid-cols-2 lg:grid-cols-4 lg:gap-x-10">
         {
           PROCESS.map((step, i) => (
-            <li
-              class="group bg-teal-900 p-8 transition-colors duration-500 hover:bg-teal-800"
-              data-reveal
-              style={`--reveal-delay:${i * 100}ms`}
-            >
-              <span class="font-mono text-xs uppercase tracking-[0.16em] text-gold-300">
-                {step.step} / 04
+            <li class="border-t border-cream/15 pt-8" data-reveal style={`--reveal-delay:${i * 100}ms`}>
+              <span class="font-display text-6xl font-light italic leading-none text-gold-300">
+                {step.step}
               </span>
-              <h3 class="mt-12 font-display text-2xl text-cream">{step.title}</h3>
-              <p class="mt-3 text-sm leading-relaxed text-cream/70">{step.description}</p>
+              <h3 class="mt-8 font-display text-3xl text-cream">{step.title}</h3>
+              <p class="mt-3 max-w-xs text-sm leading-[1.8] text-cream/65">{step.description}</p>
             </li>
           ))
         }
@@ -187,9 +208,11 @@ const faqs = [
     </div>
   </section>
 
+  <BeyondHire />
+
   <!-- FAQ -->
-  <section class="container-luxe py-24 md:py-32" aria-labelledby="faq-heading">
-    <div class="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+  <section class="container-luxe section-pad" aria-labelledby="faq-heading">
+    <div class="grid gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24">
       <SectionHeading
         id="faq-heading"
         eyebrow="Good to know"
@@ -200,15 +223,15 @@ const faqs = [
       <div class="divide-y divide-cream/10 border-y border-cream/10">
         {
           faqs.map((faq, i) => (
-            <details class="group py-5" data-reveal style={`--reveal-delay:${i * 80}ms`}>
-              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-left font-display text-lg text-cream">
+            <details class="group py-7" data-reveal style={`--reveal-delay:${i * 80}ms`}>
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-6 text-left font-display text-2xl text-cream transition-colors hover:text-gold-300 [&::-webkit-details-marker]:hidden">
                 {faq.q}
                 <Icon
                   name="lucide:plus"
-                  class="h-5 w-5 shrink-0 text-gold-600 transition-transform duration-300 group-open:rotate-45"
+                  class="h-5 w-5 shrink-0 text-gold-300 transition-transform duration-500 group-open:rotate-45"
                 />
               </summary>
-              <p class="mt-3 text-sm leading-relaxed text-muted">{faq.a}</p>
+              <p class="mt-4 max-w-xl text-[0.95rem] leading-[1.85] text-muted">{faq.a}</p>
             </details>
           ))
         }

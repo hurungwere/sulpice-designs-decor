@@ -1,60 +1,58 @@
 ---
-import SectionHeading from '@/components/SectionHeading.astro';
+import Marquee from '@/components/Marquee.astro';
+import { CLIENTS } from '@/data/site';
 
-const groups = [
-  'Wedding venues & planners',
-  'Hotels & lodges',
-  'Corporate — launches & awards',
-  'End-of-year functions',
-  'Product launches',
-  'Churches & community halls',
-  'Caterers & MCs',
-  'Film & production sets',
+const marquee = [
+  ...CLIENTS.map((c) => c.short),
+  'Churches & faith organisations',
+  'Private couples & families',
 ];
 ---
 
-<section class="border-y border-cream/5 bg-cream-100/70 py-20 md:py-24" aria-label="Clients and partners">
+<section class="section-pad overflow-hidden" aria-labelledby="clients-heading">
   <div class="container-luxe">
-    <SectionHeading
-      index="02"
-      eyebrow="Trusted by"
-      title="Styling celebrations across Zimbabwe & South Africa."
-      lead="Weddings, corporates, launches, and milestone events — with the inventory to back every single one."
-      class="mb-12"
-    />
-  </div>
-
-  <div class="overflow-hidden" aria-hidden="true">
-    <div class="client-marquee flex w-max items-center gap-4 pr-4">
-      {[...groups, ...groups].map((group) => (
-        <span class="bg-cream-50 inline-flex items-center gap-2.5 whitespace-nowrap rounded-full border border-cream/10 px-6 py-3 font-mono text-[0.72rem] uppercase tracking-[0.16em] text-gold-300">
-          <span class="bg-gold-gradient h-1.5 w-1.5 rounded-full" />
-          {group}
+    <div class="grid gap-10 lg:grid-cols-12 lg:items-end">
+      <div class="lg:col-span-7" data-reveal>
+        <span class="mono-label flex items-center gap-4 text-gold-300">
+          <span class="h-px w-10 bg-gold/70" aria-hidden="true"></span>
+          Trusted by
         </span>
-      ))}
+        <h2 id="clients-heading" class="display-lg mt-8 text-balance text-cream">
+          Institutions, brands <em class="text-gold-300">&amp; families alike.</em>
+        </h2>
+      </div>
+      <p
+        class="max-w-sm text-[0.98rem] leading-[1.85] text-muted lg:col-span-4 lg:col-start-9"
+        data-reveal
+        style="--reveal-delay:120ms"
+      >
+        For eighteen years, government institutions, corporate and automotive brands, faith
+        organisations and private clients have trusted us with their most important occasions.
+      </p>
     </div>
+
+    <ul class="mt-20 grid border-l border-t border-cream/10 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        CLIENTS.map((client, i) => (
+          <li
+            class="group flex min-h-[11rem] flex-col justify-between border-b border-r border-cream/10 p-8 transition-colors duration-700 hover:bg-cream-50 md:p-10"
+            data-reveal
+            style={`--reveal-delay:${(i % 3) * 90}ms`}
+          >
+            <span class="index-num text-lg text-gold-300">{String(i + 1).padStart(2, '0')}</span>
+            <span>
+              <span class="block font-display text-[1.7rem] leading-tight text-cream transition-colors duration-500 group-hover:text-gold-300">
+                {client.name}
+              </span>
+              <span class="mono-label mt-3 block text-[0.58rem] text-muted-400">{client.scope}</span>
+            </span>
+          </li>
+        ))
+      }
+    </ul>
   </div>
 
-  <p class="container-luxe mt-10 text-center text-sm text-muted">
-    Send us your real client or partner logos and we'll swap these placeholders for a logo wall.
-  </p>
+  <div class="mt-20 text-cream/20">
+    <Marquee items={marquee} duration={70} />
+  </div>
 </section>
-
-<style>
-  .client-marquee {
-    animation: client-scroll 38s linear infinite;
-  }
-  .client-marquee:hover {
-    animation-play-state: paused;
-  }
-  @keyframes client-scroll {
-    to {
-      transform: translateX(-50%);
-    }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .client-marquee {
-      animation: none;
-    }
-  }
-</style>

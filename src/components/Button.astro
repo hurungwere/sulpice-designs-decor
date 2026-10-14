@@ -18,26 +18,23 @@ const {
 } = Astro.props;
 
 const base =
-  'group/btn inline-flex items-center justify-center gap-2 rounded-full font-sans font-medium tracking-wide transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60';
+  'group/btn relative inline-flex items-center justify-center gap-3 overflow-hidden whitespace-nowrap font-sans font-[450] uppercase tracking-[0.28em] transition-[color,background-color,border-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] disabled:cursor-not-allowed disabled:opacity-60';
 
 const variants: Record<string, string> = {
-  primary:
-    'bg-charcoal text-cream hover:bg-ink shadow-[0_12px_28px_-18px_rgba(26,26,26,0.85)]',
-  gold: 'bg-gold-gradient text-ink shadow-[0_14px_32px_-20px_rgba(184,134,11,0.85)] hover:shadow-[0_18px_40px_-20px_rgba(184,134,11,0.95)] hover:brightness-[1.06]',
-  outline:
-    'border border-cream/30 text-cream hover:border-gold-600 hover:text-gold-600',
-  light:
-    'border border-cream/45 text-cream hover:bg-cream hover:text-ink backdrop-blur-sm',
-  ghost: 'text-cream hover:text-gold-600',
+  primary: 'bg-cream text-paper hover:bg-gold hover:text-ink',
+  gold: 'bg-gold text-ink hover:bg-gold-300',
+  outline: 'border border-cream/35 text-cream hover:border-cream hover:bg-cream hover:text-paper',
+  light: 'border border-white/50 text-white hover:border-white hover:bg-white hover:text-ink',
+  ghost: 'link-hairline !tracking-[0.3em] text-cream hover:text-gold-300',
 };
 
 const sizes: Record<string, string> = {
-  sm: 'px-4 py-2 text-xs',
-  md: 'px-6 py-3 text-sm',
-  lg: 'px-8 py-4 text-sm md:text-base',
+  sm: 'h-10 px-5 text-[0.62rem]',
+  md: 'h-12 px-8 text-[0.66rem]',
+  lg: 'h-14 px-10 text-[0.68rem]',
 };
 
-const cls = `${base} ${variants[variant]} ${sizes[size]} ${className}`;
+const cls = `${base} ${variants[variant]} ${variant === 'ghost' ? '' : sizes[size]} ${className}`;
 ---
 
 {

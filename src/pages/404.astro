@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Button from '@/components/Button.astro';
-import { Icon } from 'astro-icon/components';
 ---
 
 <BaseLayout
@@ -9,29 +8,20 @@ import { Icon } from 'astro-icon/components';
   description="The page you were looking for could not be found."
   noindex
 >
-  <section class="container-luxe relative flex min-h-[72svh] flex-col items-center justify-center overflow-hidden py-32 text-center">
-    <span
-      class="pointer-events-none absolute select-none font-display text-[11rem] leading-none text-cream/[0.05] sm:text-[16rem]"
-      aria-hidden="true"
-    >
-      404
-    </span>
-    <span class="eyebrow relative justify-center">
-      <span class="h-px w-8 bg-gold" aria-hidden="true" />
+  <section class="container-luxe relative flex min-h-[86svh] flex-col items-center justify-center overflow-hidden pb-24 pt-40 text-center">
+    <span class="mono-label flex items-center gap-4 text-gold-300">
+      <span class="h-px w-10 bg-gold/70" aria-hidden="true"></span>
       Error 404
+      <span class="h-px w-10 bg-gold/70" aria-hidden="true"></span>
     </span>
-    <h1 class="relative mt-5 font-display text-5xl text-cream sm:text-7xl">Lost in the details</h1>
-    <p class="relative mt-5 max-w-md text-base leading-relaxed text-muted">
-      The page you're looking for has moved or never existed. Let's get you back
-      to something beautiful.
+    <h1 class="display-xl mt-10 text-cream">Lost in the <em class="text-gold-300">details.</em></h1>
+    <p class="mt-8 max-w-md text-[0.98rem] leading-[1.85] text-muted">
+      The page you were looking for has moved, or never existed. Let us return you to
+      something beautiful.
     </p>
-    <div class="relative mt-9 flex flex-wrap items-center justify-center gap-3">
-      <Button href="/" size="lg">
-        Back home
-        <Icon name="lucide:arrow-right" class="h-4 w-4" />
-      </Button>
-      <Button href="/portfolio" variant="outline" size="lg">View portfolio</Button>
-      <Button href="/services" variant="outline" size="lg">See what we hire</Button>
+    <div class="mt-12 flex flex-col items-center gap-7 sm:flex-row sm:gap-10">
+      <Button href="/" size="lg">Return home</Button>
+      <a href="/portfolio" class="link-hairline text-cream hover:text-gold-300">View the portfolio</a>
     </div>
   </section>
 </BaseLayout>

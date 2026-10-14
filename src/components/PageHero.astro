@@ -1,6 +1,5 @@
 ---
 import { Image } from 'astro:assets';
-import { Icon } from 'astro-icon/components';
 
 interface Props {
   eyebrow?: string;
@@ -14,57 +13,95 @@ interface Props {
 const { eyebrow, title, lead, image, alt, crumb } = Astro.props;
 ---
 
-<section class="relative isolate overflow-hidden bg-teal-900 text-cream" aria-labelledby="page-title">
+<section
+  class="relative isolate flex min-h-[78svh] flex-col justify-end overflow-hidden bg-teal-900 text-white"
+  aria-labelledby="page-title"
+>
   <div class="absolute inset-0 -z-10">
     <Image
       src={image}
       alt={alt}
-      widths={[768, 1280, 1920]}
+      widths={[768, 1280, 1920, 2400]}
       sizes="100vw"
       loading="eager"
       fetchpriority="high"
-      class="h-full w-full object-cover"
-    />
-    <div class="absolute inset-0 bg-gradient-to-t from-teal-900/92 via-teal-900/68 to-teal-800/48" aria-hidden="true" />
-    <div
-      class="absolute inset-0 bg-[radial-gradient(60%_55%_at_18%_0%,rgba(229,197,88,0.16),transparent_60%)]"
-      aria-hidden="true"
+      class="page-hero-img h-full w-full object-cover"
     />
     <div
-      class="absolute inset-0 bg-[radial-gradient(45%_45%_at_95%_100%,rgba(14,131,145,0.45),transparent_65%)]"
+      class="absolute inset-0 bg-[linear-gradient(180deg,rgba(2,14,16,0.6)_0%,rgba(2,14,16,0.3)_35%,rgba(3,27,31,0.92)_100%)]"
       aria-hidden="true"
-    />
+    ></div>
   </div>
-  <span
-    class="absolute inset-x-0 bottom-0 z-10 h-px bg-gold-gradient/40"
-    aria-hidden="true"
-  />
 
-  <div class="container-luxe pb-16 pt-36 md:pb-24 md:pt-44">
-    <nav aria-label="Breadcrumb" class="mb-6">
-      <ol class="flex items-center gap-2 text-xs text-cream/60">
-        <li><a href="/" class="transition-colors hover:text-gold-300">Home</a></li>
-        <li aria-hidden="true"><Icon name="lucide:chevron-right" class="h-3.5 w-3.5" /></li>
-        <li class="text-cream/90">{crumb ?? title}</li>
+  <div class="container-luxe w-full pb-16 pt-44 md:pb-24">
+    <nav aria-label="Breadcrumb" class="page-hero-anim mb-10">
+      <ol class="mono-label flex items-center gap-4 text-[0.6rem] text-white/60">
+        <li><a href="/" class="transition-colors hover:text-white">Home</a></li>
+        <li aria-hidden="true"><span class="block h-px w-6 bg-white/40"></span></li>
+        <li class="text-gold-300" aria-current="page">{crumb ?? title}</li>
       </ol>
     </nav>
 
-    <div class="max-w-3xl">
+    <div class="grid gap-10 lg:grid-cols-12 lg:items-end">
+      <h1 id="page-title" class="page-hero-anim display-lg text-balance lg:col-span-8" style="--d:120ms">
+        {title}
+      </h1>
       {
-        eyebrow && (
-          <p class="eyebrow text-gold-300">
-            <span class="h-px w-8 bg-gold-300" aria-hidden="true" />
-            {eyebrow}
+        lead && (
+          <p
+            class="page-hero-anim max-w-md text-[0.98rem] leading-[1.85] text-white/80 lg:col-span-4"
+            style="--d:260ms"
+          >
+            {lead}
           </p>
         )
       }
-      <h1
-        id="page-title"
-        class="mt-5 text-balance font-display text-4xl leading-[1.05] text-white sm:text-5xl md:text-6xl"
-      >
-        {title}
-      </h1>
-      {lead && <p class="mt-6 max-w-xl text-base leading-relaxed text-cream/75 md:text-lg">{lead}</p>}
     </div>
+    {
+      eyebrow && (
+        <p class="page-hero-anim mono-label mt-14 flex items-center gap-4 border-t border-white/20 pt-6 text-[0.6rem] text-white/60" style="--d:380ms">
+          <span class="diamond" aria-hidden="true" />
+          {eyebrow}
+        </p>
+      )
+    }
   </div>
 </section>
+
+<style>
+  .page-hero-img {
+    animation: page-hero-zoom 2.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  @keyframes page-hero-zoom {
+    from {
+      transform: scale(1.08);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+  .page-hero-anim {
+    animation: page-hero-rise 1.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--d, 0ms);
+  }
+  @keyframes page-hero-rise {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  :global(.preloading) .page-hero-anim,
+  :global(.preloading) .page-hero-img {
+    animation-play-state: paused;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .page-hero-img,
+    .page-hero-anim {
+      animation: none;
+    }
+  }
+</style>

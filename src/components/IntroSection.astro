@@ -1,96 +1,82 @@
 ---
 import { Image } from 'astro:assets';
-import Button from '@/components/Button.astro';
-import StatsCounters from '@/components/StatsCounters.tsx';
-import { Icon } from 'astro-icon/components';
-import { SITE } from '@/data/site';
 import aboutStudio from '@/assets/about-studio.jpg';
 import aboutDetail from '@/assets/about-detail.jpg';
 
 const pillars = [
-  'Everything under one roof — a full range of hire equipment to choose from',
-  'Smooth delivery on our own trucks, right on time',
-  'Weddings, corporates & birthdays — any event, big or small',
+  { title: 'Under one roof', body: 'A complete hire range — one quotation, one point of contact.' },
+  { title: 'Our own fleet', body: 'Delivered on our trucks, on time, right the first time.' },
+  { title: 'Any occasion', body: 'Weddings, corporate functions and private celebrations, large or intimate.' },
 ];
 ---
 
-<section class="container-luxe section-pad" aria-labelledby="intro-heading">
-  <div class="grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
-    <!-- Image collage -->
-    <div class="relative" data-reveal>
-      <div class="overflow-hidden rounded-2xl bg-cream-100 ring-1 ring-cream/5">
-        <Image
-          src={aboutStudio}
-          alt="Event décor range on display at Sulpice Designs Decor"
-          widths={[480, 720, 960]}
-          sizes="(min-width: 1024px) 40vw, 90vw"
-          loading="lazy"
-          class="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.03]"
-        />
-      </div>
-      <div
-        class="absolute -bottom-8 -right-4 hidden w-44 overflow-hidden rounded-xl border-8 border-cream shadow-card sm:block md:w-56"
-      >
-        <Image
-          src={aboutDetail}
-          alt="Close-up of curated decor details and natural textures"
-          widths={[220, 340, 440]}
-          sizes="14rem"
-          loading="lazy"
-          class="h-full w-full object-cover"
-        />
-      </div>
-      <div
-        class="absolute -left-3 -top-6 hidden items-center gap-3 rounded-full bg-cream/90 px-5 py-3 shadow-card ring-1 ring-cream/10 backdrop-blur-md md:flex"
-      >
-        <Icon name="lucide:sparkles" class="h-5 w-5 text-gold-600" />
-        <span class="font-mono text-xs uppercase tracking-[0.16em]">Est. 2008</span>
-      </div>
-    </div>
+<section class="surface-ivory section-pad" aria-labelledby="intro-heading">
+  <div class="container-luxe">
+    <div class="grid gap-16 lg:grid-cols-12 lg:gap-12">
+      <!-- Copy -->
+      <div class="lg:col-span-5 lg:pt-10" data-reveal>
+        <span class="mono-label flex items-center gap-4 text-gold-300">
+          <span class="h-px w-10 bg-gold/70" aria-hidden="true"></span>
+          The house of Sulpice
+        </span>
+        <h2 id="intro-heading" class="display-lg mt-8 text-balance text-cream">
+          Every event, <em class="text-gold-300">beautifully dressed.</em>
+        </h2>
+        <p class="mt-9 max-w-md text-[1.02rem] leading-[1.9] text-muted">
+          Since 2008, Sulpice Designs Decor has dressed weddings, corporate occasions and
+          private celebrations across Zimbabwe and South Africa — from the first tent peg to
+          the final folded napkin. We design, supply, deliver and style, so that on the day,
+          your only task is to be present.
+        </p>
 
-    <!-- Copy -->
-    <div data-reveal style="--reveal-delay:120ms">
-      <span class="mono-label mb-5 flex items-center gap-3 text-gold-300">
-        <span class="index-num">00</span>
-        <span class="h-px w-7 bg-gold-gradient" aria-hidden="true" />
-        The company
-      </span>
-      <h2
-        id="intro-heading"
-        class="text-balance text-3xl leading-[1.1] text-cream sm:text-4xl md:text-[2.85rem]"
-      >
-        Every event, <span class="text-gold-gradient italic">beautifully dressed.</span>
-      </h2>
-      <p class="mt-6 text-base leading-relaxed text-muted md:text-lg">
-        Established in 2008, Sulpice Designs Decor is a premium events décor and
-        hiring services company. We design, supply, and deliver complete solutions —
-        from tents and tables to luxurious linen and fresh flowers — for weddings,
-        corporate events, and celebrations of every kind.
-      </p>
+        <ol class="mt-12 max-w-md border-t border-cream/15">
+          {
+            pillars.map((pillar, i) => (
+              <li class="grid grid-cols-[2.5rem_1fr] gap-x-2 border-b border-cream/15 py-5">
+                <span class="index-num pt-0.5 text-lg text-gold-300">{['i', 'ii', 'iii'][i]}.</span>
+                <span>
+                  <span class="block font-display text-xl text-cream">{pillar.title}</span>
+                  <span class="mt-1 block text-sm leading-relaxed text-muted">{pillar.body}</span>
+                </span>
+              </li>
+            ))
+          }
+        </ol>
 
-      <ul class="mt-8 space-y-4">
-        {
-          pillars.map((pillar, i) => (
-            <li class="flex items-start gap-4 text-sm text-cream/90 md:text-base">
-              <span class="index-num pt-0.5">{String(i + 1).padStart(2, '0')}</span>
-              <span class="mt-[0.62em] h-px w-4 shrink-0 bg-gold-gradient/60" aria-hidden="true" />
-              {pillar}
-            </li>
-          ))
-        }
-      </ul>
+        <a href="/about" class="link-hairline mt-12 text-cream hover:text-gold-300">Discover our story</a>
+      </div>
 
-      <div class="mt-10">
-        <Button href="/about" variant="outline">
-          More about us
-          <Icon name="lucide:arrow-right" class="h-4 w-4" />
-        </Button>
+      <!-- Images -->
+      <div class="relative lg:col-span-6 lg:col-start-7">
+        <div class="overflow-hidden" data-reveal-clip>
+          <Image
+            src={aboutStudio}
+            alt="Event décor range styled by Sulpice Designs Decor"
+            widths={[600, 900, 1200]}
+            sizes="(min-width: 1024px) 45vw, 92vw"
+            loading="lazy"
+            class="aspect-[4/5] w-full object-cover"
+          />
+        </div>
+        <div
+          class="absolute -bottom-14 -left-6 hidden w-[42%] border-[10px] border-ivory sm:block lg:-left-24"
+          data-reveal
+          style="--reveal-delay:250ms"
+        >
+          <Image
+            src={aboutDetail}
+            alt="Close-up of styled table details"
+            widths={[300, 500]}
+            sizes="18rem"
+            loading="lazy"
+            class="aspect-[3/4] w-full object-cover"
+          />
+        </div>
+        <p class="mono-label mt-5 text-right text-[0.6rem] text-muted-400">
+          Est. 2008 — Harare · Bulawayo · Fourways
+        </p>
       </div>
     </div>
-  </div>
 
-  <!-- Stats -->
-  <div class="mt-20 border-t border-cream/10 pt-12">
-    <StatsCounters client:visible items={[...SITE.stats]} />
   </div>
 </section>

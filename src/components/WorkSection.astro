@@ -1,8 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import SectionHeading from '@/components/SectionHeading.astro';
 import WorkGrid from '@/components/WorkGrid.astro';
-import { Icon } from 'astro-icon/components';
 import { toGalleryItems } from '@/utils/portfolio';
 
 const featured = (await getCollection('projects'))
@@ -15,26 +13,21 @@ const items = await toGalleryItems(featured);
 
 <section class="section-pad" aria-labelledby="work-heading">
   <div class="container-luxe">
-    <div class="flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
-      <SectionHeading
-        id="work-heading"
-        index="03"
-        eyebrow="Selected work"
-        title="Recent events we're proud of."
-        lead="From tent to tablecloth — recent weddings, corporate functions, and celebrations we've dressed and delivered."
-      />
-      <a
-        href="/portfolio"
-        class="group inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-cream/20 px-5 py-2.5 font-mono text-xs uppercase tracking-[0.16em] text-cream transition-colors hover:border-gold-600 hover:text-gold-600"
-      >
-        All events
-        <Icon
-          name="lucide:arrow-right"
-          class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
-        />
-      </a>
+    <div class="grid gap-10 lg:grid-cols-12 lg:items-end">
+      <div class="lg:col-span-8" data-reveal>
+        <span class="mono-label flex items-center gap-4 text-gold-300">
+          <span class="h-px w-10 bg-gold/70" aria-hidden="true"></span>
+          Selected events
+        </span>
+        <h2 id="work-heading" class="display-lg mt-8 text-balance text-cream">
+          Recent occasions, <em class="text-gold-300">dressed by us.</em>
+        </h2>
+      </div>
+      <div class="lg:col-span-3 lg:col-start-10 lg:justify-self-end" data-reveal>
+        <a href="/portfolio" class="link-hairline text-cream hover:text-gold-300">View the portfolio</a>
+      </div>
     </div>
 
-    <WorkGrid items={items} class="mt-14 md:mt-20" />
+    <WorkGrid items={items} class="mt-20 md:mt-28" />
   </div>
 </section>

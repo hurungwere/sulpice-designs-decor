@@ -21,31 +21,41 @@ const {
   id,
 } = Astro.props;
 
-const alignment = align === 'center' ? 'items-center text-center mx-auto' : 'items-start';
-const titleColor = tone === 'light' ? 'text-cream' : 'text-cream';
+const centered = align === 'center';
 const leadColor = tone === 'light' ? 'text-cream/70' : 'text-muted';
-const eyebrowColor = tone === 'light' ? 'text-gold-300' : 'text-gold-300';
 ---
 
-<div class:list={['flex max-w-2xl flex-col', alignment, className]} data-reveal>
+<div
+  class:list={[
+    'flex max-w-3xl flex-col',
+    centered ? 'mx-auto items-center text-center' : 'items-start',
+    className,
+  ]}
+  data-reveal
+>
   {
     eyebrow && (
-      <span class:list={['mono-label mb-5 flex items-center gap-3', eyebrowColor]}>
-        {index && <span class:list={['index-num', tone === 'light' && 'text-cream/50']}>{index}</span>}
-        <span class="h-px w-7 bg-gold-gradient" aria-hidden="true" />
+      <span class="mono-label mb-7 flex items-center gap-4 text-gold-300">
+        {index && <span class="index-num text-gold-300">{index}</span>}
+        <span class="h-px w-10 bg-gold/70" aria-hidden="true" />
         {eyebrow}
       </span>
     )
   }
-  <h2
-    id={id}
-    class:list={['text-balance text-3xl leading-[1.08] sm:text-4xl md:text-[2.85rem]', titleColor]}
-  >
+  <h2 id={id} class="display-md text-balance text-cream">
     {title}
   </h2>
   {
     lead && (
-      <p class:list={['mt-5 text-base leading-relaxed md:text-lg', leadColor]}>{lead}</p>
+      <p
+        class:list={[
+          'mt-7 max-w-xl text-base leading-[1.85] md:text-[1.05rem]',
+          leadColor,
+          centered && 'mx-auto',
+        ]}
+      >
+        {lead}
+      </p>
     )
   }
 </div>

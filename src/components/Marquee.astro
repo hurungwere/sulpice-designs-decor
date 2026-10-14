@@ -18,10 +18,11 @@ const {
 const row = [...items, ...items];
 const textClass =
   variant === 'mono'
-    ? 'font-mono text-[0.72rem] font-semibold uppercase tracking-[0.24em]'
+    ? 'mono-label text-[0.68rem]'
     : outline
-      ? 'font-display text-2xl md:text-3xl text-transparent [-webkit-text-stroke:1px_currentColor]'
-      : 'font-display text-2xl md:text-3xl';
+      ? 'font-display italic text-5xl md:text-7xl text-transparent [-webkit-text-stroke:1px_currentColor]'
+      : 'font-display italic text-5xl md:text-7xl';
+const gap = variant === 'mono' ? 'px-7' : 'px-8 md:px-12';
 ---
 
 <div class:list={['marquee-mask overflow-hidden', className]} aria-hidden="true">
@@ -32,8 +33,8 @@ const textClass =
     {
       row.map((item) => (
         <span class="flex items-center">
-          <span class:list={['whitespace-nowrap px-6', textClass]}>{item}</span>
-          <span class="h-2 w-2 shrink-0 rounded-full bg-gold-gradient shadow-[0_0_12px_rgba(229,197,88,0.45)]" />
+          <span class:list={['whitespace-nowrap leading-none', gap, textClass]}>{item}</span>
+          <span class="diamond" />
         </span>
       ))
     }

@@ -56,14 +56,14 @@ function StatItem({
     <div
       data-reveal
       style={{ '--reveal-delay': `${delay}ms` } as CSSProperties}
-      className="flex flex-col gap-2"
+      className="flex flex-col gap-2 md:border-l md:border-cream/15 md:pl-8 md:first:border-l-0 md:first:pl-0"
     >
       <dt className="sr-only">{stat.label}</dt>
       <dd className="flex flex-col gap-2">
-        <span className="text-gold-gradient font-display text-4xl leading-none tabular-nums md:text-5xl">
+        <span className="font-display text-6xl font-light leading-none tabular-nums text-cream md:text-7xl">
           {display}
         </span>
-        <span className={`font-mono text-[0.68rem] uppercase tracking-[0.16em] ${labelTone}`}>
+        <span className={`mt-3 font-mono text-[0.64rem] uppercase tracking-[0.3em] ${labelTone}`}>
           {stat.label}
         </span>
       </dd>
@@ -92,7 +92,7 @@ export default function StatsCounters({ items, tone = 'dark' }: Props) {
   }, [run]);
 
   return (
-    <dl ref={ref} className="grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-4">
+    <dl ref={ref} className="grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-4 md:gap-x-8">
       {items.map((stat, i) => (
         <StatItem key={stat.label} stat={stat} run={run} tone={tone} delay={i * 90} />
       ))}

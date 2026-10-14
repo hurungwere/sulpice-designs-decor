@@ -12,13 +12,10 @@ const entries = (await getCollection('projects')).sort(
 );
 const items = await toGalleryItems(entries);
 
-const counts = entries.reduce<Record<string, number>>((acc, entry) => {
-  acc[entry.data.category] = (acc[entry.data.category] ?? 0) + 1;
-  return acc;
-}, {});
 ---
 
 <BaseLayout
+  transparentHeader
   title="Portfolio"
   description="A selection of recent weddings, corporate events, and celebrations styled and delivered by Sulpice Designs Decor — dressed from tent to tablecloth."
 >
@@ -31,34 +28,19 @@ const counts = entries.reduce<Record<string, number>>((acc, entry) => {
     crumb="Portfolio"
   />
 
-  <section class="container-luxe py-24 md:py-28" aria-labelledby="work-heading">
-    <div class="mb-12 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-      <div>
-        <span class="eyebrow mb-4">
-          <span class="h-px w-8 bg-gold" aria-hidden="true" />
-          {entries.length} featured events
+  <section class="container-luxe section-pad" aria-labelledby="work-heading">
+    <div class="mb-20 grid gap-10 lg:grid-cols-12 lg:items-end">
+      <div class="lg:col-span-8" data-reveal>
+        <span class="mono-label flex items-center gap-4 text-gold-300">
+          <span class="h-px w-10 bg-gold/70" aria-hidden="true"></span>
+          {entries.length} occasions
         </span>
-        <h2 id="work-heading" class="font-display text-3xl text-cream sm:text-4xl">
-          Explore the collection
+        <h2 id="work-heading" class="display-lg mt-8 text-balance text-cream">
+          The <em class="text-gold-300">portfolio.</em>
         </h2>
       </div>
-      <p class="flex max-w-sm flex-wrap items-center gap-2 text-sm leading-relaxed text-muted">
-        {[
-          { key: 'Residential', label: 'Interiors' },
-          { key: 'Commercial', label: 'Commercial' },
-          { key: 'Events', label: 'Events' },
-        ].map(({ key, label }) => (
-          <span
-            class:list={[
-              'rounded-full border px-3 py-1 font-mono text-[0.68rem] uppercase tracking-[0.14em]',
-              (counts[key] ?? 0) > 0
-                ? 'border-gold/40 text-gold-600'
-                : 'border-cream/10 text-muted-400',
-            ]}
-          >
-            {label} · {counts[key] ?? 0}
-          </span>
-        ))}
+      <p class="max-w-sm text-[0.98rem] leading-[1.85] text-muted lg:col-span-4" data-reveal>
+        Select any event to see what we supplied and styled — from marquee to place setting.
       </p>
     </div>
 

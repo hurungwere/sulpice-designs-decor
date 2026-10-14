@@ -1,49 +1,39 @@
 ---
+import { Image } from 'astro:assets';
 import Marquee from '@/components/Marquee.astro';
+import monogram from '@/assets/brand/monogram.png';
+import { SITE } from '@/data/site';
 
 interface Props {
   label?: string;
-  word?: string;
-  sentence?: string;
   marquee?: string[];
 }
 
 const {
   label = 'The Sulpice promise',
-  word = 'passion',
-  sentence = 'your dream is our passion, and your passion is our mission — we make your event memorable, delivered hassle- and stress-free.',
-  marquee = ['Weddings', 'Corporates', 'Birthdays', 'Tents', 'Tables', 'Linen', 'Florals'],
+  marquee = ['Weddings', 'Corporate occasions', 'Celebrations', 'Ceremonies', 'Receptions'],
 } = Astro.props;
-
-const parts = sentence.split(word);
-const lead = parts[0];
-const tail = parts.slice(1).join(word);
 ---
 
-<section
-  class="relative overflow-hidden bg-teal-900 text-cream section-pad"
-  aria-label="The Sulpice promise"
->
+<section class="relative overflow-hidden bg-teal-900 pt-28 text-cream md:pt-40" aria-label={label}>
   <div
-    class="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-teal-600/40 blur-3xl"
+    class="pointer-events-none absolute left-1/2 top-0 h-[36rem] w-[60rem] -translate-x-1/2 bg-[radial-gradient(closest-side,rgba(201,169,106,0.10),transparent)]"
     aria-hidden="true"
-  />
-  <div class="container-luxe relative">
-    <p class="mono-label text-gold-300">{label}</p>
-    <p
-      class="mt-8 max-w-4xl text-balance font-display text-3xl leading-[1.14] sm:text-4xl md:text-5xl"
-      data-reveal
-    >
-      {lead}<span class="text-gold-gradient italic">{word}</span>{tail}
+  ></div>
+
+  <div class="container-luxe relative flex flex-col items-center text-center" data-reveal>
+    <Image src={monogram} alt="" width={120} height={122} loading="lazy" class="h-14 w-auto opacity-90" />
+    <p class="mono-label mt-10 text-gold-300">{label}</p>
+    <p class="display-lg mt-10 max-w-5xl text-balance">
+      Your dream is our <em class="text-gold-300">passion</em> — and your passion, our
+      <em class="text-gold-300">mission.</em>
+    </p>
+    <p class="mt-10 max-w-md font-display text-xl italic leading-relaxed text-cream/70">
+      {SITE.motto}
     </p>
   </div>
 
-  <div class="relative mt-16 md:mt-20">
-    <Marquee
-      items={marquee}
-      variant="mono"
-      duration={44}
-      class="border-y border-cream/15 py-6 text-cream/70"
-    />
+  <div class="relative mt-24 border-t border-cream/10 py-10 text-cream/35 md:mt-32 md:py-14">
+    <Marquee items={marquee} duration={60} />
   </div>
 </section>
