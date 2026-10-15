@@ -28,14 +28,14 @@ const { eyebrow, title, lead, image, alt, crumb } = Astro.props;
       class="page-hero-img h-full w-full object-cover"
     />
     <div
-      class="absolute inset-0 bg-[linear-gradient(180deg,rgba(2,14,16,0.6)_0%,rgba(2,14,16,0.3)_35%,rgba(3,27,31,0.92)_100%)]"
+      class="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,30,36,0.6)_0%,rgba(4,30,36,0.3)_35%,rgba(6,44,51,0.92)_100%)]"
       aria-hidden="true"
     ></div>
   </div>
 
   <div class="container-luxe w-full pb-16 pt-44 md:pb-24">
     <nav aria-label="Breadcrumb" class="page-hero-anim mb-10">
-      <ol class="mono-label flex items-center gap-4 text-[0.6rem] text-white/60">
+      <ol class="mono-label flex items-center gap-4 text-[0.66rem] text-white/60">
         <li><a href="/" class="transition-colors hover:text-white">Home</a></li>
         <li aria-hidden="true"><span class="block h-px w-6 bg-white/40"></span></li>
         <li class="text-gold-300" aria-current="page">{crumb ?? title}</li>
@@ -59,7 +59,7 @@ const { eyebrow, title, lead, image, alt, crumb } = Astro.props;
     </div>
     {
       eyebrow && (
-        <p class="page-hero-anim mono-label mt-14 flex items-center gap-4 border-t border-white/20 pt-6 text-[0.6rem] text-white/60" style="--d:380ms">
+        <p class="page-hero-anim mono-label mt-14 flex items-center gap-4 border-t border-white/20 pt-6 text-[0.66rem] text-white/60" style="--d:380ms">
           <span class="diamond" aria-hidden="true" />
           {eyebrow}
         </p>

@@ -1,12 +1,15 @@
 ---
 import { Image } from 'astro:assets';
+import Logo from '@/components/Logo.astro';
 import aboutStudio from '@/assets/about-studio.jpg';
 import aboutDetail from '@/assets/about-detail.jpg';
 
-const pillars = [
-  { title: 'Under one roof', body: 'A complete hire range — one quotation, one point of contact.' },
-  { title: 'Our own fleet', body: 'Delivered on our trucks, on time, right the first time.' },
-  { title: 'Any occasion', body: 'Weddings, corporate functions and private celebrations, large or intimate.' },
+// Core values, from the corporate profile.
+const values = [
+  { title: 'Integrity & dependability', body: 'Uncompromising honesty, clear communication and reliable delivery.' },
+  { title: 'Innovation & style', body: 'Modern trends, architectural draping and elevated palettes.' },
+  { title: 'Time & quality leadership', body: 'Perfection delivered on time, every time.' },
+  { title: 'Teamwork & empowerment', body: 'A motivated crew — and students — who take pride in service.' },
 ];
 ---
 
@@ -15,6 +18,7 @@ const pillars = [
     <div class="grid gap-16 lg:grid-cols-12 lg:gap-12">
       <!-- Copy -->
       <div class="lg:col-span-5 lg:pt-10" data-reveal>
+        <Logo tone="dark" width={120} class="mb-12" />
         <span class="mono-label flex items-center gap-4 text-gold-300">
           <span class="h-px w-10 bg-gold/70" aria-hidden="true"></span>
           The house of Sulpice
@@ -23,31 +27,47 @@ const pillars = [
           Every event, <em class="text-gold-300">beautifully dressed.</em>
         </h2>
         <p class="mt-9 max-w-md text-[1.02rem] leading-[1.9] text-muted">
-          Since 2008, Sulpice Designs Decor has dressed weddings, corporate occasions and
-          private celebrations across Zimbabwe and South Africa — from the first tent peg to
-          the final folded napkin. We design, supply, deliver and style, so that on the day,
-          your only task is to be present.
+          Sulpice Designs is a full-service house for functions décor, spatial styling, event
+          hire, commercial printing and professional event education — operating across
+          Zimbabwe and South Africa since 2008. What began as a passion-driven décor boutique is
+          now a multi-branch team trusted with luxury weddings, corporate galas and state
+          occasions alike.
         </p>
 
-        <ol class="mt-12 max-w-md border-t border-cream/15">
+        <figure class="mt-10 max-w-md border-l border-gold/60 pl-6">
+          <figcaption class="mono-label text-[0.66rem] text-gold-300">Our mission</figcaption>
+          <blockquote class="mt-3 font-display text-[1.4rem] italic leading-snug text-cream">
+            We value time, quality and transparent communication — ensuring a seamless,
+            hassle-free and memorable day that turns every dream into a beautifully realised
+            event.
+          </blockquote>
+        </figure>
+
+        <p class="mt-8 max-w-md text-sm leading-relaxed text-muted">
+          Led by <span class="text-cream">Mrs. Linah Mapondera</span>, Managing Director &amp;
+          Lead Consultant, with eighteen years in event management and wedding planning.
+        </p>
+
+        <p class="mono-label mt-12 text-[0.66rem] text-gold-300">Our core values</p>
+        <ol class="mt-5 max-w-md border-t border-cream/15">
           {
-            pillars.map((pillar, i) => (
-              <li class="grid grid-cols-[2.5rem_1fr] gap-x-2 border-b border-cream/15 py-5">
-                <span class="index-num pt-0.5 text-lg text-gold-300">{['i', 'ii', 'iii'][i]}.</span>
+            values.map((value, i) => (
+              <li class="grid grid-cols-[2.5rem_1fr] gap-x-2 border-b border-cream/15 py-4">
+                <span class="index-num pt-0.5 text-lg text-gold-300">{['i', 'ii', 'iii', 'iv'][i]}.</span>
                 <span>
-                  <span class="block font-display text-xl text-cream">{pillar.title}</span>
-                  <span class="mt-1 block text-sm leading-relaxed text-muted">{pillar.body}</span>
+                  <span class="block font-display text-xl text-cream">{value.title}</span>
+                  <span class="mt-1 block text-sm leading-relaxed text-muted">{value.body}</span>
                 </span>
               </li>
             ))
           }
         </ol>
 
-        <a href="/about" class="link-hairline mt-12 text-cream hover:text-gold-300">Discover our story</a>
+        <a href="/about" class="link-hairline mt-12 text-cream hover:text-gold-300">Our story &amp; leadership</a>
       </div>
 
       <!-- Images -->
-      <div class="relative lg:col-span-6 lg:col-start-7">
+      <div class="relative self-start lg:sticky lg:top-28 lg:col-span-6 lg:col-start-7">
         <div class="overflow-hidden" data-reveal-clip>
           <Image
             src={aboutStudio}
@@ -72,7 +92,7 @@ const pillars = [
             class="aspect-[3/4] w-full object-cover"
           />
         </div>
-        <p class="mono-label mt-5 text-right text-[0.6rem] text-muted-400">
+        <p class="mono-label mt-5 text-right text-[0.66rem] text-muted-400">
           Est. 2008 — Harare · Bulawayo · Fourways
         </p>
       </div>

@@ -10,7 +10,7 @@ import aboutStudio from '@/assets/about-studio.jpg';
 import aboutFounder from '@/assets/about-founder.jpg';
 import aboutDetail from '@/assets/about-detail.jpg';
 import missionImage from '@/assets/project-3.jpg';
-import monogram from '@/assets/brand/monogram.png';
+import Logo from '@/components/Logo.astro';
 import sewaImage from '@/assets/profile/sewa-class.jpg';
 import ceilingImage from '@/assets/profile/ceiling-installation.jpg';
 import { TEAM } from '@/data/site';
@@ -170,7 +170,7 @@ const values = [
                 <dt class="sr-only">{v.label}</dt>
                 <dd>
                   <span class="block font-display text-5xl font-light leading-none text-cream">{v.value}</span>
-                  <span class="mono-label mt-3 block text-[0.56rem] text-muted-400">{v.label}</span>
+                  <span class="mono-label mt-3 block text-[0.66rem] text-muted-400">{v.label}</span>
                 </dd>
               </div>
             ))
@@ -178,7 +178,7 @@ const values = [
         </dl>
 
         <div class="mt-14" data-reveal>
-          <p class="mono-label text-[0.62rem] text-gold-300">The occasions we dress</p>
+          <p class="mono-label text-[0.68rem] text-gold-300">The occasions we dress</p>
           <ul class="mt-6 border-t border-cream/10">
             {
               [
@@ -259,7 +259,7 @@ const values = [
             class="aspect-[16/10] w-full object-cover"
           />
         </div>
-        <p class="mono-label col-span-2 mt-2 text-[0.58rem] text-muted-400">
+        <p class="mono-label col-span-2 mt-2 text-[0.66rem] text-muted-400">
           A SEWA intake at the Harare training hub
         </p>
       </div>
@@ -297,7 +297,7 @@ const values = [
             >
               <div>
                 <p class="font-display text-[1.75rem] leading-tight text-cream">{member.name}</p>
-                <p class="mono-label mt-3 text-[0.58rem] text-gold-300">{member.role}</p>
+                <p class="mono-label mt-3 text-[0.66rem] text-gold-300">{member.role}</p>
               </div>
               <p class="text-sm leading-[1.85] text-muted sm:pt-2">{member.note}</p>
             </li>
@@ -310,12 +310,9 @@ const values = [
   <!-- Brand band -->
   <section class="bg-teal-900 py-28 md:py-36" aria-label="Sulpice Designs Decor">
     <div class="container-luxe flex flex-col items-center text-center" data-reveal>
-      <Image src={monogram} alt="" width={200} height={203} loading="lazy" class="h-24 w-auto" />
-      <p class="mt-10 font-display text-4xl font-medium uppercase tracking-[0.3em] text-cream md:text-5xl">
-        Sulpice
-      </p>
-      <p class="mono-label mt-5 text-[0.62rem] text-gold-300">
-        Designs &amp; Decor · Est. 2008
+      <Logo width={280} />
+      <p class="mono-label mt-10 text-[0.68rem] text-gold-300">
+        Events décor &amp; hiring · Est. 2008
       </p>
     </div>
   </section>

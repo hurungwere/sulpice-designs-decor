@@ -63,7 +63,7 @@ export default function MobileMenu({ nav, phone, phoneHref, logoSrc }: Props) {
                   <span className="font-display text-xl font-medium uppercase tracking-[0.2em]">
                     Sulpice
                   </span>
-                  <span className="mt-1 text-[0.5rem] uppercase tracking-[0.42em] text-gold-300">
+                  <span className="mt-1 text-[0.56rem] uppercase tracking-[0.42em] text-gold-300">
                     Designs &amp; Decor
                   </span>
                 </span>
@@ -89,7 +89,7 @@ export default function MobileMenu({ nav, phone, phoneHref, logoSrc }: Props) {
                   transition={{ delay: 0.25 + i * 0.07, duration: 0.8, ease }}
                   className="group flex items-baseline gap-5 border-b border-cream/10 py-5"
                 >
-                  <span className="font-display text-sm italic text-gold-300">
+                  <span className="font-display text-sm italic text-silver-400">
                     {['I', 'II', 'III', 'IV', 'V', 'VI'][i] ?? i + 1}
                   </span>
                   <span className="font-display text-[2.6rem] leading-none text-cream transition-colors duration-500 group-hover:text-gold-300">
@@ -105,7 +105,7 @@ export default function MobileMenu({ nav, phone, phoneHref, logoSrc }: Props) {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.7, duration: 0.8 }}
             >
-              <p className="text-[0.62rem] uppercase tracking-[0.32em] text-cream/50">
+              <p className="text-[0.68rem] uppercase tracking-[0.32em] text-cream/50">
                 Harare · Bulawayo · Fourways
               </p>
               <a
@@ -117,7 +117,7 @@ export default function MobileMenu({ nav, phone, phoneHref, logoSrc }: Props) {
               <a
                 href="/contact"
                 onClick={() => setOpen(false)}
-                className="flex h-14 w-full items-center justify-center bg-gold text-[0.68rem] uppercase tracking-[0.28em] text-ink"
+                className="flex h-14 w-full items-center justify-center bg-gold-gradient text-[0.68rem] uppercase tracking-[0.28em] text-ink"
               >
                 Request a quote
               </a>

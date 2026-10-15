@@ -1,6 +1,6 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
-import { X } from 'lucide-react';
+import { ArrowLeft, ArrowRight, X } from 'lucide-react';
 import type { GalleryItem } from '@/utils/portfolio';
 
 const CATEGORY_LABELS: Record<string, string> = {
@@ -30,6 +30,39 @@ export default function PortfolioGallery({
     () => (active === 'All' ? items : items.filter((i) => i.category === active)),
     [active, items]
   );
+
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const openerRef = useRef<HTMLElement | null>(null);
+  const index = selected ? visible.findIndex((i) => i.id === selected.id) : -1;
+  const step = (dir: number) => {
+    if (index < 0) return;
+    setSelected(visible[(index + dir + visible.length) % visible.length]);
+  };
+
+  // Lightbox: lock page scroll, keyboard controls, and return focus on close.
+  useEffect(() => {
+    if (!selected) return;
+    openerRef.current ??= document.activeElement as HTMLElement | null;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    closeRef.current?.focus();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setSelected(null);
+      if (e.key === 'ArrowRight') step(1);
+      if (e.key === 'ArrowLeft') step(-1);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener('keydown', onKey);
+    };
+  });
+
+  useEffect(() => {
+    if (selected) return;
+    openerRef.current?.focus();
+    openerRef.current = null;
+  }, [selected]);
 
   return (
     <div>
@@ -115,7 +148,7 @@ export default function PortfolioGallery({
                     <span className="block font-display text-[1.75rem] leading-tight text-cream transition-colors duration-500 group-hover:text-gold-300">
                       {item.title}
                     </span>
-                    <span className="mt-2 block text-[0.6rem] uppercase tracking-[0.3em] text-muted-400">
+                    <span className="mt-2 block text-[0.66rem] uppercase tracking-[0.3em] text-muted-400">
                       {CATEGORY_LABELS[item.category] ?? item.category} · {item.location}
                     </span>
                   </span>
@@ -145,6 +178,7 @@ export default function PortfolioGallery({
               className="absolute inset-0 h-full w-full cursor-zoom-out bg-teal-900/90 backdrop-blur-md"
             />
             <motion.div
+              key={selected.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 20 }}
@@ -161,7 +195,7 @@ export default function PortfolioGallery({
                 className="max-h-[50vh] w-full object-cover md:h-full md:max-h-[80vh]"
               />
               <div className="flex flex-col p-8 md:p-12">
-                <p className="text-[0.6rem] uppercase tracking-[0.32em] text-gold-300">
+                <p className="text-[0.66rem] uppercase tracking-[0.32em] text-gold-300">
                   {CATEGORY_LABELS[selected.category] ?? selected.category} · {selected.year}
                 </p>
                 <h3 className="mt-5 font-display text-4xl leading-tight text-cream md:text-5xl">
@@ -189,6 +223,7 @@ export default function PortfolioGallery({
                 </a>
               </div>
               <button
+                ref={closeRef}
                 type="button"
                 onClick={() => setSelected(null)}
                 aria-label="Close"
@@ -196,6 +231,29 @@ export default function PortfolioGallery({
               >
                 <X className="h-5 w-5" strokeWidth={1.25} aria-hidden="true" />
               </button>
+              {visible.length > 1 && (
+                <div className="absolute bottom-3 left-3 flex items-center bg-ink/80 text-cream backdrop-blur-sm md:bottom-auto md:top-3">
+                  <button
+                    type="button"
+                    onClick={() => step(-1)}
+                    aria-label="Previous event"
+                    className="inline-flex h-11 w-11 items-center justify-center transition-colors hover:text-gold-300"
+                  >
+                    <ArrowLeft className="h-4 w-4" strokeWidth={1.25} aria-hidden="true" />
+                  </button>
+                  <span className="px-1 font-display text-sm italic tabular-nums text-cream/80">
+                    {index + 1} / {visible.length}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => step(1)}
+                    aria-label="Next event"
+                    className="inline-flex h-11 w-11 items-center justify-center transition-colors hover:text-gold-300"
+                  >
+                    <ArrowRight className="h-4 w-4" strokeWidth={1.25} aria-hidden="true" />
+                  </button>
+                </div>
+              )}
             </motion.div>
           </motion.div>
         )}

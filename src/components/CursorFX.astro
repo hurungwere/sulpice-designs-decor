@@ -33,7 +33,7 @@
       { name: 'balloon', float: -0.55, d: 'M7 9.2a5 6 0 1 0 10 0a5 6 0 1 0 -10 0z M11.2 16.4h1.6L12 15.2z M12 16.4c-1.2 1.6.9 2.6-.2 5' },
       { name: 'confetti', float: 0.6, confetti: true },
     ];
-    var GOLDS = ['#e8d5a3', '#d4b87a', '#c9a96a', '#f3e6c4'];
+    var GOLDS = ['#e1ba39', '#f0d27a', '#fff1a8', '#e1ba39', '#c9ced3'];
     var paths = {};
     MOTIFS.forEach(function (m) {
       if (m.d) paths[m.name] = new Path2D(m.d);
@@ -164,7 +164,7 @@
         ring.r += (ring.target - ring.r) * 0.14;
         ctx.beginPath();
         ctx.arc(ring.x, ring.y, ring.r, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(212, 184, 122, 0.55)';
+        ctx.strokeStyle = 'rgba(225, 186, 57, 0.6)';
         ctx.lineWidth = 1;
         ctx.stroke();
       }

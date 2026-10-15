@@ -12,48 +12,60 @@
   /* Labels & metadata — set in tracked capitals of the sans, not a code face */
   --font-mono: 'Jost Variable', ui-sans-serif, system-ui, sans-serif;
 
-  /* Ivory — primary text on dark, page colour on light sections */
-  --color-cream: #f3ede2;
-  --color-ivory: #f5f0e7;
-  --color-ivory-200: #ebe3d5;
+  /* Text on teal, and the light "pearl" page colour for light sections */
+  --color-cream: #f5f4ef;
+  --color-ivory: #f5f5f2;
+  --color-ivory-200: #e6ebea;
 
-  /* Raised surfaces on the deep-teal page */
-  --color-cream-50: #082b30;
-  --color-cream-100: #0a3136;
-  --color-cream-200: #0d383e;
-  --color-sand: #10404a;
-  --color-sand-300: #154a54;
-  --color-linen: #1a5560;
+  /* Raised surfaces on the brand-teal page */
+  --color-cream-50: #0b5560;
+  --color-cream-100: #0c5d6a;
+  --color-cream-200: #0d6573;
+  --color-sand: #0e6d7c;
+  --color-sand-300: #0f7585;
+  --color-linen: #107d8e;
 
   /* Muted taupe / clay */
   --color-taupe: #b49b7c;
   --color-clay: #97815f;
   --color-clay-700: #7c684c;
 
-  /* Brand — champagne / antique gold (used sparingly) */
-  --color-gold-300: #e4d1a1;
-  --color-gold: #c9a96a;
-  --color-gold-600: #a9874b;
-  --gradient-gold: linear-gradient(115deg, #efe1bb 0%, #cfaf70 42%, #a6823f 100%);
+  /* Brand — metallic gold, sampled from the SD monogram */
+  --color-gold-300: #f0d27a;
+  --color-gold: #e1ba39;
+  --color-gold-600: #9c832a;
+  --gradient-gold: linear-gradient(
+    115deg,
+    #d4ae3c 0%,
+    #e1ba39 30%,
+    #fff1a8 50%,
+    #e1ba39 70%,
+    #d4ae3c 100%
+  );
 
-  /* Brand — teal, from the logo through to near-black */
-  --color-teal-50: #e6f4f5;
-  --color-teal-100: #c3e5e8;
-  --color-teal-200: #93ced4;
-  --color-teal-300: #57afb9;
-  --color-teal: #138fa0;
-  --color-teal-600: #0e7481;
-  --color-teal-700: #0b5761;
-  --color-teal-800: #073a41;
-  --color-teal-900: #031b1f;
+  /* Brand — metallic silver (secondary accent, per the brand guide) */
+  --color-silver: #c9ced3;
+  --color-silver-400: #aab1b8;
+  --gradient-silver: linear-gradient(115deg, #8e959c 0%, #e9edf0 50%, #a7aeb5 100%);
+
+  /* Brand — mint blue / teal. `teal` is the exact logo colour (#128fa3). */
+  --color-teal-50: #e6f4f6;
+  --color-teal-100: #c3e6eb;
+  --color-teal-200: #8fd0da;
+  --color-teal-300: #4fb3c2;
+  --color-teal: #128fa3;
+  --color-teal-600: #0e7181;
+  --color-teal-700: #0c616e;
+  --color-teal-800: #0a515c;
+  --color-teal-900: #062c33;
 
   --color-charcoal: #111a1b;
   --color-charcoal-800: #0b1213;
-  --color-ink: #052327;
+  --color-ink: #094b55;
   /* The colour that sits *on* cream — flips with .surface-ivory */
-  --color-paper: #052327;
-  --color-muted: #b7b2a7;
-  --color-muted-400: #8a877e;
+  --color-paper: #094b55;
+  --color-muted: #bfcccd;
+  --color-muted-400: #97abad;
 
   --shadow-soft: 0 40px 80px -48px rgb(0 0 0 / 0.6);
   --shadow-card: 0 30px 60px -40px rgb(0 0 0 / 0.55);
@@ -96,8 +108,8 @@
   }
 
   ::selection {
-    background-color: var(--color-gold);
-    color: var(--color-ink);
+    background-color: var(--color-teal);
+    color: #fff;
   }
 
   :focus-visible {
@@ -118,17 +130,18 @@
 /*  the variables resolve to ink-on-ivory inside this scope.           */
 /* ------------------------------------------------------------------ */
 .surface-ivory {
-  --color-paper: #f5f0e7;
-  --color-cream: #10292c;
-  --color-muted: #545f5d;
-  --color-muted-400: #7b817d;
-  --color-cream-50: #ede6d9;
-  --color-cream-100: #e7dfd0;
-  --color-cream-200: #ddd3c1;
-  --color-gold-300: #94743a;
-  --color-gold: #a6833f;
-  --color-gold-600: #8a6a30;
-  --gradient-gold: linear-gradient(115deg, #b38f4c 0%, #8c6a2e 100%);
+  --color-paper: #f5f5f2;
+  --color-cream: #083c45;
+  --color-muted: #4a5f62;
+  --color-muted-400: #5d7174;
+  --color-cream-50: #eaeeed;
+  --color-cream-100: #e2e8e7;
+  --color-cream-200: #d5dddc;
+  /* On light sections the accent becomes the brand teal; gold stays for small marks */
+  --color-gold-300: #0c616e;
+  --color-gold: #b8952f;
+  --color-gold-600: #8a7225;
+  --gradient-gold: linear-gradient(115deg, #0c616e 0%, #128fa3 100%);
   background-color: var(--color-ivory);
   color: var(--color-cream);
   color-scheme: light;
@@ -257,7 +270,7 @@
 /* Monospace micro-label — metadata, nav, indices */
 @utility mono-label {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 450;
   letter-spacing: 0.32em;
   text-transform: uppercase;
@@ -339,6 +352,33 @@
   }
 }
 
+/* Metallic accents — the logo's gold sweep / the brand silver, clipped to text */
+@utility text-metal-gold {
+  background-image: var(--gradient-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  color: transparent;
+}
+@utility text-silver-gradient {
+  background-image: var(--gradient-silver);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Italic accents inside display headings pick up the metallic gold automatically */
+:is(.display-xl, .display-lg, .display-md) :is(em, .italic).text-gold-300 {
+  background-image: var(--gradient-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  color: transparent;
+  padding-right: 0.06em;
+}
+
 /* Small gold diamond — separator / bullet */
 @utility diamond {
   display: inline-block;
@@ -408,7 +448,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
+  gap: 2.25rem;
   transition:
     opacity 0.6s var(--ease-luxe),
     transform 0.6s var(--ease-luxe);
@@ -419,96 +459,45 @@
   transform: translateY(-0.75rem);
 }
 
-/* Staggered letter reveal — blur-in, then a gold shimmer sweeps across */
-.preloader__word {
+/* Logo reveal — blur-in, a gold light sweep clipped to the logo, then a hairline loader */
+.preloader__logo {
   position: relative;
-  display: inline-flex;
-  align-items: flex-end;
-}
-
-.preloader__letters,
-.preloader__shimmer {
-  display: flex;
-  align-items: flex-end;
-  font-family: var(--font-display);
-  font-size: clamp(1.9rem, 7vw, 3.25rem);
-  font-weight: 500;
-  letter-spacing: 0.24em;
-  margin-right: -0.24em;
-  line-height: 1;
-}
-
-.preloader__mark {
-  width: 4.5rem;
-  height: auto;
-  opacity: 0;
-  transform: scale(0.94);
-  animation: preloader-mark-in 1.1s var(--ease-luxe) 0.05s both;
-}
-
-@keyframes preloader-mark-in {
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-.preloader__letter {
-  display: inline-block;
-}
-
-.preloader__letter-inner {
-  display: inline-block;
-  color: var(--color-cream);
   opacity: 0;
   filter: blur(10px);
-  transform: translateY(0.3em);
-  animation: preloader-letter-in 0.9s var(--ease-luxe) both;
-  animation-delay: calc(var(--i, 0) * 0.06s + 0.35s);
+  transform: scale(0.96);
+  animation: preloader-logo-in 0.9s var(--ease-luxe) 0.05s both;
 }
 
-.preloader__shimmer {
+.preloader__sheen {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  color: transparent;
-  background-image: linear-gradient(
-    105deg,
-    transparent 38%,
-    rgba(255, 247, 224, 0.95) 50%,
-    transparent 62%
-  );
-  background-repeat: no-repeat;
-  background-size: 240% 100%;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 248, 220, 0.9) 50%, transparent 65%)
+    no-repeat;
+  background-size: 250% 100%;
   background-position: 160% 0;
-  -webkit-background-clip: text;
-  background-clip: text;
-  opacity: 0;
-  animation: preloader-shimmer 1.1s var(--ease-luxe) 0.75s both;
+  -webkit-mask: var(--logo-mask) center / contain no-repeat;
+  mask: var(--logo-mask) center / contain no-repeat;
+  animation: preloader-sheen 1s var(--ease-luxe) 0.45s both;
 }
 
-.preloader__shimmer .preloader__letter-inner {
-  background-image: none;
-  opacity: 1;
-  filter: none;
-  transform: none;
-  animation: none;
+.preloader__bar {
+  display: block;
+  width: 9rem;
+  height: 1px;
+  overflow: hidden;
+  background: color-mix(in oklab, var(--color-cream) 18%, transparent);
 }
 
-.preloader__sub {
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  font-weight: 500;
-  letter-spacing: 0.5em;
-  margin-right: -0.5em;
-  text-transform: uppercase;
-  color: var(--color-gold-300);
-  opacity: 0;
-  filter: blur(6px);
-  animation: preloader-sub-in 0.6s var(--ease-luxe) 0.7s both;
+.preloader__bar > span {
+  display: block;
+  height: 100%;
+  background: var(--gradient-gold);
+  transform-origin: left;
+  animation: preloader-bar 1.2s var(--ease-luxe) 0.15s both;
 }
 
-@keyframes preloader-letter-in {
+@keyframes preloader-logo-in {
   to {
     opacity: 1;
     filter: blur(0);
@@ -516,24 +505,21 @@
   }
 }
 
-@keyframes preloader-sub-in {
+@keyframes preloader-sheen {
+  from {
+    background-position: 160% 0;
+  }
   to {
-    opacity: 1;
-    filter: blur(0);
+    background-position: -60% 0;
   }
 }
 
-@keyframes preloader-shimmer {
-  0% {
-    background-position: 160% 0;
-    opacity: 0;
+@keyframes preloader-bar {
+  from {
+    transform: scaleX(0);
   }
-  25% {
-    opacity: 1;
-  }
-  100% {
-    background-position: -60% 0;
-    opacity: 0;
+  to {
+    transform: scaleX(1);
   }
 }
 
@@ -543,18 +529,13 @@
     transition: none;
   }
 
-  .preloader__letter-inner,
-  .preloader__mark,
-  .preloader__sub {
+  .preloader__logo,
+  .preloader__sheen,
+  .preloader__bar > span {
     animation: none;
     opacity: 1;
     filter: none;
     transform: none;
-  }
-
-  .preloader__shimmer {
-    animation: none;
-    opacity: 0;
   }
 }
 

@@ -10,6 +10,7 @@ import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import Preloader from '@/components/Preloader.astro';
 import CursorFX from '@/components/CursorFX.astro';
+import QuickContact from '@/components/QuickContact.astro';
 import { SITE } from '@/data/site';
 
 interface Props {
@@ -50,9 +51,15 @@ const orgSchema = {
     <meta charset="UTF-8" />
     <script is:inline>
       document.documentElement.classList.add('js');
+      // Branded preloader: first visit of a browser session only.
       if (!window.__sulpiceBoot) {
-        document.documentElement.classList.add('preloading');
         window.__sulpiceBoot = true;
+        var seen = false;
+        try {
+          seen = sessionStorage.getItem('sulpice-intro') === '1';
+          sessionStorage.setItem('sulpice-intro', '1');
+        } catch (e) {}
+        if (!seen) document.documentElement.classList.add('preloading');
       }
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -64,7 +71,7 @@ const orgSchema = {
     <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
     <ClientRouter />
   </head>
-  <body class="min-h-screen bg-ink font-sans text-cream antialiased">
+  <body class="min-h-screen bg-ink pb-14 font-sans text-cream antialiased lg:pb-0">
     <Preloader />
 
     <div
@@ -90,6 +97,7 @@ const orgSchema = {
 
     <div class="grain" aria-hidden="true"></div>
     <CursorFX />
+    <QuickContact />
 
     <script is:inline>
       // Motion layer — runs on first load and after every client-router navigation.
@@ -113,7 +121,9 @@ const orgSchema = {
                 }
               });
             },
-            { rootMargin: '0px 0px -10% 0px', threshold: 0.12 }
+            // threshold 0: Chrome applies a target's own clip-path when measuring, so a
+            // clip-revealed element always reports ratio 0 and a higher threshold never fires.
+            { rootMargin: '0px 0px -10% 0px', threshold: 0 }
           );
           items.forEach((el) => {
             if (!el.classList.contains('is-visible')) revealObserver.observe(el);
@@ -124,12 +134,21 @@ const orgSchema = {
           const header = document.getElementById('site-header');
           const inner = document.getElementById('header-inner');
           if (!header) return;
+          let lastY = window.scrollY;
           const onScroll = () => {
+            const y = window.scrollY;
+            // Tuck the header away while reading down; bring it back on any scroll up.
+            const goingDown = y > lastY + 4;
+            const goingUp = y < lastY - 4;
+            if (y < 160 || goingUp) header.dataset.hidden = 'false';
+            else if (goingDown) header.dataset.hidden = 'true';
+            if (goingDown || goingUp) lastY = y;
+
             if (header.dataset.transparent !== 'true') {
               header.dataset.scrolled = 'false';
               return;
             }
-            const scrolled = window.scrollY > 24;
+            const scrolled = y > 24;
             header.dataset.scrolled = scrolled ? 'true' : 'false';
             if (inner) {
               inner.classList.toggle('lg:py-6', !scrolled);
@@ -141,6 +160,8 @@ const orgSchema = {
           }
           window.__sulpiceHeaderScroll = onScroll;
           window.addEventListener('scroll', onScroll, { passive: true });
+          // Keyboard users: always reveal the header when focus moves into it.
+          header.addEventListener('focusin', () => (header.dataset.hidden = 'false'));
           onScroll();
         }
 

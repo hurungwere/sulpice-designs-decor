@@ -5,9 +5,35 @@ import { CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
 interface Props {
   projectTypes: readonly string[];
   budgets: readonly string[];
+  /** Digits only, e.g. 263772335903 — used for the WhatsApp fallback. */
+  whatsapp: string;
+  email: string;
 }
 
 type Status = 'idle' | 'submitting' | 'success' | 'error';
+
+const SUMMARY_FIELDS: [string, string][] = [
+  ['name', 'Name'],
+  ['email', 'Email'],
+  ['phone', 'Phone'],
+  ['projectType', 'Event type'],
+  ['eventDate', 'Date'],
+  ['guests', 'Guests'],
+  ['city', 'Location'],
+  ['venueNeed', 'Venue'],
+  ['budget', 'Budget'],
+  ['message', 'Details'],
+];
+
+/** Plain-text version of the enquiry, so nothing typed is lost if sending fails. */
+function summarise(form: HTMLFormElement) {
+  const data = new FormData(form);
+  const lines = SUMMARY_FIELDS.map(([key, label]) => {
+    const value = String(data.get(key) ?? '').trim();
+    return value ? `${label}: ${value}` : '';
+  }).filter(Boolean);
+  return `Hello Sulpice Designs, I'd like a quotation.\n\n${lines.join('\n')}`;
+}
 interface Errors {
   name?: string;
   email?: string;
@@ -16,11 +42,12 @@ interface Errors {
 
 const field =
   'w-full rounded-none border-0 border-b border-cream/25 bg-transparent px-0 py-3 text-[0.98rem] text-cream placeholder:text-muted-400 transition-colors duration-500 hover:border-cream/50 focus:border-gold focus:outline-none [&>option]:bg-ink';
-const labelCls = 'block text-[0.62rem] font-[450] uppercase tracking-[0.3em] text-gold-300';
+const labelCls = 'block text-[0.68rem] font-[450] uppercase tracking-[0.3em] text-gold-300';
 
-export default function ContactForm({ projectTypes, budgets }: Props) {
+export default function ContactForm({ projectTypes, budgets, whatsapp, email }: Props) {
   const [status, setStatus] = useState<Status>('idle');
   const [errors, setErrors] = useState<Errors>({});
+  const [summary, setSummary] = useState('');
 
   function validate(form: HTMLFormElement): Errors {
     const data = new FormData(form);
@@ -48,30 +75,27 @@ export default function ContactForm({ projectTypes, budgets }: Props) {
     }
 
     setStatus('submitting');
+    setSummary(summarise(form));
     const data = new FormData(form);
     const key = import.meta.env.PUBLIC_WEB3FORMS_KEY as string | undefined;
 
+    // Without a Web3Forms key there is nowhere to deliver the form (static hosting would
+    // answer 200 and silently drop it), so go straight to the WhatsApp / email fallback.
+    if (!key) {
+      setStatus('error');
+      return;
+    }
+
     try {
-      if (key) {
-        data.append('access_key', key);
-        const res = await fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          body: data,
-          headers: { Accept: 'application/json' },
-        });
-        const json = await res.json();
-        if (!res.ok || !json.success) throw new Error('Request failed');
-      } else {
-        const body = new URLSearchParams(
-          Array.from(data.entries()).map(([k, v]) => [k, String(v)])
-        ).toString();
-        const res = await fetch('/', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body,
-        });
-        if (!res.ok) throw new Error('Request failed');
-      }
+      data.append('access_key', key);
+      data.append('subject', `New enquiry — ${String(data.get('projectType') || 'event')}`);
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: data,
+        headers: { Accept: 'application/json' },
+      });
+      const json = await res.json();
+      if (!res.ok || !json.success) throw new Error('Request failed');
       setStatus('success');
       form.reset();
     } catch {
@@ -79,22 +103,19 @@ export default function ContactForm({ projectTypes, budgets }: Props) {
     }
   }
 
+  const waHref = `https://wa.me/${whatsapp}?text=${encodeURIComponent(summary)}`;
+  const mailHref = `mailto:${email}?subject=${encodeURIComponent('Quotation request')}&body=${encodeURIComponent(summary)}`;
+
   return (
     <form
       name="contact"
-      method="POST"
-      action="/contact?success=true"
+      noValidate
       onSubmit={handleSubmit}
       className="space-y-10"
       aria-label="Event enquiry form"
-      {...{ 'data-netlify': 'true', 'netlify-honeypot': 'bot-field' }}
     >
-      <input type="hidden" name="form-name" value="contact" />
-      <p className="hidden">
-        <label>
-          Do not fill this out: <input name="bot-field" tabIndex={-1} autoComplete="off" />
-        </label>
-      </p>
+      {/* Web3Forms honeypot */}
+      <input type="checkbox" name="botcheck" className="hidden" tabIndex={-1} autoComplete="off" />
 
       <div className="grid gap-10 sm:grid-cols-2 sm:gap-8">
         <div>
@@ -285,7 +306,7 @@ export default function ContactForm({ projectTypes, budgets }: Props) {
       <button
         type="submit"
         disabled={status === 'submitting'}
-        className="group inline-flex h-14 w-full items-center justify-center gap-3 bg-gold px-12 text-[0.68rem] font-[450] uppercase tracking-[0.28em] text-ink transition-colors duration-500 hover:bg-gold-300 disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
+        className="group inline-flex h-14 w-full items-center justify-center gap-3 bg-gold-gradient px-12 text-[0.68rem] font-[450] uppercase tracking-[0.28em] text-ink transition-colors duration-500 hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
       >
         {status === 'submitting' ? (
           <>
@@ -313,15 +334,36 @@ export default function ContactForm({ projectTypes, budgets }: Props) {
             </motion.p>
           )}
           {status === 'error' && (
-            <motion.p
+            <motion.div
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
-              className="flex items-center gap-3 border-l border-red-400 py-2 pl-4 text-sm text-red-300"
+              className="border-l border-gold py-2 pl-5"
             >
-              <AlertCircle className="h-5 w-5 shrink-0" aria-hidden="true" />
-              Something went wrong. Please email us directly at hello@sulpicedesigns.com.
-            </motion.p>
+              <p className="flex items-center gap-3 text-sm text-cream">
+                <AlertCircle className="h-5 w-5 shrink-0 text-gold-300" strokeWidth={1.25} aria-hidden="true" />
+                We couldn&rsquo;t send this online just now — but your details are saved below.
+              </p>
+              <p className="mt-2 text-sm text-muted">
+                Send it to us in one tap; everything you typed is already filled in.
+              </p>
+              <div className="mt-5 flex flex-wrap gap-3">
+                <a
+                  href={waHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-12 items-center bg-gold-gradient px-7 text-[0.66rem] uppercase tracking-[0.26em] text-ink transition-[filter] hover:brightness-110"
+                >
+                  Send via WhatsApp
+                </a>
+                <a
+                  href={mailHref}
+                  className="inline-flex h-12 items-center border border-cream/35 px-7 text-[0.66rem] uppercase tracking-[0.26em] text-cream transition-colors hover:border-cream hover:bg-cream hover:text-paper"
+                >
+                  Send by email
+                </a>
+              </div>
+            </motion.div>
           )}
         </AnimatePresence>
       </div>

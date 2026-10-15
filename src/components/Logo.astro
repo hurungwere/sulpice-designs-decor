@@ -1,0 +1,34 @@
+---
+import { Image } from 'astro:assets';
+import logoLight from '@/assets/brand/logo-light.png';
+import logoDark from '@/assets/brand/logo-dark.png';
+
+interface Props {
+  /** `light` = white wordmark for teal backgrounds; `dark` = teal wordmark for light ones. */
+  tone?: 'light' | 'dark';
+  /** Rendered width in px (height follows the logo's proportions). */
+  width?: number;
+  class?: string;
+  loading?: 'eager' | 'lazy';
+  decorative?: boolean;
+}
+
+const {
+  tone = 'light',
+  width = 180,
+  class: className = '',
+  loading = 'lazy',
+  decorative = false,
+} = Astro.props;
+const src = tone === 'light' ? logoLight : logoDark;
+---
+
+<Image
+  src={src}
+  alt={decorative ? '' : 'Sulpice Designs Deco'}
+  width={width}
+  densities={[1, 2]}
+  loading={loading}
+  class:list={['h-auto select-none', className]}
+  style={`width:${width}px`}
+/>

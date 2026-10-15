@@ -1,9 +1,10 @@
 ---
-import { Image } from 'astro:assets';
-import monogram from '@/assets/brand/monogram.png';
+import { getImage } from 'astro:assets';
+import Logo from '@/components/Logo.astro';
+import logoLight from '@/assets/brand/logo-light.png';
 
-const word = 'SULPICE';
-const letters = Array.from(word);
+// Same file as the visible logo, reused as a mask so the light sweep follows its shape.
+const mask = await getImage({ src: logoLight, width: 440, format: 'webp' });
 ---
 
 <div
@@ -11,33 +12,14 @@ const letters = Array.from(word);
   class="preloader"
   role="status"
   aria-live="polite"
-  aria-label="Loading Sulpice Designs Decor"
+  aria-label="Loading Sulpice Designs"
 >
   <div class="preloader__inner">
-    <Image src={monogram} alt="" width={160} height={162} loading="eager" class="preloader__mark" />
-    <span class="preloader__word" aria-hidden="true">
-      <span class="preloader__letters">
-        {
-          letters.map((letter, i) => (
-            <span class="preloader__letter">
-              <span class="preloader__letter-inner" style={`--i:${i}`}>
-                {letter}
-              </span>
-            </span>
-          ))
-        }
-      </span>
-      <span class="preloader__shimmer">
-        {
-          letters.map((letter) => (
-            <span class="preloader__letter">
-              <span class="preloader__letter-inner">{letter}</span>
-            </span>
-          ))
-        }
-      </span>
-    </span>
-    <span class="preloader__sub" aria-hidden="true">Designs &amp; Decor</span>
+    <div class="preloader__logo" style={`--logo-mask:url(${mask.src})`}>
+      <Logo width={220} loading="eager" decorative />
+      <span class="preloader__sheen" aria-hidden="true"></span>
+    </div>
+    <span class="preloader__bar" aria-hidden="true"><span></span></span>
   </div>
 </div>
 
@@ -46,7 +28,11 @@ const letters = Array.from(word);
     var el = document.getElementById('preloader');
     if (!el) return;
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var minVisible = reduce ? 0 : 1900;
+    if (!document.documentElement.classList.contains('preloading')) {
+      el.remove();
+      return;
+    }
+    var minVisible = reduce ? 0 : 1650;
     var start = performance.now();
     var done = false;
 
@@ -72,6 +58,6 @@ const letters = Array.from(word);
     if (document.readyState === 'complete') ready();
     else window.addEventListener('load', ready, { once: true });
 
-    setTimeout(hide, 5000);
+    setTimeout(hide, 3500);
   })();
 </script>

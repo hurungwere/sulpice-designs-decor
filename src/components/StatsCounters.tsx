@@ -50,7 +50,7 @@ function StatItem({
   }, [run, target]);
 
   const display = target === null ? stat.value : `${prefix}${Math.round(value)}${suffix}`;
-  const labelTone = tone === 'light' ? 'text-cream/60' : 'text-muted';
+  const labelTone = tone === 'light' ? 'text-white' : 'text-muted';
 
   return (
     <div

@@ -39,12 +39,12 @@ const marquee = [
             data-reveal
             style={`--reveal-delay:${(i % 3) * 90}ms`}
           >
-            <span class="index-num text-lg text-gold-300">{String(i + 1).padStart(2, '0')}</span>
+            <span class="index-num text-lg text-silver-400">{String(i + 1).padStart(2, '0')}</span>
             <span>
               <span class="block font-display text-[1.7rem] leading-tight text-cream transition-colors duration-500 group-hover:text-gold-300">
                 {client.name}
               </span>
-              <span class="mono-label mt-3 block text-[0.58rem] text-muted-400">{client.scope}</span>
+              <span class="mono-label mt-3 block text-[0.66rem] text-muted-400">{client.scope}</span>
             </span>
           </li>
         ))
@@ -52,7 +52,7 @@ const marquee = [
     </ul>
   </div>
 
-  <div class="mt-20 text-cream/20">
+  <div class="mt-20 text-silver/25">
     <Marquee items={marquee} duration={70} />
   </div>
 </section>

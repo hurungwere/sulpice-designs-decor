@@ -3,7 +3,7 @@ import StatsCounters from '@/components/StatsCounters.tsx';
 import { SITE } from '@/data/site';
 ---
 
-<section class="border-b border-cream/10 bg-teal-900 py-14 md:py-16" aria-label="Sulpice at a glance">
+<section class="border-y border-teal-300/20 bg-teal-600 py-14 md:py-16" aria-label="Sulpice at a glance">
   <div class="container-luxe">
     <StatsCounters client:visible items={[...SITE.stats]} tone="light" />
   </div>

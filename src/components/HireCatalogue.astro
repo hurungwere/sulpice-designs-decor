@@ -1,57 +1,67 @@
 ---
 import { Image } from 'astro:assets';
 import Button from '@/components/Button.astro';
-import p1 from '@/assets/service-residential.jpg';
-import p2 from '@/assets/service-events.jpg';
-import p3 from '@/assets/service-consultation.jpg';
-import p4 from '@/assets/service-commercial.jpg';
-import p5 from '@/assets/hero-1.jpg';
-import p6 from '@/assets/hero-2.jpg';
+import furniture from '@/assets/hero-1.jpg';
+import tent from '@/assets/project-10.jpg';
+import bridalStage from '@/assets/service-commercial.jpg';
+import tablescape from '@/assets/project-11.jpg';
+import ceremony from '@/assets/project-3.jpg';
+import lighting from '@/assets/project-7.jpg';
 
+// Disciplines and inventory as listed in the client's corporate profile.
 const products = [
   {
-    name: 'Tents & Pergolas',
-    specs: ['Wedding marquees', 'Pergolas & covers', 'Garden to rooftop'],
-    image: p4,
-    href: '/services#tents-pergolas',
-  },
-  {
-    name: 'Tables & Chairs',
-    specs: ['Trendy table ranges', 'Plush & classic seating', 'Any guest count'],
-    image: p1,
+    name: 'Equipment & Furniture',
+    specs: ['Louis, Ghost & Phoenix chairs', 'Gloss & mirror tables', 'Cocktail bars'],
+    image: furniture,
+    alt: 'Gold Phoenix chairs at mirror tables with blush place settings',
     href: '/services#tables-chairs',
   },
   {
-    name: 'Crockery & Linen',
-    specs: ['Luxurious linen', 'Full crockery sets', 'Matching themes'],
-    image: p2,
-    href: '/services#crockery-linen',
+    name: 'Tents & Structures',
+    specs: ['Transparent & clear-span tents', 'Stretch tents', 'Gazebos & cabanas'],
+    image: tent,
+    alt: 'A large white marquee tent set up on a lawn by Sulpice Designs',
+    href: '/services#tents-pergolas',
   },
   {
-    name: 'Florals & Accessories',
-    specs: ['Fresh floral styling', 'Ceremony arches', 'Fancy accessories'],
-    image: p3,
+    name: 'Florals & Bridal Stages',
+    specs: ['Opulent bridal stages', 'Bespoke floral arrangements', 'Custom palettes'],
+    image: bridalStage,
+    alt: 'A white bridal stage sofa framed by lush ivory florals',
     href: '/services#florals-accessories',
   },
   {
-    name: 'Glassware & Bar',
-    specs: ['Bar & serving sets', 'Toasting flutes', 'Complete place settings'],
-    image: p5,
-    href: '/services',
+    name: 'Reception & Tablescapes',
+    specs: ['Charger plates & crystal glass', 'Fine linen & napery', 'Luxury centrepieces'],
+    image: tablescape,
+    alt: 'A reception table with crystal glassware, a white vase centrepiece and blush napkins',
+    href: '/services#crockery-linen',
   },
   {
-    name: 'Lighting & Draping',
-    specs: ['Ambient event lighting', 'Draping & backdrops', 'Stage & aerial ready'],
-    image: p6,
+    name: 'Ceremonies & Aisles',
+    specs: ['Altar arches', 'Mirror walkways', 'Flower-lined aisles'],
+    image: ceremony,
+    alt: 'A ceremony arch of gold columns and hanging crystal strands in a garden',
+    href: '/services#florals-accessories',
+  },
+  {
+    name: 'Lighting & Installations',
+    specs: ['Chandeliers', 'Fairy-light & floral ceilings', 'Wall & ceiling draping'],
+    image: lighting,
+    alt: 'A candlelit table with emerald napkins, gold chargers and glowing glassware',
     href: '/services',
   },
 ];
 
+// "Why choose Sulpice Designs", from the corporate profile.
 const standards = [
-  { title: 'Our own trucks', body: 'Delivery handled in-house — punctual, and careful with every piece.' },
-  { title: 'Our own crew', body: 'Experienced stylists set, dress and clear away, start to finish.' },
-  { title: 'One quotation', body: 'The full range under one roof, with a single point of contact.' },
-  { title: 'Since 2008', body: 'Trusted for weddings and occasions across Zimbabwe and South Africa.' },
+  { title: '18+ years of excellence', body: 'Proven in luxury décor, spatial design and event training across Southern Africa.' },
+  { title: 'A Johannesburg design studio', body: 'Concepts created at our Fourways creative hub, bringing international ideas home.' },
+  { title: 'In-house technical expertise', body: 'Engineering-led set-up for safe, high-end tent, power and lighting installations.' },
+  { title: 'Complete turnkey service', body: 'From décor hire and printing to full coordination — and even professional training.' },
+  { title: 'High-spec inventory', body: 'Transparent tents, Ghost chairs, gloss tables — current, owned and maintained by us.' },
+  { title: 'Our own fleet', body: 'Dedicated commercial trucks for seamless delivery across the region.' },
 ];
 ---
 
@@ -72,8 +82,8 @@ const standards = [
         data-reveal
         style="--reveal-delay:120ms"
       >
-        A complete hire range for weddings, corporate occasions and private celebrations —
-        quoted together, delivered by our own trucks, styled by our own hands.
+        Seven disciplines and a high-specification inventory, quoted together, delivered by
+        our own trucks and styled by our own hands — from intimate weddings to state occasions.
       </p>
     </div>
 
@@ -89,7 +99,7 @@ const standards = [
             <div class="relative overflow-hidden bg-cream-50">
               <Image
                 src={product.image}
-                alt={`${product.name} hire by Sulpice Designs Decor`}
+                alt={product.alt}
                 widths={[480, 720, 960]}
                 sizes="(min-width: 1024px) 30vw, (min-width: 640px) 46vw, 92vw"
                 loading="lazy"
@@ -114,8 +124,14 @@ const standards = [
       }
     </div>
 
-    <!-- The Sulpice standard -->
-    <div class="mt-32 grid gap-12 border-t border-cream/15 pt-14 sm:grid-cols-2 lg:mt-40 lg:grid-cols-4 lg:gap-10">
+    <!-- Why choose Sulpice (from the corporate profile) -->
+    <div class="mt-32 border-t border-cream/15 pt-14 lg:mt-40">
+      <p class="mono-label flex items-center gap-4 text-gold-300">
+        <span class="h-px w-10 bg-gold/70" aria-hidden="true"></span>
+        Why choose Sulpice
+      </p>
+    </div>
+    <div class="mt-12 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
       {
         standards.map((g, i) => (
           <div data-reveal style={`--reveal-delay:${i * 90}ms`}>

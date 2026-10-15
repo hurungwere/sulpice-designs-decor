@@ -65,6 +65,14 @@ export default function TestimonialsSlider({ items, autoplayMs = 7000 }: Props) 
             exit={{ opacity: 0, y: -10, filter: 'blur(6px)' }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             aria-live="polite"
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={0.18}
+            onDragEnd={(_, info) => {
+              if (info.offset.x < -60) paginate(1);
+              else if (info.offset.x > 60) paginate(-1);
+            }}
+            className="cursor-grab touch-pan-y select-none active:cursor-grabbing"
           >
             <p className="text-balance font-display text-[1.9rem] font-light italic leading-[1.3] text-cream sm:text-[2.4rem] md:text-[3rem] md:leading-[1.22]">
               &ldquo;{active.quote}&rdquo;
